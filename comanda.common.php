@@ -66,5 +66,6 @@ $xajax->registerFunction("bonConsum");
 $xajax->registerFunction("plataCuAvans");
 $xajax->registerFunction("frmPlataCuAvans");
 $xajax->registerFunction("inchidereBonAvans");
+$xajax->registerFunction("btnCui");
 
 ?>

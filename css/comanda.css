@@ -101,7 +101,17 @@
 	font-weight:bold;
 	color:#FFFFFF;
 	background-color:#3366FF;
-	}				
+	}
+	
+#btnCui
+	{
+	width:200px;
+	height: 40px;
+	font-size:18px;
+	font-weight:bold;
+	color:#FFFFFF;
+	background-color:#125307;
+	}	
 	
 /* functii */
 #btnGolesteComanda

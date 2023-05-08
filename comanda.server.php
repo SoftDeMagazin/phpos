@@ -476,6 +476,15 @@ function btnPlata($comanda_id, $frmValues)
 	return $objResponse;
 	}
 
+function btnCui() {
+	$keyboard = new KeyBoard();
+	$innerHTML = $keyboard -> printHtml('', '');
+	$innerHTML .= $keyboard->printCss();
+	$innerHTML .= $keyboard->printJavaScript();
+	$objResponse = afisareDialog($innerHTML, '800px', '450px', '100px', '200px', null);
+	return $objResponse;
+}	
+
 function plataAppendMod($frmPlata, $mod_plata_id, $suma)
 	{
 	global $mysql;

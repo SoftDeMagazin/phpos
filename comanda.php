@@ -188,13 +188,15 @@ echo $ds -> printHtml('produse', 1000, 100);
       <td>Total</td>
       <td>Casier</td>
       <td>Casa</td>
+      <td>CUI</td>
     </tr>
     <tr>
-      <td width="25%"><div id="nrcomanda" align="center">
+      <td width="20%"><div id="nrcomanda" align="center">
       </div></td>
-      <td width="25%"><div id="comandatotal" align="center"></div></td>
-      <td width="25%"><div id="utilizator" style="text-align:center; font-weight:bold; "></div></td>
-      <td width="25%"><div id="nume_casa"></div></td>
+      <td width="20%"><div id="comandatotal" align="center"></div></td>
+      <td width="20%"><div id="utilizator" style="text-align:center; font-weight:bold; "></div></td>
+      <td width="20%"><div id="nume_casa"></div></td>
+      <td width="20%"><div id="cui_bon"></div></td>
     </tr>
   </table>
 </div>
@@ -212,6 +214,9 @@ echo $ds -> printHtml('produse', 1000, 100);
           </div></td>
           <td><div align="center">
             <input name="btnPlata" type="button" id="btnPlata" value="Plata" onClick="xajax_btnPlata(document.getElementById('comanda_id').value,xajax.getFormValues('frmContinutComanda'));this.blur();">
+          </div></td>
+          <td><div align="center">
+            <input name="btnCui" type="button" id="btnCui" value="CUI" onClick="xajax_btnCui();this.blur();">
           </div></td>
           </tr>
       </table></td>
