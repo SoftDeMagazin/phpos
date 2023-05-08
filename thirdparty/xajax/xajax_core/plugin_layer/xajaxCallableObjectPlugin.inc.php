@@ -107,7 +107,7 @@ class xajaxCallableObjectPlugin extends xajaxRequestPlugin
 
 			if (XAJAX_CALLABLE_OBJECT == $sType)
 			{
-				$xco =& $aArgs[1];
+				$xco = $aArgs[1];
 
 				if (false === is_object($xco))
 				{
@@ -124,7 +124,7 @@ class xajaxCallableObjectPlugin extends xajaxRequestPlugin
 							foreach ($aValue as $sName => $sValue)
 								$xco->configure($sKey, $sName, $sValue);
 
-				$this->aCallableObjects[] =& $xco;
+				$this->aCallableObjects[] = $xco;
 
 				return $xco->generateRequests($this->sXajaxPrefix);
 			}
@@ -177,12 +177,12 @@ class xajaxCallableObjectPlugin extends xajaxRequestPlugin
 		if (NULL == $this->sRequestedMethod)
 			return false;
 
-		$objArgumentManager =& xajaxArgumentManager::getInstance();
+		$objArgumentManager = xajaxArgumentManager::getInstance();
 		$aArgs = $objArgumentManager->process();
 
 		foreach (array_keys($this->aCallableObjects) as $sKey)
 		{
-			$xco =& $this->aCallableObjects[$sKey];
+			$xco = $this->aCallableObjects[$sKey];
 
 			if ($xco->isClass($this->sRequestedClass))
 			{
@@ -198,5 +198,5 @@ class xajaxCallableObjectPlugin extends xajaxRequestPlugin
 	}
 }
 
-$objPluginManager =& xajaxPluginManager::getInstance();
+$objPluginManager = xajaxPluginManager::getInstance();
 $objPluginManager->registerPlugin(new xajaxCallableObjectPlugin(), 102);

@@ -157,7 +157,7 @@ class xajax
 		require $sLocalFolder . '/xajaxResponse.inc.php';
 
 		// Setup plugin manager
-		$oPluginManager =& xajaxPluginManager::getInstance();
+		$oPluginManager = xajaxPluginManager::getInstance();
 		$oPluginManager->loadPlugins(
 			// this is the list of folders where xajax will look for plugins
 			// that will be automatically included at startup.
@@ -269,12 +269,12 @@ class xajax
 			if (XAJAX_PROCESSING_EVENT == $aArgs[0])
 			{
 				$sEvent = $aArgs[1];
-				$xuf =& $aArgs[2];
+				$xuf = $aArgs[2];
 
 				if (false == is_a($xuf, 'xajaxUserFunction'))
 					$xuf = new xajaxUserFunction($xuf);
 
-				$this->aProcessingEvents[$sEvent] =& $xuf;
+				$this->aProcessingEvents[$sEvent] = $xuf;
 
 				return true;
 			}
@@ -283,7 +283,7 @@ class xajax
 		if (1 < func_num_args())
 		{
 			// for php4
-			$aArgs[1] =& $mArg;
+			$aArgs[1] = $mArg;
 		}
 
 		$objPluginManager = xajaxPluginManager::getInstance();

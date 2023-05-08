@@ -141,7 +141,7 @@ class xajaxPluginManager
 		1000 thru 8999: User created plugins, typically, these plugins don't care about order
 		9000 thru 9999: Plugins that generally need to be last or near the end of the plugin list
 	*/
-	function registerPlugin(&$objPlugin, $nPriority=1000)
+	function registerPlugin($objPlugin, $nPriority=1000)
 	{
 		if (is_a($objPlugin, 'xajaxRequestPlugin'))
 		{

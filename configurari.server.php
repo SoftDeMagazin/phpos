@@ -267,6 +267,7 @@ function loadForm($mod, $id)
 function btnSave($mod, $frmValues)
 	{
 		global $mysql;
+		$id = null;
 	$objResponse = new xajaxResponse();
 	switch($mod)
 		{

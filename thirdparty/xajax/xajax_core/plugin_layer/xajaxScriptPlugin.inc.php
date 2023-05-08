@@ -96,7 +96,7 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 	
 	function &_getSections($sType)
 	{
-		$objPluginManager =& xajaxPluginManager::getInstance();
+		$objPluginManager = xajaxPluginManager::getInstance();
 		
 		$objPluginManager->configure('deferScriptGeneration', 'deferred');
 		
@@ -138,7 +138,7 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 	{
 		if ($this->canProcessRequest())
 		{
-			$aSections =& $this->_getSections($this->sRequest);
+			$aSections = $this->_getSections($this->sRequest);
 			
 //			echo "<!--" . print_r($aSections, true) . "-->";
 			
@@ -155,7 +155,7 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 				foreach ($aSections as $sSection)
 					$objResponse->append($sSection . "\n");
 				
-				$objResponseManager =& xajaxResponseManager::getInstance();
+				$objResponseManager = xajaxResponseManager::getInstance();
 				$objResponseManager->append($objResponse);
 				
 				header ('Expires: ' . gmdate('D, d M Y H:i:s', time() + (60*60*24)) . ' GMT');
@@ -169,5 +169,5 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 	}
 }
 
-$objPluginManager =& xajaxPluginManager::getInstance();
-$objPluginManager->registerPlugin(new xajaxScriptPlugin($objXajax, 9999));
+$objPluginManager = xajaxPluginManager::getInstance();
+$objPluginManager->registerPlugin(new xajaxScriptPlugin(),9999);
