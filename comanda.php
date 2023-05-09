@@ -196,7 +196,7 @@ echo $ds -> printHtml('produse', 1000, 100);
       <td width="20%"><div id="comandatotal" align="center"></div></td>
       <td width="20%"><div id="utilizator" style="text-align:center; font-weight:bold; "></div></td>
       <td width="20%"><div id="nume_casa"></div></td>
-      <td width="20%"><div id="cui_bon"></div></td>
+      <td width="20%"><input type="text" id="cui_value" /></td>
     </tr>
   </table>
 </div>

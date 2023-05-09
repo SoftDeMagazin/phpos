@@ -478,7 +478,7 @@ function btnPlata($comanda_id, $frmValues)
 
 function btnCui() {
 	$keyboard = new KeyBoard();
-	$innerHTML = $keyboard -> printHtml('', '');
+	$innerHTML = $keyboard -> printHtml('cui_value', '');
 	$innerHTML .= $keyboard->printCss();
 	$innerHTML .= $keyboard->printJavaScript();
 	$objResponse = afisareDialog($innerHTML, '800px', '450px', '100px', '200px', null);
