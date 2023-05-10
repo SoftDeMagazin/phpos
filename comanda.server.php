@@ -72,7 +72,7 @@ function onLoad($comanda_id=NULL)
 		{
 		foreach($ModPlata -> objects as $objModPlata)
 			{
-			$onClick = "xajax_plataRapida(document.getElementById('comanda_id').value, ". $objModPlata -> mod_plata_id .");this.disabled = true;this.blur();";
+			$onClick = "xajax_plataRapida(document.getElementById('comanda_id').value, ". $objModPlata -> mod_plata_id .", document.getElementById('cui_value').value);this.disabled = true;this.blur();";
 			if(($objModPlata -> nume_mod == "PROTOCOL")  || ($objModPlata -> nume_mod == "EXPIRATE") || ($objModPlata -> nume_mod == "TRANSFER")) {
 			if($user  -> verificaDrept('protocol') == TRUE ) {
 				$btn = $html -> button(array("name" => $objModPlata -> nume_mod, 
@@ -521,13 +521,13 @@ function plataAppendMod($frmPlata, $mod_plata_id, $suma)
 	return $objResponse;
 	}
 
-function btnSavePlata($frmPlata, $comanda_id)
+function btnSavePlata($frmPlata, $comanda_id, $cui)
 	{
 	global $mysql;
 	global $html;
 	$objResponse = new xajaxResponse();
 	$Bon = new Bonuri($mysql);
-	if(!$Bon -> plata($frmPlata, $comanda_id))
+	if(!$Bon -> plata($frmPlata, $comanda_id, $cui))
 		{
 		$objResponse = btnResetPlata($frmPlata);
 		return $objResponse;
@@ -556,7 +556,7 @@ function btnResetPlata($frmPlata)
 	return $objResponse;
 	}			
 
-function plataRapida($comanda_id, $mod_plata_id)
+function plataRapida($comanda_id, $mod_plata_id, $cui)
 	{
 	global $mysql;
 	global $html;
@@ -570,7 +570,7 @@ if($cfgStocuri['verific_stoc'])
 		{
 		$objResponse = new xajaxResponse();
 		$Bon = new Bonuri($mysql);
-		$Bon -> plataRapida($comanda_id, $mod_plata_id);
+		$Bon -> plataRapida($comanda_id, $mod_plata_id, $cui);
 		//include("views/comanda/rest.php");
 		//$objResponse = afisareDialog($innerHTML, "600px", "530px", "210px", "20px", FALSE);
 		$objResponse -> script("window.location.href='comanda.php'");
@@ -585,7 +585,7 @@ else
 {
 	$objResponse = new xajaxResponse();
 	$Bon = new Bonuri($mysql);
-	$Bon -> plataRapida($comanda_id, $mod_plata_id);
+	$Bon -> plataRapida($comanda_id, $mod_plata_id, $cui);
 	//include("views/comanda/rest.php");
 	//$objResponse = afisareDialog($innerHTML, "600px", "530px", "210px", "20px", FALSE);
 	$objResponse -> script("window.location.href='comanda.php'");

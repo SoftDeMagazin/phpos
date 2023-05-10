@@ -8,7 +8,7 @@ class Bonuri extends AbstractDB
 		$this -> AbstractDB($mysql, $id);
 		}
 	
-	function adaugaBon($comanda_id)
+	function adaugaBon($comanda_id, $cui = null)
 		{
 		$comanda = new Comenzi($this -> mysql, $comanda_id);
 		$nr_bon = $this -> mysql -> getRow("SELECT * FROM rpt_bonuri_emise where zi_economica_id = '". $comanda -> obj -> zi_economica_id ."' and casa_id = '". $comanda -> obj -> casa_id ."'");		
@@ -23,6 +23,7 @@ class Bonuri extends AbstractDB
 		$this -> setObjValue("data", date("Y-m-d"));
 		$this -> setObjValue("total", $comanda -> calculeazaTotal());
 		$this -> setObjValue("zi_economica_id", $comanda -> obj -> zi_economica_id);
+		$this -> setObjValue("cui", $cui);
 		$this -> save();
 		
 		$sql = "
@@ -102,9 +103,9 @@ class Bonuri extends AbstractDB
 		$fiscal -> executBon();
 		}	
 	
-	function plataRapida($comanda_id, $mod_plata_id)
+	function plataRapida($comanda_id, $mod_plata_id, $cui = null)
 		{
-		$this -> adaugaBon($comanda_id);
+		$this -> adaugaBon($comanda_id, $cui);
 		$this -> adaugaModPlata($this -> obj -> total, $mod_plata_id);
 		$this -> emiteBonFiscal();
 		$this -> inchideBon();
@@ -143,7 +144,7 @@ class Bonuri extends AbstractDB
 				}
 			}
 		}	
-	function plata($frmPlata, $comanda_id)
+	function plata($frmPlata, $comanda_id, $cui = null)
 		{
 		$nr_r = count($frmPlata['mod_plata_id']);
 		$moduri_fiscale = FALSE;
@@ -161,7 +162,7 @@ class Bonuri extends AbstractDB
 			}
 		else
 		{
-		$this -> adaugaBon($comanda_id);
+		$this -> adaugaBon($comanda_id, $cui);
 		for($i=0; $i<$nr_r;$i++)
 			{
 			$this -> adaugaModPlata($frmPlata['suma'][$i], $frmPlata['mod_plata_id'][$i]);

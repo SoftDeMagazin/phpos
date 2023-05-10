@@ -28,6 +28,7 @@ CREATE TABLE IF NOT EXISTS `bonuri` (
   `avans` varchar(2) DEFAULT 'NU',
   `suma_avans` float DEFAULT '0',
   `achitat` varchar(2) DEFAULT 'DA',
+  `cui` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`bon_id`),
   KEY `user` (`user_id`,`bon_id`),
   KEY `casa` (`casa_id`,`bon_id`),

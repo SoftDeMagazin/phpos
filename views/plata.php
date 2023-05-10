@@ -41,7 +41,7 @@ $view = '
 		</td>
         <td valign="top">&nbsp;</td>
         <td valign="middle"><div align="center">
-          <input name="btnSavePlata" type="submit" id="btnSavePlata" value="Plata" onClick="xajax_btnSavePlata(xajax.getFormValues(\'frmPlata\'), document.getElementById(\'comanda_id\').value);this.disabled=true; this.blur();" disabled>
+          <input name="btnSavePlata" type="submit" id="btnSavePlata" value="Plata" onClick="xajax_btnSavePlata(xajax.getFormValues(\'frmPlata\'), document.getElementById(\'comanda_id\').value, document.getElementById(\'cui_value\').value);this.disabled=true; this.blur();" disabled>
           <input name="btnResetPlata" type="button" id="btnResetPlata" value="Reset" onClick="xajax_btnResetPlata(xajax.getFormValues(\'frmPlata\'));">
         </div></td>
       </tr>

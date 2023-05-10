@@ -1,0 +1,2 @@
+ALTER TABLE bonuri
+ADD COLUMN cui varchar(50) DEFAULT NULL;

@@ -33,6 +33,7 @@ class FiscalDatecs extends Fiscal
 	var $Linie = "S,<%id%>,______,_,__;<%denumire%>;<%pret%>;<%cant%>;<%sectie%>;1;1;0;0;\r\n";
 	var $Discount = "C,<%id%>,______,_,__;1;<%procent%>;;;;\r\n";
 	var $End = "T,<%id%>,______,_,__;<%cod%>;<%total%>;;;;\r\n";
+	var $Cui = "K,<%id%>,______,_,__;<%cui%>;\r\n";
 	
 	
 	 function FiscalDatecs($mysql)
@@ -52,6 +53,13 @@ class FiscalDatecs extends Fiscal
 		{
 		if(isset($BonContinut -> objects))
 			{
+				if(!empty($Bon -> obj -> cui)) {
+					$linieCui = $this -> Cui;
+					$this -> replace($linieCui, '<%id%>', $Casa -> obj -> id);
+					$this -> replace($linieCui, '<%cui%>', $Bon -> obj -> cui);
+					$this -> append($txt, $linieCui);
+				}
+
 			$Produs = new Produse($this -> mysql);
 			foreach($BonContinut -> objects as $objContinut)
 				{
