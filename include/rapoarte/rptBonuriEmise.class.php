@@ -2,7 +2,7 @@
 class rptBonuriEmise extends Rapoarte
 	{
 			var $view = "rpt_bonuri_emise";
-	function rptBonuriEmise($mysql)
+	function __construct($mysql)
 		{
 		$this -> mysql = $mysql;
 		}

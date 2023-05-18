@@ -2,7 +2,7 @@
 class RptCaseModuri extends Rapoarte
 	{
 			var $view = "rpt_moduri_case";
-	function RptModuriPlata($mysql)
+	function __construct($mysql)
 		{
 		$this -> mysql = $mysql;
 		}
