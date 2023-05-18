@@ -5,9 +5,9 @@ class Etichete extends AbstractDB
 	var $primaryKey="eticheta_id";
 	var $form = array();
 	
-	function Etichete($mysql, $id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql,$id);
+		parent::__construct($mysql, $id);
 		}
 	
 	function continut()

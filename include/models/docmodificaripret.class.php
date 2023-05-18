@@ -8,9 +8,9 @@ class DocModificariPret extends AbstractDB
 
 	/* form processing */
 	
-	function DocModificariPret($mysql, $id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql, $id);
+		parent::__construct($mysql, $id);
 		}
 
 	function printDoc()

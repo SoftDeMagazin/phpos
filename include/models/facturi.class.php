@@ -5,9 +5,9 @@ class Facturi extends AbstractDB
 	var $primaryKey="factura_id";
 	var $form = array();
 	
-	function Facturi($mysql, $id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql,$id);
+		parent::__construct($mysql, $id);
 		}
 	
 	function  preview()

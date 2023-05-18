@@ -185,7 +185,7 @@ class FiscalNet extends Fiscal
 	
 	
 	
-	 function FiscalNet($mysql)
+	 function __construct($mysql)
 		{
 		$this -> mysql = $mysql;
 		}
@@ -321,7 +321,7 @@ class FiscalZeka extends Fiscal
 {
 	var $Linie = "";
 	var $End;
-	function FiscalZeka($mysql)
+	function __construct($mysql)
 		{
 		$this -> mysql = $mysql;
 		}
@@ -371,7 +371,7 @@ class FiscalElka extends Fiscal
 {
 	var $Linie = "";
 	var $End;
-	function FiscalElka($mysql)
+	function __construct($mysql)
 		{
 		global $mysql;
 		$this -> mysql = $mysql;
@@ -438,7 +438,7 @@ class FiscalSapel extends Fiscal
 {
 	var $Linie = "";
 	var $End;
-	function FiscalSapel($mysql)
+	function __construct($mysql)
 		{
 		global $mysql;
 		$this -> mysql = $mysql;

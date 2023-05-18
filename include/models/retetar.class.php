@@ -4,9 +4,9 @@ class Retetar extends AbstractDB
 	var $useTable = "retetar";
 	var $primaryKey = "retetar_id";
 	var $form = array();
-	function Retetar($mysql, $id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql, $id);
-		}	
+		parent::__construct($mysql, $id);
+		}
 }
 ?>

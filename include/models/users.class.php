@@ -24,9 +24,9 @@ class Users extends AbstractDB
 		),
 	);
 	/* form processing */	
-	function Users($mysql, $id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql, $id);
+		parent::__construct($mysql, $id);
 		}
 	function verificaDrept($drept,$user_id=NULL)
 		{

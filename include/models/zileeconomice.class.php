@@ -3,9 +3,9 @@ class ZileEconomice extends AbstractDB
 {
 	var $useTable = "zile_economice";
 	var $primaryKey = "zi_economica_id";
-	function ZileEconomice($mysql, $id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql, $id);
+		parent::__construct($mysql, $id);
 		}
 	
 	function getLastDay()
