@@ -58,20 +58,13 @@ if (!defined ('XAJAX_JS_VALUE')) define ('XAJAX_JS_VALUE', 'unquoted value');
 class xajaxRequest
 {
 	/*
-		String: sName
-		
-		The name of the function.
-	*/
-	var $sName;
-	
-	/*
 		String: sQuoteCharacter
 		
 		A string containing either a single or a double quote character
 		that will be used during the generation of the javascript for
 		this function.  This can be set prior to calling <xajaxRequest->printScript>
 	*/
-	var $sQuoteCharacter;
+	public $sQuoteCharacter = '"';
 	
 	/*
 		Array: aParameters
@@ -79,7 +72,7 @@ class xajaxRequest
 		An array of parameters that will be used to populate the argument list
 		for this function when the javascript is output in <xajaxRequest->printScript>	
 	*/
-	var $aParameters;
+	public $aParameters = [];
 	
 	/*
 		Function: xajaxRequest
@@ -88,12 +81,16 @@ class xajaxRequest
 		
 		sName - (string):  The name of this request.
 	*/
-	function xajaxRequest($sName)
-	{
-		$this->aParameters = array();
-		$this->sQuoteCharacter = '"';
-		$this->sName = $sName;
-	}
+	function __construct(
+     /*
+     	String: sName
+     	
+     	The name of the function.
+     */
+     public $sName
+ )
+ {
+ }
 	
 	/*
 		Function: useSingleQuote
@@ -124,7 +121,7 @@ class xajaxRequest
 	*/
 	function clearParameters()
 	{
-		$this->aParameters = array();
+		$this->aParameters = [];
 	}
 	
 	/*
@@ -143,7 +140,7 @@ class xajaxRequest
 		
 		if (1 < count($aArgs))
 			$this->setParameter(
-				count($this->aParameters), 
+				is_countable($this->aParameters) ? count($this->aParameters) : 0, 
 				$aArgs[0], 
 				$aArgs[1]);
 	}
@@ -282,12 +279,7 @@ class xajaxCustomRequest extends xajaxRequest
 	/*
 		Array: aVariables;
 	*/
-	var $aVariables;
-	
-	/*
-		String: sScript;
-	*/
-	var $sScript;
+	public $aVariables = [];
 	
 	/*
 		Function: xajaxCustomRequest
@@ -299,11 +291,14 @@ class xajaxCustomRequest extends xajaxRequest
 		aVariables - (associative array, optional):  An array of variable name, 
 			value pairs that will be passed to <xajaxCustomRequest->setVariable>
 	*/
-	function xajaxCustomRequest($sScript)
-	{
-		$this->aVariables = array();
-		$this->sScript = $sScript;
-	}
+	function __construct(
+     /*
+     	String: sScript;
+     */
+     public $sScript
+ )
+ {
+ }
 	
 	/*
 		Function: clearVariables
@@ -313,7 +308,7 @@ class xajaxCustomRequest extends xajaxRequest
 	*/
 	function clearVariables()
 	{
-		$this->aVariables = array();
+		$this->aVariables = [];
 	}
 	
 	/*
@@ -335,7 +330,7 @@ class xajaxCustomRequest extends xajaxRequest
 	{
 		$sScript = $this->sScript;
 		foreach ($this->aVariables as $sKey => $sValue)
-			$sScript = str_replace($sKey, $sValue, $sScript);
+			$sScript = str_replace($sKey, $sValue, (string) $sScript);
 		echo $sScript;
 	}
 }

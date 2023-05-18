@@ -18,7 +18,7 @@
 	$objResponse = new xajaxResponse();
 	
 	class clsPage {
-		function clsPage() {
+		function __construct() {
 		}
 		
 		function sendAssignInnerHTML() {
@@ -53,23 +53,13 @@
 
 	$xajax->processRequest();
 	
-	$sRoot = dirname(dirname(dirname(__FILE__)));
+	$sRoot = dirname(__FILE__, 3);
 
 	$sCore = '/xajax_core';
 	include_once($sRoot . $sCore . '/xajaxControl.inc.php');
 
 	$sControls = '/xajax_controls';
-	foreach (array(
-		'/document.inc.php',
-		'/doctype.inc.php',
-		'/html.inc.php',
-		'/head.inc.php',
-		'/title.inc.php',
-		'/body.inc.php',
-		'/literal.inc.php',
-		'/anchor.inc.php',
-		'/div.inc.php'
-		) as $sInclude)
+	foreach (['/document.inc.php', '/doctype.inc.php', '/html.inc.php', '/head.inc.php', '/title.inc.php', '/body.inc.php', '/literal.inc.php', '/anchor.inc.php', '/div.inc.php'] as $sInclude)
 		include $sRoot . $sControls . $sInclude;
 	
 	$litLineBreak = new clsLiteral('<br />');
@@ -87,25 +77,25 @@
 	$divPage->addChild($litLineBreak);
 
 	$aSASB_Red = new clsAnchor();
-	$aSASB_Red->setEvent('onclick', $aRequests['sendassignstylebackground'], array(array(0, XAJAX_QUOTED_VALUE, '#ff5555')));
+	$aSASB_Red->setEvent('onclick', $aRequests['sendassignstylebackground'], [[0, XAJAX_QUOTED_VALUE, '#ff5555']]);
 	$aSASB_Red->addChild(new clsLiteral('Red'));
 	$divPage->addChild($aSASB_Red);
 	$divPage->addChild($litSpace);
 
 	$aSASB_Green = new clsAnchor();
-	$aSASB_Green->setEvent('onclick', $aRequests['sendassignstylebackground'], array(array(0, XAJAX_QUOTED_VALUE, '#55ff55')));
+	$aSASB_Green->setEvent('onclick', $aRequests['sendassignstylebackground'], [[0, XAJAX_QUOTED_VALUE, '#55ff55']]);
 	$aSASB_Green->addChild(new clsLiteral('Green'));
 	$divPage->addChild($aSASB_Green);
 	$divPage->addChild($litSpace);
 
 	$aSASB_Blue = new clsAnchor();
-	$aSASB_Blue->setEvent('onclick', $aRequests['sendassignstylebackground'], array(array(0, XAJAX_QUOTED_VALUE, '#5555ff')));
+	$aSASB_Blue->setEvent('onclick', $aRequests['sendassignstylebackground'], [[0, XAJAX_QUOTED_VALUE, '#5555ff']]);
 	$aSASB_Blue->addChild(new clsLiteral('Blue'));
 	$divPage->addChild($aSASB_Blue);
 	$divPage->addChild($litSpace);
 
 	$aSASB_White = new clsAnchor();
-	$aSASB_White->setEvent('onclick', $aRequests['sendassignstylebackground'], array(array(0, XAJAX_QUOTED_VALUE, '#ffffff')));
+	$aSASB_White->setEvent('onclick', $aRequests['sendassignstylebackground'], [[0, XAJAX_QUOTED_VALUE, '#ffffff']]);
 	$aSASB_White->addChild(new clsLiteral('White'));
 	$divPage->addChild($aSASB_White);
 	$divPage->addChild($litLineBreak);
@@ -124,12 +114,7 @@
 
 	$divPage->addChild($litLineBreak);
 	
-	$divContent = new clsDiv(array(
-		'attributes' => array('id' => 'content'),
-		'children' => array(
-			new clsLiteral('This content has not been modified, click an option above to execute a test.')
-			)
-		));
+	$divContent = new clsDiv(['attributes' => ['id' => 'content'], 'children' => [new clsLiteral('This content has not been modified, click an option above to execute a test.')]]);
 	$divPage->addChild($divContent);
 	
 	$title = new clsTitle();

@@ -2,7 +2,7 @@
 class RptModuriPlata extends Rapoarte
 {
 	var $view = "rpt_moduri_plata";
-	function RptModuriPlata($mysql)
+	function __construct($mysql)
 		{
 		$this -> mysql = $mysql;
 		}

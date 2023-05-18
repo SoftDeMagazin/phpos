@@ -27,17 +27,12 @@
 class xajaxControl
 {
 	/*
-		String: sTag
-	*/
-	var $sTag;
-	
-	/*
 		Array: aAttributes
 		
 		An associative array of attributes that will be used in the generation
 		of the HMTL code for this control.
 	*/
-	var $aAttributes;
+	public $aAttributes;
 	
 	/*
 		Array: aEvents
@@ -47,7 +42,7 @@ class xajaxControl
 		script will be extracted using <xajaxRequest->printScript> or 
 		<xajaxRequest->getScript>.
 	*/
-	var $aEvents;
+	public $aEvents;
 
 	/*
 		Function: xajaxControl
@@ -63,10 +58,11 @@ class xajaxControl
 		'children' - (array):  An array of <xajaxControl> derived objects that
 			will be the children of this control.
 	*/
-	function xajaxControl($sTag, $aConfiguration=array())
+	function __construct(/*
+ 	String: sTag
+ */
+ public $sTag, $aConfiguration=[])
 	{
-		$this->sTag = $sTag;
-
 		$this->clearAttributes();
 				
 		if (isset($aConfiguration['attributes']))
@@ -77,12 +73,12 @@ class xajaxControl
 		$this->clearEvents();
 		
 		if (isset($aConfiguration['event']))
-			call_user_func_array(array(&$this, 'setEvent'), $aConfiguration['event']);
+			call_user_func_array($this->setEvent(...), $aConfiguration['event']);
 		
 		else if (isset($aConfiguration['events']))
 			if (is_array($aConfiguration['events']))
 				foreach ($aConfiguration['events'] as $aEvent)
-					call_user_func_array(array(&$this, 'setEvent'), $aEvent);
+					call_user_func_array($this->setEvent(...), $aEvent);
 	}
 	
 	/*
@@ -92,7 +88,7 @@ class xajaxControl
 	*/
 	function clearAttributes()
 	{
-		$this->aAttributes = array();
+		$this->aAttributes = [];
 	}
 
 	/*
@@ -134,7 +130,7 @@ class xajaxControl
 	*/
 	function clearEvents()
 	{
-		$this->aEvents = array();
+		$this->aEvents = [];
 	}
 
 	/*
@@ -155,7 +151,7 @@ class xajaxControl
 		sAfterRequest - (string, optional):  a string containing a snippet of javascript code
 			to execute after calling the xajaxRequest function
 	*/
-	function setEvent($sEvent, &$objRequest, $aParameters=array(), $sBeforeRequest='', $sAfterRequest='; return false;')
+	function setEvent($sEvent, &$objRequest, $aParameters=[], $sBeforeRequest='', $sAfterRequest='; return false;')
 	{
 		if (false == is_a($objRequest, 'xajaxRequest'))
 			trigger_error('Invalid request object passed to xajaxControl::setEvent'
@@ -163,7 +159,7 @@ class xajaxControl
 				E_USER_ERROR
 				);
 
-		$this->aEvents[$sEvent] = array(&$objRequest, $aParameters, $sBeforeRequest, $sAfterRequest);
+		$this->aEvents[$sEvent] = [&$objRequest, $aParameters, $sBeforeRequest, $sAfterRequest];
 	}
 
 	/*
@@ -301,7 +297,7 @@ class xajaxControlContainer extends xajaxControl
 		
 		An array of child controls.
 	*/
-	var $aChildren;
+	public $aChildren;
 	
 	/*
 		Array: aChildrenAllowed
@@ -309,7 +305,7 @@ class xajaxControlContainer extends xajaxControl
 		If set, this contains the list of control classes that are allowed
 		for this container.
 	*/
-	var $aChildrenAllowed;
+	public $aChildrenAllowed = [];
 	
 	/*
 		Boolean: bOnlyLiteral
@@ -317,7 +313,7 @@ class xajaxControlContainer extends xajaxControl
 		this will be true if the only children of this control are derived
 		from clsLiteral.  literal text does not need to be formatted.
 	*/
-	var $bOnlyLiteral;
+	public $bOnlyLiteral;
 	
 	/*
 		Boolean: sEndTag
@@ -326,7 +322,7 @@ class xajaxControlContainer extends xajaxControl
 		'optional' - The control may have an abbr. begin tag or a full end tag
 		'forbidden' - The control must have an abbr. begin tag and no end tag
 	*/
-	var $sEndTag;
+	public $sEndTag = 'required';
 
 	/*
 		Function: xajaxControlContainer
@@ -336,14 +332,8 @@ class xajaxControlContainer extends xajaxControl
 		aConfiguration - (array):  See <xajaxControl->xajaxControl> for more
 			information.
 	*/
-	function xajaxControlContainer($sTag, $aConfiguration=array())
+	function __construct($sTag, $aConfiguration=[])
 	{
-		xajaxControl::xajaxControl($sTag, $aConfiguration);
-		
-		$this->sEndTag = 'required';
-
-		$this->aChildrenAllowed = array();
-		
 		if (isset($aConfiguration['allowed']))
 			if (is_array($aConfiguration['allowed']))
 				$this->aChildrenAllowed = $aConfiguration['allowed'];
@@ -365,7 +355,7 @@ class xajaxControlContainer extends xajaxControl
 	function clearChildren()
 	{
 		$this->bOnlyLiteral = true;
-		$this->aChildren = array();
+		$this->aChildren = [];
 	}
 
 	/*
@@ -384,7 +374,7 @@ class xajaxControlContainer extends xajaxControl
 		if (false == (is_a($objControl, 'clsLiteral') || is_a($objControl, 'clsBreak')))
 			$this->bOnlyLiteral = false;
 			
-		if (0 < count($this->aChildrenAllowed))
+		if (0 < (is_countable($this->aChildrenAllowed) ? count($this->aChildrenAllowed) : 0))
 		{
 			$bAllowed = false;
 			foreach($this->aChildrenAllowed as $sAllowed)
@@ -429,7 +419,7 @@ class xajaxControlContainer extends xajaxControl
 			return;
 		}
 		
-		if ('optional' == $this->sEndTag && 0 == count($this->aChildren))
+		if ('optional' == $this->sEndTag && 0 == (is_countable($this->aChildren) ? count($this->aChildren) : 0))
 		{
 			echo "/>\n";
 			return;

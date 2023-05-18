@@ -70,22 +70,22 @@
 	}
 	
 	class clsFunctions {
-		function clsFunctions() {
+		function __construct() {
 		}
 		
 		function showIsLoaded() {
 			global $objResponse;
-			clsContext::begin("theFrame");
+			(new clsContext())->begin("theFrame");
 			$objResponse->script('try { if (iframe.code.loaded) xajax.$("outputDIV").innerHTML += "<br />iframe.js loaded"; } catch (e) { xajax.$("outputDIV").innerHTML += "<br />iframe.js *NOT* loaded"; }');
-			clsContext::end();
+			(new clsContext())->end();
 			$objResponse->script('try { if (iframe.code.loaded) xajax.$("outputDIV").innerHTML += "<br />iframe.js loaded in iframe context"; } catch (e) { xajax.$("outputDIV").innerHTML += "<br />iframe.js *NOT* loaded in iframe context"; }');
 		}
 		function showFormValues($aFormValues) {
 			global $objResponse;
-			clsContext::begin("theFrame");
+			(new clsContext())->begin("theFrame");
 			$objResponse->assign("outputDIV", "innerHTML", print_r($aFormValues, true));
 			$objResponse->includeScriptOnce("iframe.js");
-			clsContext::end();
+			(new clsContext())->end();
 			$objResponse->assign("outputDIV", "innerHTML", print_r($aFormValues, true));
 			$objResponse->waitFor("iframe.code.loaded", 90);
 			$this->showIsLoaded();
@@ -94,10 +94,10 @@
 		
 		function clear() {
 			global $objResponse;
-			clsContext::begin('theFrame');
+			(new clsContext())->begin('theFrame');
 			$objResponse->assign('outputDIV', 'innerHTML', '');
 			$objResponse->removeScript('iframe.js', 'iframe.code.unload();');
-			clsContext::end();
+			(new clsContext())->end();
 			$objResponse->assign('outputDIV', 'innerHTML', '');
 			$this->showIsLoaded();
 			return $objResponse;

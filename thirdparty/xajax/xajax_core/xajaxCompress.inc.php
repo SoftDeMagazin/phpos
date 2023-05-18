@@ -11,10 +11,10 @@
 function xajaxCompressFile($sFile)
 {
 	//remove windows cariage returns
-	$sFile = str_replace("\r",'',$sFile);
+	$sFile = str_replace("\r",'',(string) $sFile);
 	
 	//array to store replaced literal strings
-	$literal_strings = array();
+	$literal_strings = [];
 	
 	//explode the string into lines
 	$lines = explode("\n",$sFile);

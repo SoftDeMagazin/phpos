@@ -19,7 +19,7 @@
 require_once("../xajax_core/xajax.inc.php");
 
 class myObjectTest {
-	var $myValue = 'default';
+	public $myValue = 'default';
 	function testInstanceMethod($formData)
 	{
 		$objResponse = new xajaxResponse();
@@ -40,7 +40,7 @@ class myObjectTest {
 
 class objectMethodsTest
 {
-	var $myValue = 'default';
+	public $myValue = 'default';
 	function firstMethod() {
 		$objResponse = new xajaxResponse();
 		$objResponse->alert("In firstMethod. My value is: {$this->myValue}");
@@ -85,9 +85,9 @@ $myObj3->myValue = 'right:3';
 
 $myObj = new myObjectTest();
 $myObj->myValue = 'wrong';
-$requestInstanceMethod =& $xajax->registerFunction(array("testForm", &$myObj, "testInstanceMethod"));
+$requestInstanceMethod =& $xajax->registerFunction(["testForm", &$myObj, "testInstanceMethod"]);
 $requestInstanceMethod->setParameter(0, XAJAX_FORM_VALUES, 'testForm1');
-$requestClassMethod =& $xajax->registerFunction(array("testForm2", "myObjectTest", "testClassMethod"));
+$requestClassMethod =& $xajax->registerFunction(["testForm2", "myObjectTest", "testClassMethod"]);
 $requestClassMethod->setParameter(0, XAJAX_FORM_VALUES, 'testForm1');
 $myObj->myValue = 'right';
 

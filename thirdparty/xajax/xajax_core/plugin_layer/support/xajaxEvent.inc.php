@@ -19,7 +19,7 @@
 */
 
 // require_once is necessary here as the function plugin also includes this
-require_once dirname(__FILE__) . '/xajaxUserFunction.inc.php';
+require_once __DIR__ . '/xajaxUserFunction.inc.php';
 
 /*
 	Class: xajaxEvent
@@ -30,19 +30,12 @@ require_once dirname(__FILE__) . '/xajaxUserFunction.inc.php';
 class xajaxEvent
 {
 	/*
-		String: sName
-		
-		The name of the event.
-	*/
-	var $sName;
-	
-	/*
 		Array: aConfiguration
 		
 		Configuration / call options to be used when initiating a xajax request
 		to trigger this event.
 	*/
-	var $aConfiguration;
+	public $aConfiguration = [];
 	
 	/*
 		Array: aHandlers
@@ -50,19 +43,23 @@ class xajaxEvent
 		A list of <xajaxUserFunction> objects associated with this registered
 		event.  Each of these functions will be called when the event is triggered.
 	*/
-	var $aHandlers;
+	public $aHandlers = [];
 	
 	/*
 		Function: xajaxEvent
 		
 		Construct and initialize this <xajaxEvent> object.
 	*/
-	function xajaxEvent($sName)
-	{
-		$this->sName = $sName;
-		$this->aConfiguration = array();
-		$this->aHandlers = array();
-	}
+	function __construct(
+     /*
+     	String: sName
+     	
+     	The name of the event.
+     */
+     public $sName
+ )
+ {
+ }
 	
 	/*
 		Function: getName
@@ -135,10 +132,10 @@ class xajaxEvent
 		if (isset($this->aConfiguration['method']))
 			$sMethod = $this->aConfiguration['method'];
 			
-		if (0 < strlen($sMode))
+		if (0 < strlen((string) $sMode))
 			$sMode = ", mode: '{$sMode}'";
 		
-		if (0 < strlen($sMethod))
+		if (0 < strlen((string) $sMethod))
 			$sMethod = ", method: '{$sMethod}'";
 		
 		$sEvent = $this->sName;

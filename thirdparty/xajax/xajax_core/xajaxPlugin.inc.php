@@ -118,7 +118,7 @@ class xajaxResponsePlugin extends xajaxPlugin
 		A reference to the current <xajaxResponse> object that is being used
 		to build the response that will be sent to the client browser.
 	*/
-	var $objResponse;
+	public $objResponse;
 	
 	/*
 		Function: setResponse
@@ -152,7 +152,7 @@ class xajaxResponsePlugin extends xajaxPlugin
 		This name must match the plugin name requested in the called to 
 		<xajaxResponse->plugin>.
 	*/
-	function getName()
+	function getName(): never
 	{
 		trigger_error('Response plugin should override the getName function.', E_USER_ERROR);
 	}
@@ -165,7 +165,7 @@ class xajaxResponsePlugin extends xajaxPlugin
 		determine which response command and parameters will be sent to the
 		client upon completion of the xajax request process.
 	*/
-	function process()
+	function process(): never
 	{
 		trigger_error('Response plugin should override the process function.', E_USER_ERROR);
 	}

@@ -29,7 +29,7 @@ function testForm2($formData)
 	return $objResponse;
 }
 
-function testFormFail($formData)
+function testFormFail($formData): never
 {
 	sleep(2);
 	header("HTTP/1.1 500 Internal Server Error");
@@ -63,8 +63,8 @@ $xajax->processRequest();
 <head>
 <title>Call Techniques Test | xajax Tests</title>
 <?php 
-	$xajax_files = array();
-	$xajax_files[] = array("xajax_js/xajax_core.js", "xajax");
+	$xajax_files = [];
+	$xajax_files[] = ["xajax_js/xajax_core.js", "xajax"];
 //	$xajax_files[] = array("xajax_js/xajax_debug.js", "xajax.debug");
 	$xajax->printJavascript("../", $xajax_files) 
 ?>

@@ -1,6 +1,6 @@
 <?php
 
-$xajax_core = dirname(dirname(__FILE__)) . '/xajax_core';
+$xajax_core = dirname(__FILE__, 2) . '/xajax_core';
 
 require_once($xajax_core . '/xajax.inc.php');
 

@@ -1,5 +1,7 @@
 <?php
 /* FONTS DEFINITION */
+define('PRINTER_FW_NORMAL', 10);
+define('PRINTER_FW_BOLD', 10);
 $fonts = array( 
 				'default' => array ( 
 					'face' => "Arial",

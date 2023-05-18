@@ -51,7 +51,8 @@
 	*/
 	function myErrorRiddenFunction()
 	{
-		$value = $silly['nuts'];
+		$silly = [];
+  $value = $silly['nuts'];
 		$objResponse = new xajaxResponse();
 		$objResponse->alert("Bad array value: $value");
 		include("file_doesnt_exist.php");

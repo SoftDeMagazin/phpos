@@ -32,7 +32,7 @@ class xajaxCallableObject
 		
 		A reference to the callable object.
 	*/
-	var $obj;
+	public $obj;
 	
 	/*
 		Array: aConfiguration
@@ -42,7 +42,7 @@ class xajaxCallableObject
 		define the call options for each request.  The call options will be
 		passed to the client browser when the function stubs are generated.
 	*/
-	var $aConfiguration;
+	public $aConfiguration = [];
 	
 	/*
 		Function: xajaxCallableObject
@@ -51,10 +51,9 @@ class xajaxCallableObject
 		
 		obj - (object):  The object to reference.
 	*/
-	function xajaxCallableObject(&$obj)
+	function __construct(&$obj)
 	{
 		$this->obj =& $obj;
-		$this->aConfiguration = array();
 	}
 	
 	/*
@@ -65,7 +64,7 @@ class xajaxCallableObject
 	*/
 	function getName()
 	{
-		return get_class($this->obj);
+		return $this->obj::class;
 	}
 	
 	/*
@@ -82,7 +81,7 @@ class xajaxCallableObject
 		$sMethod = strtolower($sMethod);
 		
 		if (false == isset($this->aConfiguration[$sMethod]))
-			$this->aConfiguration[$sMethod] = array();
+			$this->aConfiguration[$sMethod] = [];
 			
 		$this->aConfiguration[$sMethod][$sName] = $sValue;
 	}
@@ -100,9 +99,9 @@ class xajaxCallableObject
 	*/
 	function generateRequests($sXajaxPrefix)
 	{
-		$aRequests = array();
+		$aRequests = [];
 		
-		$sClass = get_class($this->obj);
+		$sClass = $this->obj::class;
 		
 		foreach (get_class_methods($this->obj) as $sMethodName)
 		{
@@ -132,7 +131,7 @@ class xajaxCallableObject
 	*/	
 	function generateClientScript($sXajaxPrefix)
 	{
-		$sClass = get_class($this->obj);
+		$sClass = $this->obj::class;
 		
 		echo "{$sXajaxPrefix}{$sClass} = {};\n";
 		
@@ -216,7 +215,7 @@ class xajaxCallableObject
 		$objResponseManager =& xajaxResponseManager::getInstance();
 		$objResponseManager->append(
 			call_user_func_array(
-				array(&$this->obj, $sMethod), 
+				[&$this->obj, $sMethod], 
 				$aArgs
 				)
 			);

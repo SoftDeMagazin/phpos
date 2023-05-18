@@ -24,7 +24,7 @@
 */
 if (!defined ('XAJAX_CALLABLE_OBJECT')) define ('XAJAX_CALLABLE_OBJECT', 'callable object');
 
-require dirname(__FILE__) . '/support/xajaxCallableObject.inc.php';
+require __DIR__ . '/support/xajaxCallableObject.inc.php';
 
 /*
 	Class: xajaxCallableObjectPlugin
@@ -34,44 +34,35 @@ class xajaxCallableObjectPlugin extends xajaxRequestPlugin
 	/*
 		Array: aCallableObjects
 	*/
-	var $aCallableObjects;
+	public $aCallableObjects = [];
 
 	/*
 		String: sXajaxPrefix
 	*/
-	var $sXajaxPrefix;
+	public $sXajaxPrefix = 'xajax_';
 	
 	/*
 		String: sDefer
 	*/
-	var $sDefer;
+	public $sDefer = '';
 	
-	var $bDeferScriptGeneration;
+	public $bDeferScriptGeneration = false;
 
 	/*
 		String: sRequestedClass
 	*/
-	var $sRequestedClass;
+	public $sRequestedClass = NULL;
 	
 	/*
 		String: sRequestedMethod
 	*/
-	var $sRequestedMethod;
+	public $sRequestedMethod = NULL;
 
 	/*
 		Function: xajaxCallableObjectPlugin
 	*/
-	function xajaxCallableObjectPlugin()
+	function __construct()
 	{
-		$this->aCallableObjects = array();
-
-		$this->sXajaxPrefix = 'xajax_';
-		$this->sDefer = '';
-		$this->bDeferScriptGeneration = false;
-
-		$this->sRequestedClass = NULL;
-		$this->sRequestedMethod = NULL;
-
 		if (!empty($_GET['xjxcls'])) $this->sRequestedClass = $_GET['xjxcls'];
 		if (!empty($_GET['xjxmthd'])) $this->sRequestedMethod = $_GET['xjxmthd'];
 		if (!empty($_POST['xjxcls'])) $this->sRequestedClass = $_POST['xjxcls'];
@@ -101,7 +92,7 @@ class xajaxCallableObjectPlugin extends xajaxRequestPlugin
 	*/
 	function register($aArgs)
 	{
-		if (1 < count($aArgs))
+		if (1 < (is_countable($aArgs) ? count($aArgs) : 0))
 		{
 			$sType = $aArgs[0];
 
@@ -118,7 +109,7 @@ class xajaxCallableObjectPlugin extends xajaxRequestPlugin
 				if (false === is_a($xco, 'xajaxCallableObject'))
 					$xco = new xajaxCallableObject($xco);
 
-				if (2 < count($aArgs))
+				if (2 < (is_countable($aArgs) ? count($aArgs) : 0))
 					if (is_array($aArgs[2]))
 						foreach ($aArgs[2] as $sKey => $aValue)
 							foreach ($aValue as $sName => $sValue)
@@ -140,7 +131,7 @@ class xajaxCallableObjectPlugin extends xajaxRequestPlugin
 	{
 		if (false === $this->bDeferScriptGeneration || 'deferred' === $this->bDeferScriptGeneration)
 		{
-			if (0 < count($this->aCallableObjects))
+			if (0 < (is_countable($this->aCallableObjects) ? count($this->aCallableObjects) : 0))
 			{
 				echo "\n<script type='text/javascript' " . $this->sDefer . "charset='UTF-8'>\n";
 				echo "/* <![CDATA[ */\n";

@@ -13,7 +13,7 @@
 	$xajax->configure('javascript URI', '../../');
 
 	class clsFunctions {
-		function clsFunctions() {
+		function __construct() {
 		}
 		
 		function confirm($seconds) {

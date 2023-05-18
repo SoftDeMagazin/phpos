@@ -2,25 +2,16 @@
 
 class xajaxScriptPlugin extends xajaxRequestPlugin
 {
-	var $sRequest;
-	var $sHash;
-	var $sRequestURI;
-	var $bDeferScriptGeneration;
-	var $bValidateHash;
+	public $sRequest = '';
+	public $sHash = null;
+	public $sRequestURI = '';
+	public $bDeferScriptGeneration = false;
+	public $bValidateHash = true;
 	
-	var $bWorking;
+	public $bWorking = false;
 	
-	function xajaxScriptPlugin()
+	function __construct()
 	{
-		$this->sRequestURI = '';
-		$this->bDeferScriptGeneration = false;
-		$this->bValidateHash = true;
-		
-		$this->bWorking = false;
-
-		$this->sRequest = '';
-		$this->sHash = null;
-		
 		if (isset($_GET['xjxGenerateJavascript'])) {
 			$this->sRequest = 'script';
 			$this->sHash = $_GET['xjxGenerateJavascript'];
@@ -60,11 +51,11 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 			$this->bWorking = true;
 			
 			$sQueryBase = '?';
-			if (0 < strpos($this->sRequestURI, '?'))
+			if (0 < strpos((string) $this->sRequestURI, '?'))
 				$sQueryBase = '&';
 			
 			$aScripts = $this->_getSections('script');
-			if (0 < count($aScripts))
+			if (0 < (is_countable($aScripts) ? count($aScripts) : 0))
 			{
 //				echo "<!--" . print_r($aScripts, true) . "-->";
 			
@@ -75,7 +66,7 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 			}
 			
 			$aStyles = $this->_getSections('style');
-			if (0 < count($aStyles))
+			if (0 < (is_countable($aStyles) ? count($aStyles) : 0))
 			{
 //				echo "<!--" . print_r($aStyles, true) . "-->";
 			
@@ -100,7 +91,7 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 		
 		$objPluginManager->configure('deferScriptGeneration', 'deferred');
 		
-		$aSections = array();
+		$aSections = [];
 		
 		// buffer output
 		
@@ -116,12 +107,12 @@ class xajaxScriptPlugin extends xajaxRequestPlugin
 			$aValues = explode('<' . $sType, $sPart, 2);
 			if (2 == count($aValues))
 			{
-				list($sJunk, $sPart) = $aValues;
+				[$sJunk, $sPart] = $aValues;
 				
 				$aValues = explode('>', $sPart, 2);
 				if (2 == count($aValues))
 				{
-					list($sJunk, $sPart) = $aValues;
+					[$sJunk, $sPart] = $aValues;
 			
 					if (0 < strlen($sPart))
 						$aSections[] = $sPart;

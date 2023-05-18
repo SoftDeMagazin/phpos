@@ -17,7 +17,7 @@ function callScript()
 {
 	$response = new xajaxResponse();
 	$value2 = "this is a string";
-	$response->call("myJSFunction", "arg1", 9432.12, array("myKey" => "some value", "key2" => $value2));
+	$response->call("myJSFunction", "arg1", 9432.12, ["myKey" => "some value", "key2" => $value2]);
 	return $response;
 }
 
@@ -33,7 +33,7 @@ $requestCallOtherScript =& $xajax->register(XAJAX_FUNCTION, "callOtherScript");
 
 $xajax->processRequest();
 
-$sRoot = dirname(dirname(dirname(__FILE__)));
+$sRoot = dirname(__FILE__, 3);
 
 $sCore = '/xajax_core';
 include_once($sRoot . $sCore . '/xajaxControl.inc.php');
@@ -42,16 +42,10 @@ $sControls = '/xajax_controls';
 include_once($sRoot . $sControls . '/literal.inc.php');
 include_once($sRoot . $sControls . '/button.inc.php');
 
-$buttonCallScript = new clsButton(array(
-	'attributes' => array('id' => 'call_script'),
-	'children' => array(new clsLiteral('Click Me'))
-	));
+$buttonCallScript = new clsButton(['attributes' => ['id' => 'call_script'], 'children' => [new clsLiteral('Click Me')]]);
 $buttonCallScript->setEvent('onclick', $requestCallScript);
 
-$buttonCallOtherScript = new clsButton(array(
-	'attributes' => array('id' => 'call_other_script'),
-	'children' => array(new clsLiteral('or Click Me'))
-	));
+$buttonCallOtherScript = new clsButton(['attributes' => ['id' => 'call_other_script'], 'children' => [new clsLiteral('or Click Me')]]);
 $buttonCallOtherScript->setEvent('onclick', $requestCallOtherScript);
 
 ?>

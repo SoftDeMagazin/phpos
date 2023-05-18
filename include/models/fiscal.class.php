@@ -36,7 +36,7 @@ class FiscalDatecs extends Fiscal
 	var $Cui = "K,<%id%>,______,_,__;<%cui%>;\r\n";
 	
 	
-	 function FiscalDatecs($mysql)
+	 function __construct($mysql)
 		{
 		$this -> mysql = $mysql;
 		}

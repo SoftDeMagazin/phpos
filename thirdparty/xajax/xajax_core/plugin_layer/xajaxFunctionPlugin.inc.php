@@ -26,7 +26,7 @@
 if (!defined ('XAJAX_FUNCTION')) define ('XAJAX_FUNCTION', 'function');
 
 // require_once is necessary here as the xajaxEvent class will include this also
-require_once dirname(__FILE__) . '/support/xajaxUserFunction.inc.php';
+require_once __DIR__ . '/support/xajaxUserFunction.inc.php';
 
 /*
 	Class: xajaxFunctionPlugin
@@ -39,7 +39,7 @@ class xajaxFunctionPlugin extends xajaxRequestPlugin
 		An array of <xajaxUserFunction> object that are registered and
 		available via a <xajax.request> call.
 	*/
-	var $aFunctions;
+	public $aFunctions = [];
 
 	/*
 		String: sXajaxPrefix
@@ -47,7 +47,7 @@ class xajaxFunctionPlugin extends xajaxRequestPlugin
 		A configuration setting that is stored locally and used during
 		the client script generation phase.
 	*/
-	var $sXajaxPrefix;
+	public $sXajaxPrefix = 'xajax_';
 	
 	/*
 		String: sDefer
@@ -55,9 +55,9 @@ class xajaxFunctionPlugin extends xajaxRequestPlugin
 		Configuration option that can be used to request that the
 		javascript file is loaded after the page has been fully loaded.
 	*/
-	var $sDefer;
+	public $sDefer = '';
 	
-	var $bDeferScriptGeneration;
+	public $bDeferScriptGeneration = false;
 
 	/*
 		String: sRequestedFunction
@@ -68,7 +68,7 @@ class xajaxFunctionPlugin extends xajaxRequestPlugin
 		Since canProcessRequest loads this value from the get or post
 		data, it is unnecessary to load it again.
 	*/
-	var $sRequestedFunction;
+	public $sRequestedFunction = NULL;
 
 	/*
 		Function: xajaxFunctionPlugin
@@ -78,16 +78,8 @@ class xajaxFunctionPlugin extends xajaxRequestPlugin
 		be used to determine if the request is for a registered function in
 		<xajaxFunctionPlugin->canProcessRequest>
 	*/
-	function xajaxFunctionPlugin()
+	function __construct()
 	{
-		$this->aFunctions = array();
-
-		$this->sXajaxPrefix = 'xajax_';
-		$this->sDefer = '';
-		$this->bDeferScriptGeneration = false;
-
-		$this->sRequestedFunction = NULL;
-		
 		if (isset($_GET['xjxfun'])) $this->sRequestedFunction = $_GET['xjxfun'];
 		if (isset($_POST['xjxfun'])) $this->sRequestedFunction = $_POST['xjxfun'];
 	}
@@ -120,7 +112,7 @@ class xajaxFunctionPlugin extends xajaxRequestPlugin
 	*/
 	function register($aArgs)
 	{
-		if (1 < count($aArgs))
+		if (1 < (is_countable($aArgs) ? count($aArgs) : 0))
 		{
 			$sType = $aArgs[0];
 
@@ -131,7 +123,7 @@ class xajaxFunctionPlugin extends xajaxRequestPlugin
 				if (false === is_a($xuf, 'xajaxUserFunction'))
 					$xuf = new xajaxUserFunction($xuf);
 
-				if (2 < count($aArgs))
+				if (2 < (is_countable($aArgs) ? count($aArgs) : 0))
 					if (is_array($aArgs[2]))
 						foreach ($aArgs[2] as $sName => $sValue)
 							$xuf->configure($sName, $sValue);
@@ -157,7 +149,7 @@ class xajaxFunctionPlugin extends xajaxRequestPlugin
 	{
 		if (false === $this->bDeferScriptGeneration || 'deferred' === $this->bDeferScriptGeneration)
 		{
-			if (0 < count($this->aFunctions))
+			if (0 < (is_countable($this->aFunctions) ? count($this->aFunctions) : 0))
 			{
 				echo "\n<script type='text/javascript' " . $this->sDefer . "charset='UTF-8'>\n";
 				echo "/* <![CDATA[ */\n";

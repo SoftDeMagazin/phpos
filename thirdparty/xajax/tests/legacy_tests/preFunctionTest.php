@@ -36,12 +36,12 @@ function myPreFunction($funcName, $args)
 		return $objResponse;
 	}
 	$objResponse->addAlert("This is from the pre-function, which will now end the request.");
-	return array(false, $objResponse);
+	return [false, $objResponse];
 }
 
 class myPreObject
 {
-	var $message = "This is from the pre-function object method";
+	public $message = "This is from the pre-function object method";
 	
 	function preMethod($funcName, $args)
 	{
@@ -51,7 +51,7 @@ class myPreObject
 			return $objResponse;
 		}
 		$objResponse->addAlert($this->message . ", which will now end the request.");
-		return array(false, $objResponse);		
+		return [false, $objResponse];		
 	}
 }
 
@@ -59,7 +59,7 @@ $xajax = new legacyXajax();
 $xajax->debugOn();
 if (@$_GET['useObjects'] == "true") {
 	$preObj = new myPreObject();
-	$xajax->registerPreFunction(array("myPreFunction", &$preObj, "preMethod"));
+	$xajax->registerPreFunction(["myPreFunction", &$preObj, "preMethod"]);
 }
 else {
 	$xajax->registerPreFunction("myPreFunction");

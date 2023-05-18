@@ -1,6 +1,6 @@
 <?php
 
-$core = dirname(dirname(__FILE__)) . '/xajax_core';
+$core = dirname(__FILE__, 2) . '/xajax_core';
 require_once $core . '/xajax.inc.php';
 
 $xajax = new xajax();
@@ -13,12 +13,11 @@ require_once $core . '/xajaxPluginManager.inc.php';
 
 class testPlugin extends xajaxResponsePlugin
 {
-	var $sDefer;
+	public $sDefer = '';
 	
-	function testPlugin()
-	{
-		$this->sDefer = '';
-	}
+	function __construct()
+ {
+ }
 	
 	function getName()
 	{
@@ -40,7 +39,7 @@ class testPlugin extends xajaxResponsePlugin
 	
 	function testMethod()
 	{
-		$this->addCommand(array('n'=>'testPlg'), 'abcde]]>fg');	
+		$this->addCommand(['n'=>'testPlg'], 'abcde]]>fg');	
 	}
 }
 
@@ -60,7 +59,7 @@ function showOutput()
 	// PHP5 ONLY - Uncomment to test
 	//$testResponse->testPlugin->testMethod();
 	
-	$testResponseOutput = htmlspecialchars($testResponse->getOutput());
+	$testResponseOutput = htmlspecialchars((string) $testResponse->getOutput());
 	
 	$objResponse = new xajaxResponse();
 	$objResponse->assign("submittedDiv", "innerHTML", $testResponseOutput);
@@ -74,19 +73,11 @@ $xajax->processRequest();
 
 include_once($core . '/xajaxControl.inc.php');
 
-$controls = dirname(dirname(__FILE__)) . '/xajax_controls';
+$controls = dirname(__FILE__, 2) . '/xajax_controls';
 include_once($controls . '/button.inc.php');
 include_once($controls . '/literal.inc.php');
 
-$buttonShowOutput = new clsButton(array(
-	'attributes' => array(
-		'id' => 'btnShowOutput',
-		'name' => 'btnShowOutput'
-		),
-	'children' => array(
-		new clsLiteral('Show Response XML')
-		)
-	));
+$buttonShowOutput = new clsButton(['attributes' => ['id' => 'btnShowOutput', 'name' => 'btnShowOutput'], 'children' => [new clsLiteral('Show Response XML')]]);
 $buttonShowOutput->setEvent('onclick', $reqShowOutput);
 
 ?>

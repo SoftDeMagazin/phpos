@@ -37,7 +37,7 @@ class xajaxArgumentManager
 		An array of arguments received via the GET or POST parameter
 		xjxargs.
 	*/
-	var $aArgs;
+	public $aArgs = [];
 	
 	/*
 		Boolean: bDecodeUTF8Input
@@ -45,28 +45,28 @@ class xajaxArgumentManager
 		A configuration option used to indicate whether input data should be
 		UTF8 decoded automatically.
 	*/
-	var $bDecodeUTF8Input;
+	public $bDecodeUTF8Input = false;
 	
 	/*
 		Integer: iPos
 		
 		The current array position used during the parsing of the args.
 	*/
-	var $iPos;
+	public $iPos = 0;
 	
 	/*
 		Array: aObjArray
 		
 		An array that will contain the argument data as it is being processed.
 	*/
-	var $aObjArray;
+	public $aObjArray = [];
 	
 	/*
 		String: sCharacterEncoding
 		
 		The character encoding in which the input data will be received.
 	*/
-	var $sCharacterEncoding;
+	public $sCharacterEncoding = 'UTF-8';
 	
 	/*
 		Integer: nMethod
@@ -74,7 +74,7 @@ class xajaxArgumentManager
 		Stores the method that was used to send the arguments from the client.  Will
 		be one of: XAJAX_METHOD_UNKNOWN, XAJAX_METHOD_GET, XAJAX_METHOD_POST
 	*/
-	var $nMethod;
+	public $nMethod = XAJAX_METHOD_UNKNOWN;
 	
 	/*
 		Constructor: xajaxArgumentManager
@@ -82,15 +82,8 @@ class xajaxArgumentManager
 		Initializes configuration settings to their default values and reads
 		the argument data from the GET or POST data.
 	*/
-	function xajaxArgumentManager()
+	function __construct()
 	{
-		$this->aArgs = array();
-		$this->bDecodeUTF8Input = false;
-		$this->iPos = 0;
-		$this->aObjArray = array();
-		$this->sCharacterEncoding = 'UTF-8';
-		$this->nMethod = XAJAX_METHOD_UNKNOWN;
-		
 		$aArgs = NULL;
 		
 		if (isset($_POST['xjxargs'])) {
@@ -178,21 +171,21 @@ class xajaxArgumentManager
 		for ($i = 0; $i < sizeof($aArgs); $i++)
 		{
 			// If magic quotes is on, then we need to strip the slashes from the args
-			if (get_magic_quotes_gpc() == 1 && is_string($aArgs[$i])) {
+			if (is_string($aArgs[$i])) {
 			
 				$aArgs[$i] = stripslashes($aArgs[$i]);
 			}
-			if (false != strstr($aArgs[$i],"<xjxobj>")) {
+			if (str_contains($aArgs[$i],"<xjxobj>")) {
 				$aArgs[$i] = $this->_xmlToArray("xjxobj",$aArgs[$i]);	
 			}
-			else if (false != strstr($aArgs[$i],"<xjxquery>")) {
+			else if (str_contains($aArgs[$i],"<xjxquery>")) {
 				$aArgs[$i] = $this->_xmlToArray("xjxquery",$aArgs[$i]);	
 			}
 			else {
 				if ($this->bDecodeUTF8Input) {
 					$aArgs[$i] = $this->_decodeUTF8Data($aArgs[$i]);	
 				}
-				$aArgs[$i] = str_replace(array('<![CDATA[', ']]>'), '', $aArgs[$i]);
+				$aArgs[$i] = str_replace(['<![CDATA[', ']]>'], '', (string) $aArgs[$i]);
 			}
 		}
 		return $aArgs;
@@ -217,8 +210,8 @@ class xajaxArgumentManager
 	*/
 	function _xmlToArray($rootTag, $sXml)
 	{
-		$aArray = array();
-		$sXml = str_replace("<$rootTag>","<$rootTag>|~|",$sXml);
+		$aArray = [];
+		$sXml = str_replace("<$rootTag>","<$rootTag>|~|",(string) $sXml);
 		$sXml = str_replace("</$rootTag>","</$rootTag>|~|",$sXml);
 		$sXml = str_replace("<e>","<e>|~|",$sXml);
 		$sXml = str_replace("</e>","</e>|~|",$sXml);
@@ -253,33 +246,33 @@ class xajaxArgumentManager
 	*/
 	function _parseObjXml($rootTag)
 	{
-		$aArray = array();
+		$aArray = [];
 		
 		if ($rootTag == "xjxobj")
 		{
-			while (!strstr($this->aObjArray[$this->iPos],"</xjxobj>")) {
+			while (!strstr((string) $this->aObjArray[$this->iPos],"</xjxobj>")) {
 				$this->iPos++;
-				if (strstr($this->aObjArray[$this->iPos],"<e>")) {
+				if (strstr((string) $this->aObjArray[$this->iPos],"<e>")) {
 					$key = "";
 					$value = null;
 						
 					$this->iPos++;
-					while (!strstr($this->aObjArray[$this->iPos],"</e>")) {
-						if (strstr($this->aObjArray[$this->iPos],"<k>")) {
+					while (!strstr((string) $this->aObjArray[$this->iPos],"</e>")) {
+						if (strstr((string) $this->aObjArray[$this->iPos],"<k>")) {
 							$this->iPos++;
-							while (!strstr($this->aObjArray[$this->iPos],"</k>")) {
+							while (!strstr((string) $this->aObjArray[$this->iPos],"</k>")) {
 								$key .= $this->aObjArray[$this->iPos];
 								$this->iPos++;
 							}
 							if ($this->bDecodeUTF8Input) {
 								$key = $this->_decodeUTF8Data($key);
 							}
-							$key = str_replace(array('<![CDATA[', ']]>'), '', $key);
+							$key = str_replace(['<![CDATA[', ']]>'], '', (string) $key);
 						}
-						if (strstr($this->aObjArray[$this->iPos],"<v>")) {
+						if (strstr((string) $this->aObjArray[$this->iPos],"<v>")) {
 							$this->iPos++;
-							while (!strstr($this->aObjArray[$this->iPos],"</v>")) {
-								if (strstr($this->aObjArray[$this->iPos],"<xjxobj>")) {
+							while (!strstr((string) $this->aObjArray[$this->iPos],"</v>")) {
+								if (strstr((string) $this->aObjArray[$this->iPos],"<xjxobj>")) {
 									$value = $this->_parseObjXml("xjxobj");
 									$this->iPos++;
 								}
@@ -289,7 +282,7 @@ class xajaxArgumentManager
 									{
 										$value = $this->_decodeUTF8Data($value);
 									}
-									$value = str_replace(array('<![CDATA[', ']]>'), '', $value);
+									$value = str_replace(['<![CDATA[', ']]>'], '', (string) $value);
 								}
 								$this->iPos++;
 							}
@@ -305,8 +298,8 @@ class xajaxArgumentManager
 		{
 			$sQuery = "";
 			$this->iPos++;
-			while (!strstr($this->aObjArray[$this->iPos],"</xjxquery>")) {
-				if (strstr($this->aObjArray[$this->iPos],"<q>") || strstr($this->aObjArray[$this->iPos],"</q>")) {
+			while (!strstr((string) $this->aObjArray[$this->iPos],"</xjxquery>")) {
+				if (strstr((string) $this->aObjArray[$this->iPos],"<q>") || strstr((string) $this->aObjArray[$this->iPos],"</q>")) {
 					$this->iPos++;
 					continue;
 				}
@@ -327,7 +320,7 @@ class xajaxArgumentManager
 			// If magic quotes is on, then we need to strip the slashes from the
 			// array values because of the parse_str pass which adds slashes
 			if (get_magic_quotes_gpc() == 1) {
-				$newArray = array();
+				$newArray = [];
 				foreach ($aArray as $sKey => $sValue) {
 					if (is_string($sValue))
 						$newArray[$sKey] = stripslashes($sValue);
@@ -338,7 +331,7 @@ class xajaxArgumentManager
 			}
 			
 			foreach ($aArray as $key => $value) {
-				$aArray[$key] = str_replace(array('<![CDATA[', ']]>'), '', $value);
+				$aArray[$key] = str_replace(['<![CDATA[', ']]>'], '', (string) $value);
 			}
 		}
 		

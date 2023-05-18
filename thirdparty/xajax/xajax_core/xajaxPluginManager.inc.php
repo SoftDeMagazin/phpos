@@ -17,7 +17,7 @@
 	@license http://www.xajaxproject.org/bsd_license.txt BSD License
 */
 
-include_once(dirname(__FILE__) . '/xajaxPlugin.inc.php');
+include_once(__DIR__ . '/xajaxPlugin.inc.php');
 
 /*
 	Class: xajaxPluginManager
@@ -27,46 +27,39 @@ class xajaxPluginManager
 	/*
 		Array: aRequestPlugins
 	*/
-	var $aRequestPlugins;
+	public $aRequestPlugins = [];
 	
 	/*
 		Array: aResponsePlugins
 	*/
-	var $aResponsePlugins;
+	public $aResponsePlugins = [];
 	
 	/*
 		Array: aConfigurable
 	*/
-	var $aConfigurable;
+	public $aConfigurable = [];
 	
 	/*
 		Array: aRegistrars
 	*/
-	var $aRegistrars;
+	public $aRegistrars = [];
 	
 	/*
 		Array: aProcessors
 	*/
-	var $aProcessors;
+	public $aProcessors = [];
 	
 	/*
 		Array: aClientScriptGenerators
 	*/
-	var $aClientScriptGenerators;
+	public $aClientScriptGenerators = [];
 	
 	/*
 		Function: xajaxPluginManager
 	*/
-	function xajaxPluginManager()
-	{
-		$this->aRequestPlugins = array();
-		$this->aResponsePlugins = array();
-		
-		$this->aConfigurable = array();
-		$this->aRegistrars = array();
-		$this->aProcessors = array();
-		$this->aClientScriptGenerators = array();
-	}
+	function __construct()
+ {
+ }
 	
 	/*
 		Function: getInstance

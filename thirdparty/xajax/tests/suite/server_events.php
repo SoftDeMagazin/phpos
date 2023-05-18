@@ -40,9 +40,9 @@
 	}
 	
 	$objEventHandlers = new clsEventHandlers();
-	$objEventHandlerThree = new xajaxUserFunction(array(&$objEventHandlers, 'eventHandlerThree'));
+	$objEventHandlerThree = new xajaxUserFunction($objEventHandlers->eventHandlerThree(...));
 	
-	$requestEvent = $xajax->register(XAJAX_EVENT, 'theOneAndOnly', array("mode" => "synchronous"));
+	$requestEvent = $xajax->register(XAJAX_EVENT, 'theOneAndOnly', ["mode" => "synchronous"]);
 	
 	$xajax->register(XAJAX_EVENT_HANDLER, 'theOneAndOnly', 'eventHandlerOne');
 	$xajax->register(XAJAX_EVENT_HANDLER, 'theOneAndOnly', 'eventHandlerTwo');

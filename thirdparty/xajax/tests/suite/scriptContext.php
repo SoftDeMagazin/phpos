@@ -38,8 +38,8 @@
 	$req_Mv = $xajax->register(XAJAX_FUNCTION, 'modifyValue');
 	$req_Cf = $xajax->register(XAJAX_FUNCTION, 'callFunction');
 	
-	$req_Mv_Mo = $xajax->register(XAJAX_FUNCTION, 'modifyValue', array('context' => 'myObject', 'alias' => 'modifyValue_myObject'));
-	$req_Cf_Mo = $xajax->register(XAJAX_FUNCTION, 'callFunction', array('context' => 'myObject', 'alias' => 'callFunction_myObject'));
+	$req_Mv_Mo = $xajax->register(XAJAX_FUNCTION, 'modifyValue', ['context' => 'myObject', 'alias' => 'modifyValue_myObject']);
+	$req_Cf_Mo = $xajax->register(XAJAX_FUNCTION, 'callFunction', ['context' => 'myObject', 'alias' => 'callFunction_myObject']);
 	
 	$xajax->processRequest();
 	
