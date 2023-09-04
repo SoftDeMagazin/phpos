@@ -38,13 +38,8 @@ $xajax->configure('javascript URI', '../');
 $xajax->configure('allowAllResponseTypes', true);
 
 $callXajaxResponse =& $xajax->register(XAJAX_FUNCTION, 'testXajaxResponse');
-$callXmlResponse =& $xajax->register(XAJAX_FUNCTION, 'testXmlResponse', array(
-	'responseProcessor' => 'xmlResponse'
-	));
-$callTextResponse =& $xajax->register(XAJAX_FUNCTION, 'testTextResponse', array(
-	'mode' => '"synchronous"',
-	'responseProcessor' => 'textResponse'
-	));
+$callXmlResponse =& $xajax->register(XAJAX_FUNCTION, 'testXmlResponse', ['responseProcessor' => 'xmlResponse']);
+$callTextResponse =& $xajax->register(XAJAX_FUNCTION, 'testTextResponse', ['mode' => '"synchronous"', 'responseProcessor' => 'textResponse']);
 
 $xajax->processRequest();
 

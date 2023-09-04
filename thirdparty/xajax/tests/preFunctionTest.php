@@ -36,7 +36,7 @@ function beforeProcessing(&$bEndRequest)
 
 class myPreObject
 {
-	var $message = "This is from the pre-function object method";
+	public $message = "This is from the pre-function object method";
 	
 	function beforeProcessing(&$bEndRequest)
 	{
@@ -71,7 +71,7 @@ $xajax = new xajax();
 if (isset($_GET['useObjects'])) {
 	if ('true' == $_GET['useObjects']) {
 		$preObj = new myPreObject();
-		$xajax->registerEvent(XAJAX_PROCESSING_EVENT_BEFORE, array(&$preObj, "beforeProcessing"));
+		$xajax->registerEvent(XAJAX_PROCESSING_EVENT_BEFORE, $preObj->beforeProcessing(...));
 	}
 }
 else {

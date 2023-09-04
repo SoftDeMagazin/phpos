@@ -46,7 +46,7 @@
 			
 			Constructor
 		*/
-		function clsPage() {
+		function __construct() {
 		}
 		
 		/*
@@ -86,7 +86,7 @@
 	$requestShowFormValues =& $xajax->register(
 		XAJAX_FUNCTION, 
 		new xajaxUserFunction('showFormValues', 'alert_confirm_external.inc.php'), 
-		array('mode'=>'"synchronous"'));
+		['mode'=>'"synchronous"']);
 	$requestShowFormValues->addParameter(XAJAX_FORM_VALUES, 'theForm');
 	
 	$requestSendBothEvent =& $xajax->register(XAJAX_EVENT, 'sendBoth');

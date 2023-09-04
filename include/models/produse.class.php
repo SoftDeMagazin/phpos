@@ -9,9 +9,9 @@ class Produse extends AbstractDB
 			"data_source" => "SELECT categorie_id, denumire_categorie FROM categorii ORDER BY denumire_categorie ASC"
 			)
 		);
-	function Produse($mysql, $id=NULL)
+		function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql, $id);
+		parent::__construct($mysql, $id);
 		}
 	
 	function btnProdus($options)

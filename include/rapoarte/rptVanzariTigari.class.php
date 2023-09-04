@@ -2,7 +2,7 @@
 class RptVanzariTigari extends Rapoarte
 {
 	var $view = "rpt_vanzari";
-	function RptModuriPlata($mysql)
+	function __construct($mysql)
 		{
 		$this -> mysql = $mysql;
 		}

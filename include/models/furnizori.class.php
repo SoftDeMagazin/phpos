@@ -44,9 +44,9 @@ class Furnizori extends AbstractDB
 	
 	);
 	/* form processing */	
-	function Furnizori($mysql, $id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql, $id);
+		parent::__construct($mysql, $id);
 		}
 	
 	function totalFacturiEmise($options = array())

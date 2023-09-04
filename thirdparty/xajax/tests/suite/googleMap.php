@@ -1,6 +1,6 @@
 <?php
 
-$sBaseFolder = dirname(dirname(dirname(__FILE__)));
+$sBaseFolder = dirname(__FILE__, 3);
 $sXajaxCore = $sBaseFolder . '/xajax_core';
 $sXajaxPlugins = $sBaseFolder . '/xajax_plugins';
 

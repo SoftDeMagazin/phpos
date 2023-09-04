@@ -36,21 +36,14 @@ class xajaxUserFunction
 		to call the same xajax enabled function with a different set of
 		call options from what was already registered.
 	*/
-    var $sAlias;
+    public $sAlias = '';
     
     /*
 		Object: uf
 		
 		A string or array which defines the function to be registered.
 	*/
-    var $uf;
-    
-    /*
-		String: sInclude
-		
-		The path and file name of the include file that contains the function.
-	*/
-    var $sInclude;
+    public $uf;
     
     /*
 		Array: aConfiguration
@@ -58,7 +51,7 @@ class xajaxUserFunction
 		An associative array containing call options that will be sent to the
 		browser curing client script generation.
 	*/
-    var $aConfiguration;
+    public $aConfiguration = [];
     
 	/*
 		Function: xajaxUserFunction
@@ -102,12 +95,14 @@ class xajaxUserFunction
 				
 			$xajax->register(XAJAX_FUNCTION, $myUserFunction);				
 	*/
-    function xajaxUserFunction($uf, $sInclude=NULL, $aConfiguration=array())
+    function __construct($uf, /*
+    	String: sInclude
+    	
+    	The path and file name of the include file that contains the function.
+    */
+    public $sInclude=NULL, $aConfiguration=[])
     {
-        $this->sAlias = '';
         $this->uf =& $uf;
-        $this->sInclude = $sInclude;
-        $this->aConfiguration = array();
         foreach ($aConfiguration as $sKey => $sValue)
 			$this->configure($sKey, $sValue);
     }
@@ -151,7 +146,7 @@ class xajaxUserFunction
     function generateRequest($sXajaxPrefix)
     {
         $sAlias = $this->getName();
-        if (0 < strlen($this->sAlias))
+        if (0 < strlen((string) $this->sAlias))
             $sAlias = $this->sAlias;
         return new xajaxRequest("{$sXajaxPrefix}{$sAlias}");
     }
@@ -168,7 +163,7 @@ class xajaxUserFunction
     {
         $sFunction = $this->getName();
         $sAlias = $sFunction;
-        if (0 < strlen($this->sAlias))
+        if (0 < strlen((string) $this->sAlias))
             $sAlias = $this->sAlias;
         echo "{$sXajaxPrefix}{$sAlias} = function() { ";
         echo "return xajax.request( ";
@@ -191,7 +186,7 @@ class xajaxUserFunction
 		function, including an external file if needed and passing along 
 		the specified arguments.
 	*/
-    function call($aArgs=array())
+    function call($aArgs=[])
     {
         $objResponseManager = xajaxResponseManager::getInstance();
         

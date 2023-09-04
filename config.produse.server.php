@@ -152,6 +152,21 @@ function frmProdus($produs_id)
 			}
 		$html -> replace($frmProdus, '<%categorie_id%>', $cat);	
 		}
+    $Cotetva = new CoteTva($mysql);
+    $Cotetva->find(array("ORDER BY", "valoare", "DESC"));
+    if(isset($Cotetva->objects)) {
+        $cote = "";
+        foreach ($Cotetva->objects as $objCotatva) {
+            $selected = "";
+            if($objCotatva->cotatva_id === $Produs->obj->cotatva_id) {
+                $selected = "selected";
+            }
+            $html->append($cote,
+                sprintf($html -> tags['option'], $html -> tagElements(array("value"=> $objCotatva -> cotatva_id, $selected)), $objCotatva -> valoare)
+            );
+        }
+        $html -> replace($frmProdus, '<%cotatva_id%>', $cote);
+    }
 	if($Produs -> obj -> la_vanzare == 'NU')
 		{
 		$html -> replace($frmProdus, '<%la_vanzare%>', '<option value="DA">DA</option><option value="NU" selected>NU</option>');	

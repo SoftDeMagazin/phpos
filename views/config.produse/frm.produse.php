@@ -29,6 +29,11 @@ Tip produs<br>
 <select name="tip_produs" id="tip_produs">
   <%tip_produs%>
 </select>
+</br>
+Cota tva </br>
+<select name="cotatva_id" id="cotatva_id">
+  <%cotatva_id%>
+</select>
 <br>
 <div style="text-align:right"><input name="btnSave" id="btnSave" type="button" value="Salveaza" onClick="xajax_frmSave(xajax.getFormValues(\'frmProdus\'));" accesskey="s"> <input name="btnCancel" id="btnCancel" type="button" value="Abandon" onClick="xajax_btnRenuntaDialog();" accesskey="c"></div>
 </fieldset>

@@ -17,7 +17,7 @@
 	$objResponse = new xajaxResponse();
 	
 	class clsFunctions {
-		function clsFunctions() {
+		function __construct() {
 		}
 		
 		function loadCSS1() {
@@ -55,7 +55,7 @@
 	
 	$xajax->processRequest();
 
-	$sRoot = dirname(dirname(dirname(__FILE__)));
+	$sRoot = dirname(__FILE__, 3);
 
 	$sCore = '/xajax_core';
 	include_once($sRoot . $sCore . '/xajaxControl.inc.php');
@@ -64,40 +64,16 @@
 	include_once($sRoot . $sControls . '/literal.inc.php');
 	include_once($sRoot . $sControls . '/button.inc.php');
 	
-	$buttonLoadCSS1 = new clsButton(array(
-		'attributes' => array(
-			'class' => 'loadCSS1',
-			'id' => 'loadCSS1'
-			),
-		'children' => array(new clsLiteral('Load CSS 1'))
-		));
+	$buttonLoadCSS1 = new clsButton(['attributes' => ['class' => 'loadCSS1', 'id' => 'loadCSS1'], 'children' => [new clsLiteral('Load CSS 1')]]);
 	$buttonLoadCSS1->setEvent('onclick', $aFunctions['loadcss1']);
 
-	$buttonUnloadCSS1 = new clsButton(array(
-		'attributes' => array(
-			'class' => 'initiallyHidden unloadCSS1',
-			'id' => 'unloadCSS1'
-			),
-		'children' => array(new clsLiteral('Unload CSS 1'))
-		));
+	$buttonUnloadCSS1 = new clsButton(['attributes' => ['class' => 'initiallyHidden unloadCSS1', 'id' => 'unloadCSS1'], 'children' => [new clsLiteral('Unload CSS 1')]]);
 	$buttonUnloadCSS1->setEvent('onclick', $aFunctions['unloadcss1']);
 	
-	$buttonLoadCSS2 = new clsButton(array(
-		'attributes' => array(
-			'class' => 'loadCSS2',
-			'id' => 'loadCSS2'
-			),
-		'children' => array(new clsLiteral('Load CSS 2'))
-		));
+	$buttonLoadCSS2 = new clsButton(['attributes' => ['class' => 'loadCSS2', 'id' => 'loadCSS2'], 'children' => [new clsLiteral('Load CSS 2')]]);
 	$buttonLoadCSS2->setEvent('onclick', $aFunctions['loadcss2']);
 
-	$buttonUnloadCSS2 = new clsButton(array(
-		'attributes' => array(
-			'class' => 'initiallyHidden unloadCSS2',
-			'id' => 'unloadCSS2'
-			),
-		'children' => array(new clsLiteral('Unload CSS 2'))
-		));
+	$buttonUnloadCSS2 = new clsButton(['attributes' => ['class' => 'initiallyHidden unloadCSS2', 'id' => 'unloadCSS2'], 'children' => [new clsLiteral('Unload CSS 2')]]);
 	$buttonUnloadCSS2->setEvent('onclick', $aFunctions['unloadcss2']);
 
 ?>

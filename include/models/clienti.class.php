@@ -5,9 +5,9 @@ class Clienti extends AbstractDB
 	var $primaryKey="client_id";
 	var $form = array();
 	
-	function Clienti($mysql, $id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql,$id);
+		parent::__construct($mysql, $id);
 		}
 	
 	function frmClient()

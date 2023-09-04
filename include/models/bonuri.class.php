@@ -3,9 +3,9 @@ class Bonuri extends AbstractDB
 {
 	var $useTable="bonuri";
 	var $primaryKey="bon_id";
-	function Bonuri($mysql,$id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql, $id);
+		parent::__construct($mysql, $id);
 		}
 	
 	function adaugaBon($comanda_id, $cui = null)

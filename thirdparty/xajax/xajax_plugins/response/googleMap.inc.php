@@ -29,7 +29,7 @@ class clsGoogleMap extends xajaxResponsePlugin
 		enables the plugin to generate a script reference to it's javascript file
 		if the javascript code is NOT inlined.
 	*/
-	var $sJavascriptURI;
+	public $sJavascriptURI = '';
 	
 	/*
 		Boolean: bInlineScript
@@ -39,7 +39,7 @@ class clsGoogleMap extends xajaxResponsePlugin
 		for the page, else, it will generate a script tag referencing the file by
 		using the <clsTableUpdater->sJavascriptURI>.
 	*/
-	var $bInlineScript;
+	public $bInlineScript = true;
 	
 	/*
 		String: sGoogleSiteKey
@@ -52,11 +52,9 @@ class clsGoogleMap extends xajaxResponsePlugin
 		
 		Constructs and initializes an instance of the table updater class.
 	*/
-	function clsGoogleMap()
-	{
-		$this->sJavascriptURI = '';
-		$this->bInlineScript = true;
-	}
+	function __construct()
+ {
+ }
 	
 	/*
 		Function: configure
@@ -127,7 +125,7 @@ class clsGoogleMap extends xajaxResponsePlugin
 	
 	function getName()
 	{
-		return get_class($this);
+		return static::class;
 	}
 	
 	function setGoogleSiteKey($sKey)
@@ -137,24 +135,26 @@ class clsGoogleMap extends xajaxResponsePlugin
 	
 	function create($sMap, $sParentId)
 	{
-		$command = array('n'=>'gm:cr', 't'=>$sParentId);
+		$command = ['n'=>'gm:cr', 't'=>$sParentId];
 		$this->addCommand($command, $sMap);	
 	}
 	function zoom($sMap, $nZoom) {
-		$command = array('n'=>'gm:zm', 't'=>$sMap);
+		$command = ['n'=>'gm:zm', 't'=>$sMap];
 		$this->addCommand($command, $nZoom);
 	}
 	function setMarker($sMap, $nLat, $nLon, $sText) {
 		$this->addCommand(
-			array('n'=>'gm:sm', 't'=>$sMap), 
-			array($nLat, $nLon, $sText)
+			['n'=>'gm:sm', 't'=>$sMap], 
+			[$nLat, $nLon, $sText]
 			);
 	}
 	function moveTo($sMap, $nLat, $nLon) {
-//	39.928005, 
+$position = null;
+  $row = null;
+  //	39.928005, 
 //	-82.70784, 
 //	15);
-		$command = array('n'=>'et_ar', 't'=>$parent);
+		$command = ['n'=>'et_ar', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
 		$this->addCommand($command, $row);

@@ -27,38 +27,24 @@
 */
 class xajaxIncludeClientScriptPlugin extends xajaxRequestPlugin
 {
-	var $sJsURI;
-	var $aJsFiles;
-	var $sDefer;
-	var $sRequestURI;
-	var $sStatusMessages;
-	var $sWaitCursor;
-	var $sVersion;
-	var $sDefaultMode;
-	var $sDefaultMethod;
-	var $bDebug;
-	var $bVerboseDebug;
-	var $nScriptLoadTimeout;
-	var $bUseUncompressedScripts;
-	var $bDeferScriptGeneration;
+	public $sJsURI = '';
+	public $aJsFiles = [];
+	public $sDefer = '';
+	public $sRequestURI = '';
+	public $sStatusMessages = 'false';
+	public $sWaitCursor = 'true';
+	public $sVersion = 'unknown';
+	public $sDefaultMode = 'asynchronous';
+	public $sDefaultMethod = 'POST';
+	public $bDebug = false;
+	public $bVerboseDebug = false;
+	public $nScriptLoadTimeout = 2000;
+	public $bUseUncompressedScripts = false;
+	public $bDeferScriptGeneration = false;
 
-	function xajaxIncludeClientScriptPlugin()
-	{
-		$this->sJsURI = '';
-		$this->aJsFiles = array();
-		$this->sDefer = '';
-		$this->sRequestURI = '';
-		$this->sStatusMessages = 'false';
-		$this->sWaitCursor = 'true';
-		$this->sVersion = 'unknown';
-		$this->sDefaultMode = 'asynchronous';
-		$this->sDefaultMethod = 'POST';	// W3C: Method is case sensitive
-		$this->bDebug = false;
-		$this->bVerboseDebug = false;
-		$this->nScriptLoadTimeout = 2000;
-		$this->bUseUncompressedScripts = false;
-		$this->bDeferScriptGeneration = false;
-	}
+	function __construct()
+ {
+ }
 
 	/*
 		Function: configure
@@ -175,17 +161,17 @@ class xajaxIncludeClientScriptPlugin extends xajaxRequestPlugin
 		$aJsFiles = $this->aJsFiles;
 		$sJsURI = $this->sJsURI;
 
-		if (0 == count($aJsFiles)) {
-			$aJsFiles[] = array($this->_getScriptFilename('xajax_js/xajax_core.js'), 'xajax');
+		if (0 == (is_countable($aJsFiles) ? count($aJsFiles) : 0)) {
+			$aJsFiles[] = [$this->_getScriptFilename('xajax_js/xajax_core.js'), 'xajax'];
 			
 			if (true === $this->bDebug)
-				$aJsFiles[] = array($this->_getScriptFilename('xajax_js/xajax_debug.js'), 'xajax.debug');
+				$aJsFiles[] = [$this->_getScriptFilename('xajax_js/xajax_debug.js'), 'xajax.debug'];
 			
 			if (true === $this->bVerboseDebug)
-				$aJsFiles[] = array($this->_getScriptFilename('xajax_js/xajax_verbose.js'), 'xajax.debug.verbose');
+				$aJsFiles[] = [$this->_getScriptFilename('xajax_js/xajax_verbose.js'), 'xajax.debug.verbose'];
 		}
 		
-		if ($sJsURI != '' && substr($sJsURI, -1) != '/') 
+		if ($sJsURI != '' && !str_ends_with($sJsURI, '/')) 
 			$sJsURI .= '/';
 		
 		$html = '';
@@ -228,7 +214,7 @@ class xajaxIncludeClientScriptPlugin extends xajaxRequestPlugin
 	function _getScriptFilename($sFilename)
 	{
 		if ($this->bUseUncompressedScripts) {
-			return str_replace('.js', '_uncompressed.js', $sFilename);  
+			return str_replace('.js', '_uncompressed.js', (string) $sFilename);  
 		}
 		return $sFilename;
 	}

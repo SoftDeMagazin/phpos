@@ -4,9 +4,9 @@ class Transformari extends AbstractDB
 	var $useTable = "transformari";
 	var $primaryKey = "transformare_id";
 	var $form = array();
-	function Transformari($mysql, $id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql, $id);
+		parent::__construct($mysql, $id);
 		}
 	
 	function proceseaza()

@@ -28,6 +28,7 @@ include("include/models/moduriplata.class.php");
 include("include/models/fiscal.class.php");
 include("include/models/modificaripret.class.php");
 include("include/models/retetar.class.php");
+include("include/models/cotetva.class.php");
 include("config/config.php");
 $xajax->registerFunction("btnCatalogProduse");
 $xajax->registerFunction("catalogListaProduse");

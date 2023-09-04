@@ -13,7 +13,7 @@
 
 if (false == class_exists('xajaxPlugin') || false == class_exists('xajaxPluginManager'))
 {
-	$sBaseFolder = dirname(dirname(dirname(__FILE__)));
+	$sBaseFolder = dirname(__FILE__, 3);
 	$sXajaxCore = $sBaseFolder . '/xajax_core';
 
 	if (false == class_exists('xajaxPlugin'))
@@ -35,7 +35,7 @@ class clsTableUpdater extends xajaxResponsePlugin
 		that the browser defer loading of the javascript until the rest of the page 
 		has been loaded.
 	*/
-	var $sDefer;
+	public $sDefer = '';
 	
 	/*
 		String: sJavascriptURI
@@ -44,7 +44,7 @@ class clsTableUpdater extends xajaxResponsePlugin
 		enables the plugin to generate a script reference to it's javascript file
 		if the javascript code is NOT inlined.
 	*/
-	var $sJavascriptURI;
+	public $sJavascriptURI = '';
 	
 	/*
 		Boolean: bInlineScript
@@ -54,19 +54,16 @@ class clsTableUpdater extends xajaxResponsePlugin
 		for the page, else, it will generate a script tag referencing the file by
 		using the <clsTableUpdater->sJavascriptURI>.
 	*/
-	var $bInlineScript;
+	public $bInlineScript = true;
 	
 	/*
 		Function: clsTableUpdater
 		
 		Constructs and initializes an instance of the table updater class.
 	*/
-	function clsTableUpdater()
-	{
-		$this->sDefer = '';
-		$this->sJavascriptURI = '';
-		$this->bInlineScript = true;
-	}
+	function __construct()
+ {
+ }
 	
 	/*
 		Function: configure
@@ -107,7 +104,7 @@ class clsTableUpdater extends xajaxResponsePlugin
 			echo "\n<script type='text/javascript' " . $this->sDefer . "charset='UTF-8'>\n";
 			echo "/* <![CDATA[ */\n";
 
-			include(dirname(__FILE__) . '/tableUpdater.js');
+			include(__DIR__ . '/tableUpdater.js');
 
 			echo "/* ]]> */\n";
 			echo "</script>\n";
@@ -118,30 +115,30 @@ class clsTableUpdater extends xajaxResponsePlugin
 	
 	function getName()
 	{
-		return get_class($this);
+		return static::class;
 	}
 	
 	// tables
 	function appendTable($table, $parent) {
-		$command = array('n'=>'et_at', 't'=>$parent);
+		$command = ['n'=>'et_at', 't'=>$parent];
 		$this->addCommand($command, $table);	
 	}
 	function insertTable($table, $parent, $position) {
-		$command = array('n'=>'et_it', 't'=>$parent, 'p'=>$position);
+		$command = ['n'=>'et_it', 't'=>$parent, 'p'=>$position];
 		$this->addCommand($command, $table);
 	}
 	function deleteTable($table) {
-		$this->addCommand(array('n'=>'et_dt'), $table);
+		$this->addCommand(['n'=>'et_dt'], $table);
 	}
 	// rows
 	function appendRow($row, $parent, $position = null) {
-		$command = array('n'=>'et_ar', 't'=>$parent);
+		$command = ['n'=>'et_ar', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
 		$this->addCommand($command, $row);
 	}
 	function insertRow($row, $parent, $position = null, $before = null) {
-		$command = array('n'=>'et_ir', 't'=>$parent);
+		$command = ['n'=>'et_ir', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
 		if (null != $before)
@@ -149,7 +146,7 @@ class clsTableUpdater extends xajaxResponsePlugin
 		$this->addCommand($command, $row);
 	}
 	function replaceRow($row, $parent, $position = null, $before = null) {
-		$command = array('n'=>'et_rr', 't'=>$parent);
+		$command = ['n'=>'et_rr', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
 		if (null != $before)
@@ -157,13 +154,13 @@ class clsTableUpdater extends xajaxResponsePlugin
 		$this->addCommand($command, $row);
 	}
 	function deleteRow($parent, $position = null) {
-		$command = array('n'=>'et_dr', 't'=>$parent);
+		$command = ['n'=>'et_dr', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
 		$this->addCommand($command, null);
 	}
 	function assignRow($values, $parent, $position = null, $start_column = null) {
-		$command = array('n'=>'et_asr', 't'=>$parent);
+		$command = ['n'=>'et_asr', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
 		if (null != $start_column)
@@ -171,38 +168,38 @@ class clsTableUpdater extends xajaxResponsePlugin
 		$this->addCommand($command, $values);
 	}
 	function assignRowProperty($property, $value, $parent, $position = null) {
-		$command = array('n'=>'et_asr', 't'=>$parent);
+		$command = ['n'=>'et_asr', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
-		$this->addCommand($command, array('p'=>$property, 'v'=>$value));
+		$this->addCommand($command, ['p'=>$property, 'v'=>$value]);
 	}
 	// columns
 	function appendColumn($column, $parent, $position = null) {
-		$command = array('n'=>'et_acol', 't'=>$parent);
+		$command = ['n'=>'et_acol', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
 		$this->addCommand($command, $column);
 	}
 	function insertColumn($column, $parent, $position = null) {
-		$command = array('n'=>'et_icol', 't'=>$parent);
+		$command = ['n'=>'et_icol', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
 		$this->addCommand($command, $column);
 	}
 	function replaceColumn($column, $parent, $position = null) {
-		$command = array('n'=>'et_rcol', 't'=>$parent);
+		$command = ['n'=>'et_rcol', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
 		$this->addCommand($command, $column);
 	}
 	function deleteColumn($parent, $position = null) {
-		$command = array('n'=>'et_dcol', 't'=>$parent);
+		$command = ['n'=>'et_dcol', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
 		$this->addCommand($command, null);
 	}
 	function assignColumn($values, $parent, $position = null, $start_row = null) {
-		$command = array('n'=>'et_ascol', 't'=>$parent);
+		$command = ['n'=>'et_ascol', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
 		if (null != $start_row)
@@ -210,16 +207,16 @@ class clsTableUpdater extends xajaxResponsePlugin
 		$this->addCommand($command, $values);
 	}
 	function assignColumnProperty($property, $value, $parent, $position = null) {
-		$command = array('n'=>'et_ascol', 't'=>$parent);
+		$command = ['n'=>'et_ascol', 't'=>$parent];
 		if (null != $position)
 			$command['p'] = $position;
-		$this->addCommand($command, array('p'=>$property, 'v'=>$value));
+		$this->addCommand($command, ['p'=>$property, 'v'=>$value]);
 	}
 	function assignCell($row, $column, $value) {
-		$this->addCommand(array('n'=>'et_asc', 't'=>$row, 'p'=>$column), $value);
+		$this->addCommand(['n'=>'et_asc', 't'=>$row, 'p'=>$column], $value);
 	}
 	function assignCellProperty($row, $column, $property, $value) {
-		$this->addCommand(array('n'=>'et_asc', 't'=>$row, 'p'=>$column), array('p'=>$property, 'v'=>$value));
+		$this->addCommand(['n'=>'et_asc', 't'=>$row, 'p'=>$column], ['p'=>$property, 'v'=>$value]);
 	}
 }
 

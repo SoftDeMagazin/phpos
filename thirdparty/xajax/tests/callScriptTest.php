@@ -5,7 +5,7 @@ function callScript()
 {
 	$response = new xajaxResponse();
 	$value2 = "this is a string";
-	$response->call("myJSFunction", "arg1", 9432.12, array("myKey" => "some value", "key2" => $value2));
+	$response->call("myJSFunction", "arg1", 9432.12, ["myKey" => "some value", "key2" => $value2]);
 	return $response;
 }
 

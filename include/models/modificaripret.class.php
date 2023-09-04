@@ -8,9 +8,9 @@ class ModificariPret extends AbstractDB
 
 	/* form processing */
 	
-	function ModificariPret($mysql, $id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql, $id);
+		parent::__construct($mysql, $id);
 		}
 
 }

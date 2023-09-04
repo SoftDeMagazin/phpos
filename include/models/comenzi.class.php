@@ -3,10 +3,10 @@ class Comenzi extends AbstractDB
 {
 	var $useTable = "comenzi";
 	var $primaryKey = "comanda_id";
-	function Comenzi($mysql, $id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql, $id);
-		}		
+		parent::__construct($mysql, $id);
+		}
 	
 	function amHappyHour() {
 		global $cfgMarcaj;

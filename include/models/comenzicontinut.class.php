@@ -3,9 +3,9 @@ class ComenziContinut extends AbstractDB
 {
 	var $useTable = "comenzi_continut";
 	var $primaryKey = "comanda_continut_id";
-	function ComenziContinut($mysql, $id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql, $id);
+		parent::__construct($mysql, $id);
 		}
 	
 	function plusCantitate()

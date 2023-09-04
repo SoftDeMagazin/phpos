@@ -9,9 +9,9 @@ class NiruriComponente extends AbstractDB
 			"label" => false
 		),
 	);
-	function NiruriComponente($mysql,$id=NULL)
+	function __construct($mysql,$id=NULL)
 		{
-		$this -> AbstractDB($mysql, $id);
+		parent::__construct($mysql, $id);
 		}
 		
 	function adaugaComponenta($frmValues, $nir_id = NULL)

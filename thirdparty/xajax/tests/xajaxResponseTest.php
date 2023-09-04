@@ -26,11 +26,11 @@
 		$testResponse2 = new xajaxResponse();
 		$testResponse2->loadCommands($testResponse);
 		$testResponse2->replace("this", "is", "a", "replacement]]>");
-		$testResponseOutput = htmlspecialchars($testResponse2->getOutput());	
+		$testResponseOutput = htmlspecialchars((string) $testResponse2->getOutput());	
 		
 		$objResponse = new xajaxResponse();
 		$objResponse->assign("submittedDiv", "innerHTML", $testResponseOutput);
-		$aValues = array();
+		$aValues = [];
 		$aValues[] = "Yippie";
 		$objResponse->setReturnValue($aValues);
 		return $objResponse;

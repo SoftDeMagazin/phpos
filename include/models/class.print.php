@@ -4,7 +4,7 @@ class Printer
 	var $handle;
 	var $printerName;
 	
-	function Printer($printerName=NULL)
+	function __construct($printerName=NULL)
 		{
 		$this -> printerName = $printerName;
 		}

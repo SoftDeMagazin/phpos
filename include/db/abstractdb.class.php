@@ -6,7 +6,7 @@ class AbstractDB
 	var $objects;
 	var $dataTable;
 	
-	function AbstractDB($mysql, $id=NULL)
+	function __construct($mysql, $id=NULL)
 		{
 		$this -> mysql = $mysql;
 		if($id != NULL) $this -> get($id);
@@ -119,7 +119,7 @@ function setObjValueNull($col)
 	function findAllBy($col, $value, $dt=FALSE)
 		{
 		$this -> objects = $this -> mysql -> getObjects("SELECT * FROM ". $this -> useTable ." WHERE $col = '$value';");
-		return count($this -> objects);
+		return $this -> objects ? count($this -> objects) : 0;
 		}
 	
 	function findBy($col, $value)

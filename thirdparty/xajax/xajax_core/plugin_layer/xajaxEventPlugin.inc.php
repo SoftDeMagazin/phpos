@@ -29,7 +29,7 @@
 if (!defined ('XAJAX_EVENT')) define ('XAJAX_EVENT', 'xajax event');
 if (!defined ('XAJAX_EVENT_HANDLER')) define ('XAJAX_EVENT_HANDLER', 'xajax event handler');
 
-require dirname(__FILE__) . '/support/xajaxEvent.inc.php';
+require __DIR__ . '/support/xajaxEvent.inc.php';
 
 /*
 	Class: xajaxEventPlugin
@@ -42,44 +42,35 @@ class xajaxEventPlugin extends xajaxRequestPlugin
 	/*
 		Array: aEvents
 	*/
-	var $aEvents;
+	public $aEvents = [];
 
 	/*
 		String: sXajaxPrefix
 	*/
-	var $sXajaxPrefix;
+	public $sXajaxPrefix = 'xajax_';
 	
 	/*
 		String: sEventPrefix
 	*/
-	var $sEventPrefix;
+	public $sEventPrefix = 'event_';
 
 	/*
 		String: sDefer
 	*/
-	var $sDefer;
+	public $sDefer = '';
 	
-	var $bDeferScriptGeneration;
+	public $bDeferScriptGeneration = false;
 
 	/*
 		String: sRequestedEvent
 	*/
-	var $sRequestedEvent;
+	public $sRequestedEvent = NULL;
 
 	/*
 		Function: xajaxEventPlugin
 	*/
-	function xajaxEventPlugin()
+	function __construct()
 	{
-		$this->aEvents = array();
-
-		$this->sXajaxPrefix = 'xajax_';
-		$this->sEventPrefix = 'event_';
-		$this->sDefer = '';
-		$this->bDeferScriptGeneration = false;
-
-		$this->sRequestedEvent = NULL;
-
 		if (isset($_GET['xjxevt'])) $this->sRequestedEvent = $_GET['xjxevt'];
 		if (isset($_POST['xjxevt'])) $this->sRequestedEvent = $_POST['xjxevt'];
 	}
@@ -114,7 +105,7 @@ class xajaxEventPlugin extends xajaxRequestPlugin
 	*/
 	function register($aArgs)
 	{
-		if (1 < count($aArgs))
+		if (1 < (is_countable($aArgs) ? count($aArgs) : 0))
 		{
 			$sType = $aArgs[0];
 
@@ -126,7 +117,7 @@ class xajaxEventPlugin extends xajaxRequestPlugin
 				{
 					$xe = new xajaxEvent($sEvent);
 
-					if (2 < count($aArgs))
+					if (2 < (is_countable($aArgs) ? count($aArgs) : 0))
 						if (is_array($aArgs[2]))
 							foreach ($aArgs[2] as $sKey => $sValue)
 								$xe->configure($sKey, $sValue);
@@ -169,7 +160,7 @@ class xajaxEventPlugin extends xajaxRequestPlugin
 	{
 		if (false === $this->bDeferScriptGeneration || 'deferred' === $this->bDeferScriptGeneration)
 		{
-			if (0 < count($this->aEvents))
+			if (0 < (is_countable($this->aEvents) ? count($this->aEvents) : 0))
 			{
 				echo "\n<script type='text/javascript' ";
 				echo $this->sDefer;

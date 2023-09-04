@@ -2,7 +2,7 @@
 class RptUtilizatoriModuri extends Rapoarte
 	{
 			var $view = "rpt_utilizatori_moduri";
-	function RptModuriPlata($mysql)
+	function __construct($mysql)
 		{
 		$this -> mysql = $mysql;
 		}

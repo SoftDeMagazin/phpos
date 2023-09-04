@@ -1,6 +1,6 @@
 <?php
 
-$sBaseFolder = dirname(dirname(dirname(__FILE__)));
+$sBaseFolder = dirname(__FILE__, 3);
 $sXajaxCore = $sBaseFolder . '/xajax_core';
 
 require_once($sXajaxCore . '/xajax.inc.php');
@@ -14,7 +14,7 @@ require_once("./options.inc.php");
 
 $requestURI = $xajax->_detectURI();
 
-$requestURI = str_replace('methodOne=1', '', $requestURI);
+$requestURI = str_replace('methodOne=1', '', (string) $requestURI);
 $requestURI = str_replace('methodTwo=1', '', $requestURI);
 $requestURI = str_replace('methodThree=1', '', $requestURI);
 
@@ -42,7 +42,7 @@ class testPlugin extends xajaxResponsePlugin
 	
 	function testMethod()
 	{
-		$this->addCommand(array('n'=>'testPlg'), 'abcde]]>fg');	
+		$this->addCommand(['n'=>'testPlg'], 'abcde]]>fg');	
 	}
 }
 
@@ -51,7 +51,7 @@ $objPluginManager->registerPlugin(new testPlugin());
 
 $xajax->processRequest();
 
-$sRoot = dirname(dirname(dirname(__FILE__)));
+$sRoot = dirname(__FILE__, 3);
 
 $sCore = '/xajax_core';
 include_once($sRoot . $sCore . '/xajaxControl.inc.php');
@@ -60,11 +60,7 @@ $sControls = '/xajax_controls';
 include_once($sRoot . $sControls . '/button.inc.php');
 include_once($sRoot . $sControls . '/literal.inc.php');
 
-$buttonShowOutput = new clsButton(array(
-	'attributes' => array('id' => 'btnShowOutput'),
-	'child' => new clsLiteral('Show Response XML'),
-	'event' => array('onclick', $reqShowOutput)
-	));
+$buttonShowOutput = new clsButton(['attributes' => ['id' => 'btnShowOutput'], 'child' => new clsLiteral('Show Response XML'), 'event' => ['onclick', $reqShowOutput]]);
 
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
@@ -102,7 +98,7 @@ $buttonShowOutput = new clsButton(array(
 	<div>
 <?php
 	$sSeparator = '?';
-	if (false !== strstr($requestURI, '?'))
+	if (str_contains($requestURI, '?'))
 		$sSeparator = '&';
 
 	$newRequestURI = $requestURI . $sSeparator . 'methodOne=1';
@@ -160,7 +156,7 @@ function showOutput()
 		eval('$testResponse->testPlugin->testMethod();');
 	
 	$testResponseOutput = '<pre>' 
-		. htmlspecialchars(str_replace("><", ">\n<", $testResponse->getOutput())) 
+		. htmlspecialchars(str_replace("><", ">\n<", (string) $testResponse->getOutput())) 
 		. '</pre>';
 	
 	$objResponse = new xajaxResponse();

@@ -33,25 +33,24 @@ class xajaxResponseManager
 		The current response object that will be sent back to the browser
 		once the request processing phase is complete.
 	*/
-	var $objResponse;
+	public $objResponse = NULL;
 	
 	/*
 		String: sCharacterEncoding
 	*/
-	var $sCharacterEncoding;
+	public $sCharacterEncoding;
 	
 	/*
 		Boolean: bOutputEntities
 	*/
-	var $bOutputEntities;
+	public $bOutputEntities;
 	
 	/*
 		Function: xajaxResponseManager
 	*/
-	function xajaxResponseManager()
-	{
-		$this->objResponse = NULL;
-	}
+	function __construct()
+ {
+ }
 	
 	/*
 		Function: getInstance

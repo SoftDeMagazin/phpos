@@ -28,24 +28,13 @@
 */
 class xajaxCall {
 
-	/**#@+
-	 * @access protected
-	 */
-
-	/*
-		String: sFunction
-		
-		Required:  The name of the xajax enabled function to call
-	*/
-	var $sFunction;
-	
 	/*
 		String: sReturnValue
 		
 		Required:  The value to return once the <xajax.call> has
 		returned.  (for asynchronous calls, this is immediate)
 	*/
-	var $sReturnValue;
+	public $sReturnValue;
 	
 	/*
 		Array: aParameters
@@ -56,7 +45,7 @@ class xajaxCall {
 		- value: A boolean value indicating whether or not to use quotes around
 			this parameter.
 	*/
-	var $aParameters;
+	public $aParameters = [];
 	
 	/*
 		String: sMode
@@ -65,7 +54,7 @@ class xajaxCall {
 		- 'synchronous'
 		- 'asynchronous'
 	*/
-	var $sMode;
+	public $sMode = '';
 	
 	/*
 		String: sRequestType
@@ -74,7 +63,7 @@ class xajaxCall {
 		- 'GET'
 		- 'POST'
 	*/
-	var $sRequestType;
+	public $sRequestType = '';
 	
 	/*
 		String: sResponseProcessor
@@ -82,21 +71,21 @@ class xajaxCall {
 		The name of the javascript function that will be invoked
 		to handle the response.
 	*/
-	var $sResponseProcessor;
+	public $sResponseProcessor = '';
 	
 	/*
 		String: sRequestURI
 		
 		The URI for where this request will be sent.
 	*/
-	var $sRequestURI;
+	public $sRequestURI = '';
 	
 	/*
 		String: sContentType
 		
 		The content type to use for the request.
 	*/
-	var $sContentType;
+	public $sContentType = '';
 	
 	/*
 		Constructor: xajaxCall
@@ -108,15 +97,19 @@ class xajaxCall {
 			on the browser.  This function name should match a PHP 
 			function from your script.
 	*/
-	function xajaxCall($sFunction = '') {
-		$this->sFunction = $sFunction;
-		$this->aParameters = array();
-		$this->sMode = '';
-		$this->sRequestType = '';
-		$this->sResponseProcessor = '';
-		$this->sRequestURI = '';
-		$this->sContentType = '';
-	}
+	function __construct(
+     /**#@+
+      * @access protected
+      */
+     /*
+     	String: sFunction
+     	
+     	Required:  The name of the xajax enabled function to call
+     */
+     public $sFunction = ''
+ )
+ {
+ }
 	
 	/*
 		Function: setFunction
@@ -143,7 +136,7 @@ class xajaxCall {
 		object - The <xajaxCall> object.
 	*/
 	function clearParameters() {
-		$this->aParameters = array();
+		$this->aParameters = [];
 	}
 	
 	/*
@@ -163,7 +156,7 @@ class xajaxCall {
 		object - The <xajaxCall> object.
 	*/
 	function addParameter($sParameter, $bUseQuotes = true) {
-		$this->aParameters[] = array($sParameter, $bUseQuotes);
+		$this->aParameters[] = [$sParameter, $bUseQuotes];
 		return $this;
 	}
 	
@@ -181,7 +174,7 @@ class xajaxCall {
 		object - The <xajaxCall> object.
 	*/
 	function addFormValuesParameter($sFormID) {
-		$this->aParameters[] = array('xajax.getFormValues("'.$sFormID.'")');
+		$this->aParameters[] = ['xajax.getFormValues("'.$sFormID.'")'];
 		return $this;
 	}
 	
@@ -301,7 +294,7 @@ class xajaxCall {
 		$output .= $this->sFunction;
 		$output .= '", {';
 		$separator = '';
-		if (0 < count($this->aParameters)) {
+		if (0 < (is_countable($this->aParameters) ? count($this->aParameters) : 0)) {
 			$output .= 'parameters: [';
 			foreach ($this->aParameters as $aParameter) {
 				$output .= $separator;
@@ -315,34 +308,34 @@ class xajaxCall {
 			}
 			$output .= ']';
 		}
-		if (0 < strlen($this->sMode)) {
+		if (0 < strlen((string) $this->sMode)) {
 			$output .= $separator;
 			$output .= 'mode:"';
 			$output .= $this->sMode;
 			$output .= '"';
 			$separator = ',';
 		}
-		if (0 < strlen($this->sRequestType)) {
+		if (0 < strlen((string) $this->sRequestType)) {
 			$output .= $separator;
 			$output .= 'requestType:"';
 			$output .= $this->sRequestType;
 			$output .= '"';
 			$separator = ',';
 		}
-		if (0 < strlen($this->sResponseProcessor)) {
+		if (0 < strlen((string) $this->sResponseProcessor)) {
 			$output .= $separator;
 			$output .= 'responseProcessor:';
 			$output .= $this->sResponseProcessor;
 			$separator = ',';
 		}
-		if (0 < strlen($this->sRequestURI)) {
+		if (0 < strlen((string) $this->sRequestURI)) {
 			$output .= $separator;
 			$output .= 'requestURI:"';
 			$output .= $this->sRequestURI;
 			$output .= '"';
 			$separator = ',';
 		}
-		if (0 < strlen($this->sContentType)) {
+		if (0 < strlen((string) $this->sContentType)) {
 			$output .= $separator;
 			$output .= 'contentType:"';
 			$output .= $this->sContentType;
@@ -350,7 +343,7 @@ class xajaxCall {
 			$separator = ',';
 		}
 		$output .= '}); ';
-		if (0 < strlen($this->sReturnValue)) {
+		if (0 < strlen((string) $this->sReturnValue)) {
 			$output .= 'return ';
 			$output .= $this->sReturnValue;
 		} else {

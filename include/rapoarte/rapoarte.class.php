@@ -4,7 +4,7 @@ class Rapoarte
 	var $mysql;
 	var $rows;
 	var $columns;
-	function Rapoarte($mysql)
+	function __construct($mysql)
 		{
 		$this -> mysql = $mysql;
 		}

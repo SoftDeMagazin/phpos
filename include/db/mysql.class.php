@@ -7,7 +7,7 @@ class MySQL
 	var $Pass;
 	var $Db;
 	
-	function MySQL($connect=TRUE)
+	function __construct($connect=TRUE)
 		{
 			if(file_exists('config/config.db.php')) {
 				include_once('config/config.db.php');
