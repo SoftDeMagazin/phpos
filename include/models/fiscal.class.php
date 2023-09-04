@@ -30,7 +30,7 @@ class Fiscal
 
 class FiscalDatecs extends Fiscal
 {
-	var $Linie = "S,<%id%>,______,_,__;<%denumire%>;<%pret%>;<%cant%>;<%sectie%>;1;1;0;0;\r\n";
+	var $Linie = "S,<%id%>,______,_,__;<%denumire%>;<%pret%>;<%cant%>;<%sectie%>;<%tva%>;1;0;0;\r\n";
 	var $Discount = "C,<%id%>,______,_,__;1;<%procent%>;;;;\r\n";
 	var $End = "T,<%id%>,______,_,__;<%cod%>;<%total%>;;;;\r\n";
 	var $Cui = "K,<%id%>,______,_,__;<%cui%>;\r\n";
@@ -61,15 +61,22 @@ class FiscalDatecs extends Fiscal
 				}
 
 			$Produs = new Produse($this -> mysql);
+            $Cotatva = new CoteTva($this->mysql);
 			foreach($BonContinut -> objects as $objContinut)
 				{
 				$Produs -> get($objContinut -> produs_id);
+                $Cotatva -> get($Produs->obj->cotatva_id);
 				$linie = $this -> Linie;
 				$this -> replace($linie, '<%id%>', $Casa -> obj -> id);
 				$this -> replace($linie, '<%denumire%>', strtoupper(substr($Produs -> obj -> denumire, 0, 20)));
 				$this -> replace($linie, '<%pret%>', number_format($objContinut -> valoare, 2, '.', ''));
 				$this -> replace($linie, '<%cant%>', number_format($objContinut -> cantitate, 3, '.', ''));
 				$this -> replace($linie, '<%sectie%>', '1');
+                if(isset($Cotatva->obj)) {
+                    $this->replace($linie, '<%tva%>', $Cotatva->obj->cod);
+                } else {
+                    $this->replace($linie, '<%tva%>', '1');
+                }
 				$this -> append($txt, $linie);
 					if($objContinut -> discount > 0) {
 						$discount = $this -> Discount;

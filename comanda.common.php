@@ -35,6 +35,7 @@ include("include/models/facturi.class.php");
 include("include/models/bonuriconsum.class.php");
 include("include/models/bonuriconsumcontinut.class.php");
 include("include/models/retetar.class.php");
+include("include/models/cotetva.class.php");
 
 include("config/config.php");
 include("include/xajax_global/clienti.php");
