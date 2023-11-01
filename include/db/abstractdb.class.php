@@ -81,7 +81,7 @@ function setObjValueNull($col)
 	function save()
 		{
 		$col = $this -> primaryKey;
-		if($this -> obj -> $col == 0)
+		if(empty($this -> obj -> $col))
 			{
 			$this -> insert();
 			}
