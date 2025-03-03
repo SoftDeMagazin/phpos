@@ -9,16 +9,12 @@ class RptVanzari extends Rapoarte
 	
 	function genereazaRaport($dateStart, $dateStop, $filtre = array())
 		{
-		/*$this -> columns = array(
-			"denumire as denumire", "denumire_categorie", "SUM(valoare_vanduta) as valoare_vanduta", "SUM(cantitate_vanduta) as cantitate_vanduta"
-			);*/
-		/*$this -> getByInterval($dateStart, $dateStop, $filtre);*/
 $this -> rows = $this -> mysql -> getRows("
 select 
 `produse`.`denumire` AS `denumire`,
 `categorii`.`denumire_categorie` AS `denumire_categorie`,
 sum(`bonuri_continut`.`cantitate`) AS `cantitate_vanduta`,
-sum((`bonuri_continut`.`cantitate` * `bonuri_continut`.`valoare`)) AS `valoare_vanduta`
+sum((`bonuri_continut`.`cantitate` * (`bonuri_continut`.`valoare` - `bonuri_continut`.`valoare` *bonuri_continut.discount/100))) AS `valoare_vanduta`
 from ((((`bonuri_continut` 
 join `bonuri` on((`bonuri_continut`.`bon_id` = `bonuri`.`bon_id`))) 
 join `produse` on((`bonuri_continut`.`produs_id` = `produse`.`produs_id`))) 
