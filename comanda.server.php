@@ -177,10 +177,48 @@ function clickProdusComanda($comanda_continut_id)
     <td align="center"><input type="button" name="btnStergeProdus" id="btnStergeProdus" class="btnTouch" value=" " style="height:75px;background-image:url(files/img/gtk-close.png); background-position:center; background-repeat:no-repeat;"  onClick="xajax_btnSterge('. $comanda_continut_id .');this.blur();xajax_btnRenuntaDialog();" onDblClick="xajax_btnSterge('. $comanda_continut_id .');this.blur();xajax_btnRenuntaDialog();"></td>
   </tr>
 </table>
+<h3 align="center">Aplica discount produs</h3>
+<table width="100%"  border="0" cellspacing="2" cellpadding="2" align="center">
+  <tr>
+    <td align="center"><input type="button" class="btnTouch" value="0%"  onClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 0);this.blur();xajax_btnRenuntaDialog();" onDblClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 10);this.blur()"></td>
+	<td align="center"><input type="button" class="btnTouch" value="5%"  onClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 5);this.blur();xajax_btnRenuntaDialog();" onDblClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 15);this.blur()"></td>
+	<td align="center"> </td>
+  </tr>
+  <tr>
+    <td align="center"><input type="button" class="btnTouch" value="10%"  onClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 10);this.blur();xajax_btnRenuntaDialog();" onDblClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 10);this.blur()"></td>
+	<td align="center"><input type="button" class="btnTouch" value="15%"  onClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 15);this.blur();xajax_btnRenuntaDialog();" onDblClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 15);this.blur()"></td>
+	<td align="center"><input type="button" class="btnTouch" value="20%"  onClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 20);this.blur();xajax_btnRenuntaDialog();" onDblClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 20);this.blur()"></td>
+  </tr>
+  <tr>
+    <td align="center"><input type="button" class="btnTouch" value="25%"  onClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 25);this.blur();xajax_btnRenuntaDialog();" onDblClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 10);this.blur()"></td>
+	<td align="center"><input type="button" class="btnTouch" value="30%"  onClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 30);this.blur();xajax_btnRenuntaDialog();" onDblClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 15);this.blur()"></td>
+	<td align="center"><input type="button" class="btnTouch" value="35%"  onClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 35);this.blur();xajax_btnRenuntaDialog();" onDblClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 20);this.blur()"></td>
+  </tr>
+  <tr>
+    <td align="center"><input type="button" class="btnTouch" value="40%"  onClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 40);this.blur();xajax_btnRenuntaDialog();" onDblClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 10);this.blur()"></td>
+	<td align="center"><input type="button" class="btnTouch" value="45%"  onClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 45);this.blur();xajax_btnRenuntaDialog();" onDblClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 15);this.blur()"></td>
+	<td align="center"><input type="button" class="btnTouch" value="50%"  onClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 50);this.blur();xajax_btnRenuntaDialog();" onDblClick="xajax_btnAplicaDiscount('. $comanda_continut_id .', 20);this.blur()"></td>
+  </tr>
+</table>
 </form>
 ';
-	$objResponse = afisareDialog($innerHTML, "550px", "200px", "250px", "30px", "IESIRE");
+	$objResponse = afisareDialog($innerHTML, "550px", "450px", "250px", "30px", "IESIRE");
 	return $objResponse;
+	}
+
+function btnAplicaDiscount($comanda_continut_id, $discount)
+	{
+	global $mysql;
+	$ComandaContinut = new ComenziContinut($mysql, $comanda_continut_id);
+	if ($discount == 0) $ComandaContinut -> obj -> discount = 0;
+	else
+	  $ComandaContinut -> obj -> discount =  $discount;
+	$ComandaContinut -> save();
+	$objResponse = new xajaxResponse();
+	$comanda  = new Comenzi($mysql, $ComandaContinut -> obj -> comanda_id);
+	$objResponse -> assign("continutcomanda", "innerHTML", $comanda -> comandaContinut(FALSE));
+	$objResponse -> assign("comandatotal", "innerHTML", "".$comanda -> calculeazaTotal());
+	return $objResponse; 
 	}
 
 function btnPlus($comanda_continut_id)

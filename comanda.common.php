@@ -45,6 +45,7 @@ $xajax->registerFunction("marcareProdus");
 $xajax->registerFunction("btnPlus");
 $xajax->registerFunction("btnMinus");
 $xajax->registerFunction("btnSterge");
+$xajax->registerFunction("btnAplicaDiscount");
 $xajax->registerFunction("btnCauta");
 $xajax->registerFunction("btnFunctii");
 $xajax->registerFunction("golesteComanda");

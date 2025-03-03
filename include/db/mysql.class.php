@@ -139,7 +139,7 @@ class MySQL
 		$i = 0;	
 		foreach ($class_vars as $name => $value) 
 		    {
-			if($name != $id && (!empty($value)))
+			if($name != $id && (!empty($value) || $value == 0))
 				{
 				if($i==0) $sql .= "`$name` = '$value'";
     			else $sql .=", `$name` = '$value'";
