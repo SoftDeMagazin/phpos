@@ -28,8 +28,6 @@ include("include/models/moduriplata.class.php");
 include("include/models/fiscal.class.php");
 include("include/models/users.class.php");
 include("include/models/zileeconomice.class.php");
-include("include/models/niruri.class.php");
-include("include/models/niruricomponente.class.php");
 include("include/models/unitatimasura.class.php");
 include("include/models/furnizori.class.php");
 include("include/models/registrucasa.class.php");

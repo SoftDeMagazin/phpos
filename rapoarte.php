@@ -59,10 +59,6 @@ $mysql = new MySQL();
             "class" => "btn_catalog",
             "onClick" => "$('#tabViewContent button').css({border:'2px solid #FAFAFA'});$(this).css({border:'2px solid #000000'});xajax_loadRaport(xajax.getFormValues('frmFiltre'), 'rptVanzari')"
             ),
-            2 => array("name" => "btnRptVanzariTigari", "value" => "RaportVanzariTigari",
-            "class" => "btn_catalog",
-            "onClick" => "$('#tabViewContent button').css({border:'2px solid #FAFAFA'});$(this).css({border:'2px solid #000000'});xajax_loadRaport(xajax.getFormValues('frmFiltre'), 'rptVanzariTigari')"
-            ),
             3 => array("name" => "btnRaportUtilizatori", "value" => "Raport Utilizatori",
             "class" => "btn_catalog",
             "onClick" => "$('#tabViewContent button').css({border:'2px solid #FAFAFA'});$(this).css({border:'2px solid #000000'});xajax_loadRaport(xajax.getFormValues('frmFiltre'), 'rptUtilizatoriModuri')"
