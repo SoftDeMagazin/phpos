@@ -166,7 +166,7 @@ function btnRenuntaDialog()
     }
 */
 
-if ($registerFunctions == true) {
+if (isset($registerFunctions) && $registerFunctions == true) {
     $xajax -> registerFunction("window");
     $xajax -> registerFunction("close_window");
     $xajax -> registerFunction("afisareDialog");
