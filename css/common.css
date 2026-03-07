@@ -2,16 +2,16 @@ body {
 }
 #layout
 {
-width:1020px; 
-height: 765px; 
-border:1px solid #000000; 
+width:1020px;
+min-height: 765px;
+border:1px solid #000000;
 margin:0px auto;
 }
 
 #main
 {
 width:1020px;
-height: 765px;
+min-height: 765px;
 margin:0px auto;
 }
 #overlay

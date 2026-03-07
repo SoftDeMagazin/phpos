@@ -89,15 +89,15 @@ if (isset($categorii -> objects)) {
 ?>
 </div>
 
-<div id="catalogLista"  style="height:500px; overflow:auto; padding-left:10px; margin-top:10px;">
+<div id="catalogLista"  style="height:460px; overflow:auto; padding-left:10px; margin-top:10px;">
 </div>
 <input name="frm_categorie_id" id="frm_categorie_id" type="hidden" value="0">
 <hr>
 <form action="" method="post" name="frmFiltre" id="frmFiltre" style="padding:0px 0px 0px 0px; margin:0px 0px 0px 0px; ">
 <table width="100%"  border="0" cellspacing="2" cellpadding="0">
   <tr>
-    <td width="350" valign="top">
-    <fieldset style="height:200px; "><legend>Sortare Produse</legend>
+    <td width="300" valign="top">
+    <fieldset><legend>Sortare Produse</legend>
     <div style="text-align: center ">
     <select name="orderBy" id="orderBy" style="width:150px ">
       <option value="denumire" selected>Denumire</option>
@@ -106,50 +106,47 @@ if (isset($categorii -> objects)) {
       <option value="stoc">Stoc</option>
      </select>
     </div>
-    <input name="ordMod" type="radio" value="ASC" checked> 
+    <input name="ordMod" type="radio" value="ASC" checked>
     Ascendent
-    <input name="ordMod" type="radio" value="DESC" > 
+    <input name="ordMod" type="radio" value="DESC" >
     Descendent
     <br>
     <div style="text-align: center ">
     <input name="btnSort" type="button" class="btn_search" id="btnSort" value=" " onClick="xajax_catalogListaProduse(document.getElementById('frm_categorie_id').value, xajax.getFormValues('frmFiltre'))">
     </div>
     </fieldset> </td>
-    <td width="350" valign="top"><fieldset style="height:200px;"><legend>Cautare Produse
-    </legend>
-    <div style="text-align:center; "><label style="text-align:left; ">Cod Bare</label> 
+    <td width="400" valign="top"><fieldset><legend>Cautare Produse</legend>
+    <div style="text-align:center; "><label style="text-align:left; ">Cod Bare</label>
     <br>
     <input type="text" name="txtCodBare" id="txtCodBare">
-    <input name="Button2" type="button" class="kb_buttonTastatura" value=" " onClick="xajax_kbPopup('txtCodBare');">    
+    <input name="Button2" type="button" class="kb_buttonTastatura" value=" " onClick="xajax_kbPopup('txtCodBare');">
     <input name="btnSearchCod" type="button" class="btn_search" id="btnSearchCod" value=" " onClick="xajax_catalogListaProduse(document.getElementById('frm_categorie_id').value, xajax.getFormValues('frmFiltre'))">
     <br>
-    <input name="radMod" type="radio" value="AND"> 
-    Si 
-    <input name="radMod" type="radio" value="OR" checked> 
-    Sau 
+    <input name="radMod" type="radio" value="AND">
+    Si
+    <input name="radMod" type="radio" value="OR" checked>
+    Sau
     <br>
     <label style="text-align:left; ">Denumire</label> <br>
     <input type="text" name="txtDenumire" id="txtDenumire">
     <input name="Button" type="button" class="kb_buttonTastatura" value=" " onClick="xajax_kbPopup('txtDenumire');">
     <input name="btnSearchDenumire" type="button" class="btn_search" id="btnSearchDenumire" value=" " onClick="xajax_catalogListaProduse(document.getElementById('frm_categorie_id').value, xajax.getFormValues('frmFiltre'))">
-    <div style="text-align:center; margin-top:20px; ">
+    <div style="text-align:center; margin-top:10px; ">
     <input name="btnResetSearch" type="button" class="btnTouch" id="btnResetSearch" onClick="document.getElementById('txtCodBare').value='';document.getElementById('txtDenumire').value='';xajax_catalogListaProduse(document.getElementById('frm_categorie_id').value, xajax.getFormValues('frmFiltre'))" value="Reset">
     </div>
-    
+
     </fieldset></td>
-    <td width="320" valign="top"><fieldset style="height:98px; padding-top:0px; "><legend style="margin:0px 0px 0px 0px; padding: 0px 0px 0px 0px; ">Produs</legend>
+    <td width="320" valign="top"><fieldset><legend>Produs</legend>
           <input type="hidden" name="frm_produs_id" id="frm_produs_id" value="0">
-        <div id="produsDenumire" style="height: 30px; text-align:center; color:#FF0000; font-weight:bold; ">&nbsp;</div>
+        <div id="produsDenumire" style="height: 25px; text-align:center; color:#FF0000; font-weight:bold; ">&nbsp;</div>
         <div align="center">
-            <input name="addProdus" type="button" class="btnTouch" accesskey="a" onClick="xajax_frmProdus(0);" value="Adauga Produs" style="height:40px; ">  
-            <input name="editProdus" type="button" class="btnTouch" accesskey="m" onClick="xajax_frmProdus(document.getElementById('frm_produs_id').value);" value="Modifica Produs" style="height:40px; ">
+            <input name="addProdus" type="button" class="btnTouch" accesskey="a" onClick="xajax_frmProdus(0);" value="Adauga Produs" style="height:40px; "><br>
+            <input name="editProdus" type="button" class="btnTouch" accesskey="m" onClick="xajax_frmProdus(document.getElementById('frm_produs_id').value);" value="Modifica Produs" style="height:40px; margin-top:5px; ">
         </div>
-    </fieldset>
-    <fieldset style="height:100px; "><legend>Iesire</legend>
-    <div align="center">
-      <input name="btnCautareAvansata" type="button" class="btnTouch" id="btnCautareAvansata" onClick="window.location.href = 'login.php'" value="IESIRE">
-      </div>
-    </fieldset> </td>
+        <div align="center" style="margin-top:10px; padding-top:10px; border-top:1px solid #ccc;">
+          <input name="btnCautareAvansata" type="button" class="btnTouch" id="btnCautareAvansata" onClick="window.location.href = 'login.php'" value="IESIRE">
+        </div>
+    </fieldset></td>
   </tr>
 </table>
 
