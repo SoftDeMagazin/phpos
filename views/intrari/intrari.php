@@ -72,4 +72,3 @@ $componente = '
 <div align="center">
   <input name="btnSave" type="button" class="btnTouch" id="btnSave" value="Salveaza" onClick="xajax_save(xajax.getFormValues(\'frmDocument\'), xajax.getFormValues(\'frmComponente\'));">
 </div>';
-?>

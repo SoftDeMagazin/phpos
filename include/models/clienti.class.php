@@ -1,18 +1,18 @@
 <?php
 class Clienti extends AbstractDB
 {
-	var $useTable="clienti";
-	var $primaryKey="client_id";
-	var $form = array();
-	
-	function __construct($mysql,$id=NULL)
-		{
-		parent::__construct($mysql, $id);
-		}
-	
-	function frmClient()
-		{
-		$out = '<table width="100%"  border="0" cellspacing="2" cellpadding="2">
+    var $useTable="clienti";
+    var $primaryKey="client_id";
+    var $form = array();
+    
+    function __construct($mysql, $id = null)
+    {
+        parent::__construct($mysql, $id);
+    }
+    
+    function frmClient()
+    {
+        $out = '<table width="100%"  border="0" cellspacing="2" cellpadding="2">
   <tr>
     <td width="28%"><strong>Denumire</strong>
     <input name="client_id" type="hidden" id="client_id" value="'. $this -> obj -> client_id .'"></td>
@@ -44,12 +44,12 @@ class Clienti extends AbstractDB
   </tr>
 </table>
 ';
-return $out;
-		}
-	
-	function displayClient()
-		{
-		$out = '<table width="100%"  border="0" cellspacing="2" cellpadding="2">
+        return $out;
+    }
+    
+    function displayClient()
+    {
+        $out = '<table width="100%"  border="0" cellspacing="2" cellpadding="2">
   <tr>
     <td width="28%"><strong>Denumire</strong>
     <input name="client_id" type="hidden" id="client_id" value="'. $this -> obj -> client_id .'"></td>
@@ -81,14 +81,12 @@ return $out;
   </tr>
 </table>
 ';
-return $out;
-		}	
+        return $out;
+    }
 
-	function salveazaClient($frmValues)
-		{
-		$this -> tableToForm();
-		$this -> saveForm($frmValues);
-		}				
-
+    function salveazaClient($frmValues)
+    {
+        $this -> tableToForm();
+        $this -> saveForm($frmValues);
+    }
 }
-?>

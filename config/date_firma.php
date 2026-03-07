@@ -9,4 +9,3 @@ $dateFirma = '<strong>FOOD FACTORY SRL</strong><br>
 <strong>Banca:</strong> ALPHA BANK Titulescu 		
 <br>
 <strong>Cont:</strong> Ro04BUCU151408272511Ro01';
-?>

@@ -2,7 +2,7 @@
 require_once("thirdparty/xajax/xajax_core/xajax.inc.php");
 
 $xajax = new xajax("transformari.server.php");
-$registerFunctions = TRUE;
+$registerFunctions = true;
 /*         HELPERS         */
 include("include/helpers/helper.class.php");
 include("include/helpers/forms.class.php");
@@ -41,4 +41,3 @@ $xajax -> registerFunction("selectProdus");
 $xajax->registerFunction("frmProdus");
 $xajax->registerFunction("frmSave");
 $xajax->registerFunction("salveazaTransformare");
-?>

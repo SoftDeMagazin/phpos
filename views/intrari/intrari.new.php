@@ -68,4 +68,3 @@ $new = '<form action="" method="post" name="frmDocument" id="frmDocument" style=
   <input name="btnSave" type="button" class="btnTouch" id="btnSave" value="Salveaza" onClick="xajax_save(xajax.getFormValues(\'frmDocument\'), xajax.getFormValues(\'frmComponente\'));"> <input name="btnCancel" type="button" class="btnTouch" id="btnCancel" value="Anuleaza" onClick="xajax_meniu();">
   <input name="btnCancel" type="button" class="btnTouch" id="btnCancel" value="Instrumente" onClick="xajax_tools();">
 </div>';
-?>

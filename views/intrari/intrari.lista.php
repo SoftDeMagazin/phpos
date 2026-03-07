@@ -1,6 +1,6 @@
 <?php
-	$zi = new ZileEconomice($mysql);
-	$zi -> getLastDay();
+    $zi = new ZileEconomice($mysql);
+    $zi -> getLastDay();
 $lista = '<br>
 <br>
 <br>
@@ -29,4 +29,3 @@ $lista = '<br>
       <input name="btnIesire" type="button" class="btnTouch" id="btnIesire" value="Iesire" onClick="xajax_meniu();">
     </div>
 ';
-?>

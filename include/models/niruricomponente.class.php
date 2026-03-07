@@ -1,44 +1,50 @@
 <?php
 class NiruriComponente extends AbstractDB
 {
-	var $useTable="niruri_componente";
-	var $primaryKey="nir_componenta_id";
-	var $form = array(
-		"nir_componenta_id" => array(
-			"input" => array("type" => "hidden"),
-			"label" => false
-		),
-	);
-	function __construct($mysql,$id=NULL)
-		{
-		parent::__construct($mysql, $id);
-		}
-		
-	function adaugaComponenta($frmValues, $nir_id = NULL)
-		{
-		if(!isset($frmValues['nir_componenta_id'])) $frmValues['nir_componenta_id'] = 0;
-		if($nir_id == NULL) $nir_id = $this -> obj -> nir_id;
-		$frmValues['nir_id'] = $nir_id;
-		$this -> tableToForm();
-		$this -> saveForm($frmValues);
-		}
-		
-	function frmComponenta($edit = FALSE)
-		{
-			$time = $this -> obj -> nir_componenta_id;
-			$frmValues['txtTva'] = $this -> obj -> tva_ach;
-			$val_ach = $this -> obj -> val_ach;
-			$total_tva_ach = $this -> obj -> total_tva_ach;
-			$pret_vanzare = $this -> obj -> pret_vanzare;
-			$tva_vanzare = $this -> obj -> tva_vanzare;
-			$total_tva_vanzare = $this -> obj -> total_tva_vanzare;
-			$val_total = $this -> obj -> val_total;
-			$adaos_unit = $this -> obj -> adaos_unit;
-			$total_adaos = $this -> obj -> total_adaos; 
-			$txt = '';
-			$um = new UnitatiMasura($this -> mysql, $this -> obj -> unitate_masura_id);
-			if($edit == FALSE) $txt .= '<div id="comp_'. $time .'">';
-			$txt .= '
+    var $useTable="niruri_componente";
+    var $primaryKey="nir_componenta_id";
+    var $form = array(
+        "nir_componenta_id" => array(
+            "input" => array("type" => "hidden"),
+            "label" => false
+        ),
+    );
+    function __construct($mysql, $id = null)
+    {
+        parent::__construct($mysql, $id);
+    }
+        
+    function adaugaComponenta($frmValues, $nir_id = null)
+    {
+        if (!isset($frmValues['nir_componenta_id'])) {
+            $frmValues['nir_componenta_id'] = 0;
+        }
+        if ($nir_id == null) {
+            $nir_id = $this -> obj -> nir_id;
+        }
+        $frmValues['nir_id'] = $nir_id;
+        $this -> tableToForm();
+        $this -> saveForm($frmValues);
+    }
+        
+    function frmComponenta($edit = false)
+    {
+            $time = $this -> obj -> nir_componenta_id;
+            $frmValues['txtTva'] = $this -> obj -> tva_ach;
+            $val_ach = $this -> obj -> val_ach;
+            $total_tva_ach = $this -> obj -> total_tva_ach;
+            $pret_vanzare = $this -> obj -> pret_vanzare;
+            $tva_vanzare = $this -> obj -> tva_vanzare;
+            $total_tva_vanzare = $this -> obj -> total_tva_vanzare;
+            $val_total = $this -> obj -> val_total;
+            $adaos_unit = $this -> obj -> adaos_unit;
+            $total_adaos = $this -> obj -> total_adaos;
+            $txt = '';
+            $um = new UnitatiMasura($this -> mysql, $this -> obj -> unitate_masura_id);
+        if ($edit == false) {
+            $txt .= '<div id="comp_'. $time .'">';
+        }
+            $txt .= '
 	<table width="1000" border="0" align="center" cellpadding="0" cellspacing="0" style="font-size:10px; ">	
     <tr>
       <td width="129" nowrap><input type="text" name="data['.$time.'][denumire]" style="border:1px solid #000;border-right: 0px solid #000; width:129px; font-size:10px; text-align:center; " readonly=""  value="'. $this -> obj -> denumire .'" onClick="xajax_editComponenta('. $this -> obj -> nir_componenta_id .')"></td>
@@ -57,9 +63,9 @@ class NiruriComponente extends AbstractDB
     </tr>
   	</table>
 	';
-		if($edit == FALSE) $txt .= '</div>';
-	return $txt;
-		}
-	
+        if ($edit == false) {
+            $txt .= '</div>';
+        }
+        return $txt;
+    }
 }
-?>

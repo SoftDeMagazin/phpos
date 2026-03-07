@@ -13,10 +13,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 select {
 width: 190px;
@@ -30,16 +30,15 @@ $xajax->printJavascript('thirdparty/xajax/');
 ?>
 
 <?php
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> javaScript(); 
-	}
-$tn = new TastaturaNumerica;
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> javaScript();
+}
+$tn = new TastaturaNumerica();
 echo $tn -> printJavaScript();
-$kb = new KeyBoard;
+$kb = new KeyBoard();
 echo $kb -> printJavaScript();
-$tabView = new TabView;
+$tabView = new TabView();
 $tabView -> root = "";
 echo $tabView -> printCss();
 echo $tabView -> printJavaScript();
@@ -58,30 +57,26 @@ $user_id = $_GET['user_id'];
 $user = new Users($mysql, $user_id);
 ?>
 <?php
-if($_SERVER['REQUEST_METHOD'] == 'POST')
-	{ switch($_POST['actiune'])
-		{
-		case "drepturi":
-			{
-			$mysql -> query("DELETE FROM drepturi_users WHERE user_id = '$user_id';");
-			$drepturi = explode(" ", $_POST['valoriDestinatieDrepturi']);
-			if(isset($drepturi))
-			{
-			foreach($drepturi as $drept)
-				{
-				if(!empty($drept))
-					{
-					$du = new DrepturiUsers($mysql);
-					$du -> setObjId(0);
-					$du -> setObjValue("user_id", $user_id);
-					$du -> setObjValue("drept_id", $drept);
-					$du -> save();
-					}
-				}
-			}	
-			}break;
-	   }		
-	}
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    switch ($_POST['actiune']) {
+        case "drepturi":
+            {
+            $mysql -> query("DELETE FROM drepturi_users WHERE user_id = '$user_id';");
+            $drepturi = explode(" ", $_POST['valoriDestinatieDrepturi']);
+            if (isset($drepturi)) {
+                foreach ($drepturi as $drept) {
+                    if (!empty($drept)) {
+                        $du = new DrepturiUsers($mysql);
+                        $du -> setObjId(0);
+                        $du -> setObjValue("user_id", $user_id);
+                        $du -> setObjValue("drept_id", $drept);
+                        $du -> save();
+                    }
+                }
+            }
+        }break;
+    }
+}
 ?>
 <form action="" method="post" name="frmProdus" id="frmProdus">
         <table width="600" border="0" align="center" cellpadding="3" cellspacing="3">
@@ -93,8 +88,8 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
           </tr>
           <tr>
             <td colspan="2">
-			
-			<table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
+            
+            <table width="100%" border="0" align="center" cellpadding="0" cellspacing="0">
           <tr>
             <td><strong>Drepturi <input name="actiune" type="hidden" id="actiune" value="drepturi">
             </strong></td>
@@ -103,18 +98,16 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
           </tr>
           <tr>
             <td>
-			<select name="sursaDrepturi" id="sursaDrepturi" size="5" style="width:200px; height:200px;  ">
-			<?php
-			$drepturi = new Drepturi($mysql);
-			$drepturi -> findAll();
-			if(isset($drepturi -> objects))
-				{
-				foreach($drepturi -> objects as $objDrept)
-					{
-					echo '<option value="'. $objDrept -> drept_id .'">'. $objDrept -> nume_drept.'</option>';
-					}
-				}
-			?>
+            <select name="sursaDrepturi" id="sursaDrepturi" size="5" style="width:200px; height:200px;  ">
+            <?php
+            $drepturi = new Drepturi($mysql);
+            $drepturi -> findAll();
+            if (isset($drepturi -> objects)) {
+                foreach ($drepturi -> objects as $objDrept) {
+                    echo '<option value="' . $objDrept -> drept_id . '">' . $objDrept -> nume_drept . '</option>';
+                }
+            }
+            ?>
             </select></td>
             <td><div align="center">
                 <p>
@@ -125,28 +118,26 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
                     </p>
             </div></td>
             <td>
-			  <div align="center">
-			  <select name="destinatieDrepturi" id="destinatieDrepturi" size="5" style="width:200px; height:200px; " multiple>
-			 <?php
-			$rows = $mysql -> getObjects("SELECT drepturi.drept_id, drepturi.nume_drept 
+              <div align="center">
+              <select name="destinatieDrepturi" id="destinatieDrepturi" size="5" style="width:200px; height:200px; " multiple>
+             <?php
+                $rows = $mysql -> getObjects("SELECT drepturi.drept_id, drepturi.nume_drept 
 			FROM drepturi_users 
 			INNER JOIN drepturi on drepturi_users.drept_id = drepturi.drept_id
 			WHERE user_id = '$user_id'");
-			if(isset($rows))
-				{
-				foreach($rows as $objDrept)
-					{
-					echo '<option value="'. $objDrept -> drept_id .'">'. $objDrept -> nume_drept.'</option>';
-					}
-				}
-			?>
+                if (isset($rows)) {
+                    foreach ($rows as $objDrept) {
+                        echo '<option value="' . $objDrept -> drept_id . '">' . $objDrept -> nume_drept . '</option>';
+                    }
+                }
+                ?>
               </select>
-			  <input name="valoriDestinatieDrepturi" type="hidden" id="valoriDestinatieDrepturi" value="">
-			    </div></td>
+              <input name="valoriDestinatieDrepturi" type="hidden" id="valoriDestinatieDrepturi" value="">
+                </div></td>
           </tr>
         </table>
-			
-			</td>
+            
+            </td>
           </tr>
       </table>
         <table width="600"  border="0" align="center" cellpadding="3" cellspacing="3">
@@ -167,12 +158,11 @@ if($_SERVER['REQUEST_METHOD'] == 'POST')
 </div>
 </div>
 </div>
-<?php 
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> div(); 
-	}
+<?php
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> div();
+}
 ?>
 <div id="windows"></div>
 </body>

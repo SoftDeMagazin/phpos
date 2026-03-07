@@ -9,10 +9,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 
 h2 {
@@ -83,64 +83,64 @@ include("include/models/inventar.class.php");
 </div>
 <?php
 $mysql = new MySQL();
-if($_SERVER['REQUEST_METHOD'] == "POST") {
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $nr_r = count($_POST['denumire']);
 
-	$nr_r = count($_POST['denumire']);
-	
-	echo '<table width="100%" border=0>';
-	$j=0;
-	for($i=0;$i<$nr_r;$i++) {
-	
-	if($_POST['chk'][$i]) {
-		if($j%3==0) echo '</tr><tr class="tablerow">';
+    echo '<table width="100%" border=0>';
+    $j = 0;
+    for ($i = 0; $i < $nr_r; $i++) {
+        if ($_POST['chk'][$i]) {
+            if ($j % 3 == 0) {
+                echo '</tr><tr class="tablerow">';
+            }
 
-		switch(strlen($_POST['cod_bare'][$i]))
-						{
-						case 8:
-							{
-							$cod = "ean8";
-							$txt = substr($_POST['cod_bare'][$i], 0, 7);
-							}break;
-						case 13:
-							{
-							$cod = "ean13";
-							$txt = substr($_POST['cod_bare'][$i], 0, 12);
-							}break;
-						default:
-							{
-							$cod = "code39";
-							$txt = $_POST['cod_bare'][$i];
-							}
-						}
-		if($txt) $imgCod='<img src="thirdparty/barcode/html/image.php?code='. $cod .'&o=1&t=25&r=1&text='. $txt .'&f=2&a1=&a2=">';	
-
-else $imgCod='';
-				echo 
-		'<td class="eticheta" width="300" height="150"><div>'. $imgCod .'</div>
+            switch (strlen($_POST['cod_bare'][$i])) {
+                case 8:
+                    {
+                    $cod = "ean8";
+                    $txt = substr($_POST['cod_bare'][$i], 0, 7);
+                }break;
+                case 13:
+                    {
+                    $cod = "ean13";
+                    $txt = substr($_POST['cod_bare'][$i], 0, 12);
+                }break;
+                default:
+                    {
+                    $cod = "code39";
+                    $txt = $_POST['cod_bare'][$i];
+                }
+            }
+            if ($txt) {
+                $imgCod = '<img src="thirdparty/barcode/html/image.php?code=' . $cod . '&o=1&t=25&r=1&text=' . $txt . '&f=2&a1=&a2=">';
+            } else {
+                $imgCod = '';
+            }
+                echo
+            '<td class="eticheta" width="300" height="150"><div>' . $imgCod . '</div>
 		<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		  <tr>
-			<td colspan="2" scope="col" style="font-size:11px;">'. $_POST['denumire'][$i] .'</td>
+			<td colspan="2" scope="col" style="font-size:11px;">' . $_POST['denumire'][$i] . '</td>
 		  </tr>
 		  <tr>
 			<td width="" ><strong>Pret</strong></td>
-			<td width="" ><strong style="font-size:19px;">'. number_format($_POST['pret'][$i], 2) .' LEI</strong></td>
+			<td width="" ><strong style="font-size:19px;">' . number_format($_POST['pret'][$i], 2) . ' LEI</strong></td>
 		  </tr>
 		  <tr>
 			<td ></td>
 			<td ></td>
 		  </tr>
 		</table></td>';
-		$j++;
-	}	
-}
-	
+            $j++;
+        }
+    }
 
-			while($j%3!=0)
-			{
-			echo '<td class="eticheta" width="300" >&nbsp;</td>';
-			$j++;
-			}
-	echo '</tr></table>';
+
+    while ($j % 3 != 0) {
+        echo '<td class="eticheta" width="300" >&nbsp;</td>';
+        $j++;
+    }
+    echo '</tr></table>';
 }
 ?>
 

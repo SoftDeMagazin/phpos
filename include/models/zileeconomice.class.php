@@ -4,7 +4,7 @@ class ZileEconomice extends AbstractDB
     var $useTable = "zile_economice";
     var $primaryKey = "zi_economica_id";
 
-    function __construct($mysql, $id = NULL)
+    function __construct($mysql, $id = null)
     {
         parent::__construct($mysql, $id);
     }
@@ -39,4 +39,3 @@ class ZileEconomice extends AbstractDB
         return $closed;
     }
 }
-?>

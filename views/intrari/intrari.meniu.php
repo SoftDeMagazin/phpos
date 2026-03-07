@@ -21,4 +21,3 @@ $meniu = '
   </table>
   <p>&nbsp;</p>
 ';
-?>

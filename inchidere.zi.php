@@ -11,10 +11,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 -->
 </style>
@@ -25,11 +25,11 @@ $xajax->printJavascript('thirdparty/xajax/');
 ?>
 
 <?php
-$tn = new TastaturaNumerica;
+$tn = new TastaturaNumerica();
 echo $tn -> printJavaScript();
-$kb = new KeyBoard;
+$kb = new KeyBoard();
 echo $kb -> printJavaScript();
-$tabView = new TabView;
+$tabView = new TabView();
 $tabView -> root = "";
 echo $tabView -> printCss();
 echo $tabView -> printJavaScript();
@@ -54,13 +54,12 @@ include("include/helpers/print.class.php");
 $r = isset($_GET['r']) ? $_GET['r'] : null;
 $zi = new ZileEconomice($mysql);
 $zi -> getLastDay();
-if($r != "DA")
-{
-?>	
-	<div align="center">
-	  <h1><strong>Inchidere zi economica?</strong></h1>
-	  <h1><strong><?php echo date("d/m/Y", strtotime($zi -> obj -> data)); ?></strong></h1>
-	  <table width="400"  border="0" cellspacing="5" cellpadding="5">
+if ($r != "DA") {
+    ?>  
+    <div align="center">
+      <h1><strong>Inchidere zi economica?</strong></h1>
+      <h1><strong><?php echo date("d/m/Y", strtotime($zi -> obj -> data)); ?></strong></h1>
+      <table width="400"  border="0" cellspacing="5" cellpadding="5">
         <tr>
           <td><div align="center">
             <input name="kb_btnOk" type="button" id="kb_btnOk" value="DA" onClick="window.location.href = 'inchidere.zi.php?r=DA'">
@@ -70,26 +69,24 @@ if($r != "DA")
           </div></td>
         </tr>
       </table>
-	</div>
-<?php
+    </div>
+    <?php
+} else {
+    $closed = $zi -> closeDay($_SESSION['USERID']);
+    ?>
+    
+    <div align="center">
+      <h1><strong>Inchidere zi: <?php echo date("d/m/Y", strtotime($closed -> data)); ?></strong></h1>
+      <h1><strong>Se lucreaza in:<?php echo date("d/m/Y", strtotime($zi -> obj -> data)); ?></strong></h1>
+      <p>
+        <input name="kb_btnRenunta" type="button" id="kb_btnRenunta" value="IESIRE" onClick="window.location.href = 'login.php'">
+      </p>
+    </div>
+    
+    <?php
 }
-else
-	{
-	$closed = $zi -> closeDay($_SESSION['USERID']);
-	?>
-	
-	<div align="center">
-	  <h1><strong>Inchidere zi: <?php echo date("d/m/Y", strtotime($closed -> data)); ?></strong></h1>
-	  <h1><strong>Se lucreaza in:<?php echo date("d/m/Y", strtotime($zi -> obj -> data)); ?></strong></h1>
-	  <p>
-	    <input name="kb_btnRenunta" type="button" id="kb_btnRenunta" value="IESIRE" onClick="window.location.href = 'login.php'">
-	  </p>
-	</div>
-	
-	<?php
-	}
 ?>
-	
+    
 </div>
 
 <div id="overlay">

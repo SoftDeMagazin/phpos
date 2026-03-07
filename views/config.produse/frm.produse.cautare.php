@@ -28,4 +28,3 @@ Activ<br>
 <div style="text-align:right"><input name="btnSave" id="btnSave" type="button" value="Salveaza" onClick="xajax_frmSave(xajax.getFormValues(\'frmProdus\'), \''.$action.'\');" accesskey="s"> <input name="btnCancel" id="btnCancel" type="button" value="Abandon" onClick="xajax_btnRenuntaDialog();" accesskey="c"></div>
 </fieldset>
 </form>';
-?>

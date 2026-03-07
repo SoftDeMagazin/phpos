@@ -2,7 +2,7 @@
 require_once("thirdparty/xajax/xajax_core/xajax.inc.php");
 
 $xajax = new xajax("evidenta.vanzari.server.php");
-$registerFunctions = TRUE;
+$registerFunctions = true;
 /*         HELPERS         */
 include("include/helpers/helper.class.php");
 include("include/helpers/forms.class.php");
@@ -33,4 +33,3 @@ include("include/models/casefiscale.class.php");
 include("include/libchart/classes/libchart.php");
 include("config/config.php");
 $xajax -> registerFunction("genereazaRaport");
-?>

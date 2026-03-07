@@ -12,10 +12,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 #loading {
 
@@ -43,16 +43,15 @@ $xajax->printJavascript('thirdparty/xajax/');
 ?>
 
 <?php
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> javaScript(); 
-	}
-$tn = new TastaturaNumerica;
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> javaScript();
+}
+$tn = new TastaturaNumerica();
 echo $tn -> printJavaScript();
-$kb = new KeyBoard;
+$kb = new KeyBoard();
 echo $kb -> printJavaScript();
-$tabView = new TabView;
+$tabView = new TabView();
 $tabView -> root = "";
 echo $tabView -> printCss();
 echo $tabView -> printJavaScript();
@@ -113,14 +112,14 @@ alert('True Xpos is: '+trueX+'nTrue Ypos is: '+trueY)
 </Script>
 <script type="text/javascript">
 function fn_loadProdus(denumire, pret_vanzare)
-	{
-	xajax.$('div_denumire').innerHTML = denumire;
-	xajax.$('div_pret').innerHTML = pret_vanzare;
-	}
+    {
+    xajax.$('div_denumire').innerHTML = denumire;
+    xajax.$('div_pret').innerHTML = pret_vanzare;
+    }
 function fn_focus(strId)
-	{
-	document.getElementById(strId).focus();
-	}	
+    {
+    document.getElementById(strId).focus();
+    }   
 </script>
 <script type="text/javascript">
 var OnKeyRequestBuffer = 
@@ -194,7 +193,7 @@ echo '<body id="body" onLoad="$(\'#data_transformare\').datepicker();">';
           <tr>
             <td width="24%"><strong>Produs</strong></td>
             <td width="76%"><input name="destinatie_denumire" id="destinatie_denumire" type="text" size="40" onKeyUp="if(event.keyCode == 13) { xajax_cautaProdus(this.value,'destinatie');}" onFocus="this.value = '';xajax.$('destinatie_produs_id').value='';this.style.backgroundColor='#CCCCCC';this.select();" onDblClick="xajax_cautaProdus();" onBlur="this.style.backgroundColor='#FFFFFF'">
-			<input name="addProdus" type="button" value="NOU"  id="addProdus" onClick="xajax_frmProdus(document.getElementById('destinatie_produs_id').value, 'destinatie');">			</td>
+            <input name="addProdus" type="button" value="NOU"  id="addProdus" onClick="xajax_frmProdus(document.getElementById('destinatie_produs_id').value, 'destinatie');">          </td>
           </tr>
           <tr>
             <td><input name="destinatie_produs_id" type="hidden" id="destinatie_produs_id" value="0"></td>
@@ -224,12 +223,11 @@ echo '<body id="body" onLoad="$(\'#data_transformare\').datepicker();">';
 <div id="obiecte" class="flora" style=" ">
 </div>
 </div>
-<?php 
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> div(); 
-	}
+<?php
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> div();
+}
 ?>
 <div id="windows">
 </div>

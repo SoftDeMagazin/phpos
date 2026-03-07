@@ -12,10 +12,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 #loading {
 
@@ -43,16 +43,15 @@ $xajax->printJavascript('thirdparty/xajax/');
 ?>
 
 <?php
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> javaScript(); 
-	}
-$tn = new TastaturaNumerica;
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> javaScript();
+}
+$tn = new TastaturaNumerica();
 echo $tn -> printJavaScript();
-$kb = new KeyBoard;
+$kb = new KeyBoard();
 echo $kb -> printJavaScript();
-$tabView = new TabView;
+$tabView = new TabView();
 $tabView -> root = "";
 echo $tabView -> printCss();
 echo $tabView -> printJavaScript();
@@ -134,23 +133,21 @@ alert('True Xpos is: '+trueX+'nTrue Ypos is: '+trueY)
       <input name="dateStop" type="text" id="dateStop" value="<?php echo date("Y-m-d"); ?>" readonly="" onClick="xajax_calPopup('','', 'dateStop')">
     </div></td>
     <td width="200">
-	<div align="center">
-	  <?php
-	  		$frm = new Forms();
-			$user = new Users($mysql);
-			$user -> find(array("WHERE", "activ" => " = 'DA'", "ORDER BY", "nume", "ASC"));
-			$options = NULL;
-			$options['0'] = "Filtru Utilizatori";
-			if(isset($user -> objects))
-				{
-				foreach($user -> objects as $objUser)
-					{
-					$options[$objUser -> user_id] = $objUser -> nume;
-					}
-				}
-			echo $frm -> input("user_id", array("options" => $options));	
-	?>	
-	  </div></td>
+    <div align="center">
+      <?php
+            $frm = new Forms();
+            $user = new Users($mysql);
+            $user -> find(array("WHERE", "activ" => " = 'DA'", "ORDER BY", "nume", "ASC"));
+            $options = null;
+            $options['0'] = "Filtru Utilizatori";
+        if (isset($user -> objects)) {
+            foreach ($user -> objects as $objUser) {
+                $options[$objUser -> user_id] = $objUser -> nume;
+            }
+        }
+            echo $frm -> input("user_id", array("options" => $options));
+        ?>  
+      </div></td>
     <td width="200"><div align="center">
     </div></td>
   </tr>
@@ -162,14 +159,14 @@ alert('True Xpos is: '+trueX+'nTrue Ypos is: '+trueY)
 <input name="nr" type="radio" value="numar_inventar" checked>      
 Numar inventar:<br>
         </div></td>
-    <td>	<div align="center">
+    <td>    <div align="center">
       <input name="numar_inventar" type="text" id="numar_inventar">
-    </div>	</td>
+    </div>  </td>
     <td>
-	<div align="center">
-	  <input name="btnGenereaza" type="button" id="btnGenereaza" value="Genereaza Raport" onClick="xajax_genereazaLista(xajax.getFormValues('frmFiltre'));">	
-	  </div>
-	</td>
+    <div align="center">
+      <input name="btnGenereaza" type="button" id="btnGenereaza" value="Genereaza Raport" onClick="xajax_genereazaLista(xajax.getFormValues('frmFiltre'));">    
+      </div>
+    </td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -186,7 +183,7 @@ Numar inventar:<br>
   <tr>
     <td><div id="actiuni">
 
-	</div></td>
+    </div></td>
   </tr>
   <tr>
     <td>&nbsp;</td>
@@ -212,13 +209,12 @@ Numar inventar:<br>
 </div>
 </div>
 
-<?php 
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> div(); 
-	}
+<?php
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> div();
+}
 ?>
-<div id="windows">	</div>
+<div id="windows">  </div>
 </body>
 </html>

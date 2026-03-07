@@ -12,10 +12,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 select {
 width: 190px;
@@ -36,42 +36,33 @@ display:none;
   </div>
 </div>
 <?php
-if($_SERVER['REQUEST_METHOD'] == "POST")
-	{
-	$dela = $_POST['dela'];
-	$panala = $_POST['panala'];
-	if(is_numeric($dela) && is_numeric($panala) && $dela < $panala)
-		{
-		for($i=0;$i+$dela<=$panala;$i++)
-			{
-			if($i%3==0) {
-			echo '  </tr>
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $dela = $_POST['dela'];
+    $panala = $_POST['panala'];
+    if (is_numeric($dela) && is_numeric($panala) && $dela < $panala) {
+        for ($i = 0; $i + $dela <= $panala; $i++) {
+            if ($i % 3 == 0) {
+                echo '  </tr>
 </table><table width="100%" border="0" align="center" cellpadding="0" cellspacing="5" id="table">
   <tr>';
-  if($i%30==0 && $i != 0)
-  	{
-	echo '<div style="page-break-after: always;"><span style="display: none;">&nbsp;</span></div>';
-	}
-  }
-  $cod = $i+$dela;
-  			echo '<td width="33%"  valign="top">
+                if ($i % 30 == 0 && $i != 0) {
+                    echo '<div style="page-break-after: always;"><span style="display: none;">&nbsp;</span></div>';
+                }
+            }
+            $cod = $i + $dela;
+            echo '<td width="33%"  valign="top">
 	<div align="center">
-	<img src="thirdparty/barcode/html/image.php?code=code39&o=2&t=30&r=2&text='. $cod .'&f=3&a1=&a2=">
+	<img src="thirdparty/barcode/html/image.php?code=code39&o=2&t=30&r=2&text=' . $cod . '&f=3&a1=&a2=">
     </div>
 	<input name="a" type="text" style="border: 0px; border-bottom:1px solid #000; width:100%  " value="DEN:">		
 	<input name="a" type="text" style="border: 0px; border-bottom:1px solid #000; width:100%  " value="PRET:">
-	</td>';	
-			}
-		  	
-		}
-	else 
-		{
-		echo 'ceva';
-		}	
-	}
-else 
-	{	
-?>
+	</td>';
+        }
+    } else {
+        echo 'ceva';
+    }
+} else {
+    ?>
 
   <form name="form1" method="post" action="">
     <h3 align="center">Generator coduri interne </h3>
@@ -104,8 +95,8 @@ else
       </tr>
     </table>
   </form>
-<?php
-} 
+    <?php
+}
 ?> 
 </body>
 </html>

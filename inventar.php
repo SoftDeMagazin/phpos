@@ -12,10 +12,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 #loading {
 
@@ -43,16 +43,15 @@ $xajax->printJavascript('thirdparty/xajax/');
 ?>
 
 <?php
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> javaScript(); 
-	}
-$tn = new TastaturaNumerica;
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> javaScript();
+}
+$tn = new TastaturaNumerica();
 echo $tn -> printJavaScript();
-$kb = new KeyBoard;
+$kb = new KeyBoard();
 echo $kb -> printJavaScript();
-$tabView = new TabView;
+$tabView = new TabView();
 $tabView -> root = "";
 echo $tabView -> printCss();
 echo $tabView -> printJavaScript();
@@ -64,14 +63,14 @@ $mysql = new MySQL();
 ?>
 <script type="text/javascript">
 function fn_loadProdus(denumire, pret_vanzare)
-	{
-	xajax.$('div_denumire').innerHTML = denumire;
-	xajax.$('div_pret').innerHTML = pret_vanzare;
-	}
+    {
+    xajax.$('div_denumire').innerHTML = denumire;
+    xajax.$('div_pret').innerHTML = pret_vanzare;
+    }
 function fn_focus(strId)
-	{
-	document.getElementById(strId).focus();
-	}	
+    {
+    document.getElementById(strId).focus();
+    }   
 </script>
 <Script Language=JavaScript>
 
@@ -151,8 +150,11 @@ var OnKeyRequestBuffer =
 </script>
 <?php
 $inventar_id = $_GET['inventar_id'];
-if(!isset($inventar_id)) echo '<body id="body" onLoad="xajax_deschideInventar()">';
-else echo '<body id="body" onLoad="xajax_deschideInventar('. $inventar_id .')">';
+if (!isset($inventar_id)) {
+    echo '<body id="body" onLoad="xajax_deschideInventar()">';
+} else {
+    echo '<body id="body" onLoad="xajax_deschideInventar(' . $inventar_id . ')">';
+}
 ?>
 <div id="main">
 <div id="layout" style="width:1020px;">
@@ -161,19 +163,19 @@ else echo '<body id="body" onLoad="xajax_deschideInventar('. $inventar_id .')">'
 <script type="text/javascript" src="js/ui/ui/ui.datepicker.js"></script>
 <form name="frmInventar" id="frmInventar" style="margin:0px 0px 0px 0px;">
 <div id="nir" style="overflow:hidden; height:100px "></div>
-</form>	
+</form> 
 <div id="meniu" class="page" style="height:50px">
   <table width="800"  border="0" align="center" cellpadding="2" cellspacing="2">
     <tr>
       <td><div align="center">
         <input name="Button" type="button" id="btnRecalculare" class="btnTouch" value="RECALCULARE" onClick="xajax_recalculare(xajax.getFormValues('frmInventar'));">
       </div></td>
-	  	  <td><div align="center">
+          <td><div align="center">
         <input name="Button" type="button" id="btnAnuleaza" class="btnTouch" value="Anuleaza" onClick="xajax_stergeInventar(xajax.getFormValues('frmInventar'));">
       </div></td>      
-	  <td><div align="center">
-	    <input name="Button2" type="button" class="btnTouch" value="Iesire" onClick="window.location.href='evidenta.inventar.php'">
-	    </div></td>
+      <td><div align="center">
+        <input name="Button2" type="button" class="btnTouch" value="Iesire" onClick="window.location.href='evidenta.inventar.php'">
+        </div></td>
     </tr>
   </table>
 </div>
@@ -191,7 +193,7 @@ else echo '<body id="body" onLoad="xajax_deschideInventar('. $inventar_id .')">'
   </tr>
   <tr>
     <td><input name="txtDenumire" id="txtDenumire" type="text" size="45" onKeyUp="if(event.keyCode == 13) { if(this.value == '') {xajax_cautaProdus('', 'sursa');} else {xajax_cautaProdus(this.value,'sursa');}}" onFocus="this.value = '';xajax.$('produs_id').value='';this.style.backgroundColor='#CCCCCC';this.select();" onDblClick="xajax_cautaProdus();" onBlur="this.style.backgroundColor='#FFFFFF'">
-	<input name="produs_id" type="hidden" value="" id="produs_id"></td>
+    <input name="produs_id" type="hidden" value="" id="produs_id"></td>
     <td><input name="stoc_scriptic" type="text" id="stoc_scriptic" size="10" readonly=""></td>
     <td><input name="stoc_faptic" type="text" id="stoc_faptic" size="10" onKeyUp="if(event.keyCode == 13) xajax_addComponenta(xajax.getFormValues('frmAddComponenta'),xajax.getFormValues('frmInventar'))">
       </td>
@@ -217,8 +219,8 @@ else echo '<body id="body" onLoad="xajax_deschideInventar('. $inventar_id .')">'
 <table width="800"  border="0" align="center" cellpadding="2" cellspacing="2">
     <tr>
       <td><div align="center">
-	    <input name="Button3" type="button" class="btnTouch" value="ADAUGA PRODUS" onClick="xajax_frmProdus(0);">
-	    
+        <input name="Button3" type="button" class="btnTouch" value="ADAUGA PRODUS" onClick="xajax_frmProdus(0);">
+        
       </div></td>
       </tr>
   </table>
@@ -236,13 +238,12 @@ else echo '<body id="body" onLoad="xajax_deschideInventar('. $inventar_id .')">'
 <div id="obiecte" class="flora" style="z-index:500 ">
 </div>
 </div>
-<?php 
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> div(); 
-	}
+<?php
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> div();
+}
 ?>
-<div id="windows">	</div>
+<div id="windows">  </div>
 </body>
 </html>

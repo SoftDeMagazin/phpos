@@ -5,4 +5,3 @@ $cfgDb = array(
     'pass' => '',
     'db' => 'retail'
 );
-?>

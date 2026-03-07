@@ -12,10 +12,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 #loading {
 
@@ -43,16 +43,15 @@ $xajax->printJavascript('thirdparty/xajax/');
 ?>
 
 <?php
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> javaScript(); 
-	}
-$tn = new TastaturaNumerica;
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> javaScript();
+}
+$tn = new TastaturaNumerica();
 echo $tn -> printJavaScript();
-$kb = new KeyBoard;
+$kb = new KeyBoard();
 echo $kb -> printJavaScript();
-$tabView = new TabView;
+$tabView = new TabView();
 $tabView -> root = "";
 echo $tabView -> printCss();
 echo $tabView -> printJavaScript();
@@ -113,14 +112,14 @@ alert('True Xpos is: '+trueX+'nTrue Ypos is: '+trueY)
 </Script>
 <script type="text/javascript">
 function fn_loadProdus(denumire, pret_vanzare)
-	{
-	xajax.$('div_denumire').innerHTML = denumire;
-	xajax.$('div_pret').innerHTML = pret_vanzare;
-	}
+    {
+    xajax.$('div_denumire').innerHTML = denumire;
+    xajax.$('div_pret').innerHTML = pret_vanzare;
+    }
 function fn_focus(strId)
-	{
-	document.getElementById(strId).focus();
-	}	
+    {
+    document.getElementById(strId).focus();
+    }   
 </script>
 <script type="text/javascript">
 var OnKeyRequestBuffer = 
@@ -150,8 +149,11 @@ var OnKeyRequestBuffer =
 </script>
 <?php
 $nir_id = $_GET['nir_id'];
-if(!empty($nir_id)) echo '<body id="body" onLoad="xajax_onLoad('. $nir_id .');$(\'#data_factura\').datepicker()">';
-else echo '<body id="body" onLoad="$(\'#data_factura\').datepicker()">';
+if (!empty($nir_id)) {
+    echo '<body id="body" onLoad="xajax_onLoad(' . $nir_id . ');$(\'#data_factura\').datepicker()">';
+} else {
+    echo '<body id="body" onLoad="$(\'#data_factura\').datepicker()">';
+}
 ?>
 <link rel="stylesheet" type="text/css" href="js/ui/themes/flora/flora.all.css">
 <script type="text/javascript" src="js/ui/ui/ui.core.js"></script>
@@ -173,17 +175,15 @@ else echo '<body id="body" onLoad="$(\'#data_factura\').datepicker()">';
       <td width="44%">        <div id="div_furnizor_id">
         <select name="furnizor_id"  id="select" style="width:350px" onKeyUp="if(event.keyCode==13) document.getElementById('numar_factura').focus();">
           <?php
-	  $mysql = new MySQL();
-	  $furnizori = new Furnizori($mysql);
-	  $furnizori -> find(array("ORDER BY", "nume", "ASC"));
-			if(isset($furnizori -> objects))
-				{
-				foreach($furnizori -> objects as $obj)
-					{
-					echo '<option value="'. $obj -> furnizor_id .'">'.$obj -> nume.'</option>';
-					}
-				}
-	  ?>
+            $mysql = new MySQL();
+            $furnizori = new Furnizori($mysql);
+            $furnizori -> find(array("ORDER BY", "nume", "ASC"));
+            if (isset($furnizori -> objects)) {
+                foreach ($furnizori -> objects as $obj) {
+                    echo '<option value="' . $obj -> furnizor_id . '">' . $obj -> nume . '</option>';
+                }
+            }
+            ?>
               </select>
       </div></td>
       <td width="7%"><strong>Data</strong></td>
@@ -219,7 +219,7 @@ else echo '<body id="body" onLoad="$(\'#data_factura\').datepicker()">';
 <hr>
 <fieldset><legend>Componente</legend>
 <div style="height:500px; width:980px; overflow:auto; ">
-<table width="1000" border="0" align="center" cellpadding="0" cellspacing="0" style="font-size:10px; ">	
+<table width="1000" border="0" align="center" cellpadding="0" cellspacing="0" style="font-size:10px; "> 
     <tr>
       <td width="129" nowrap><input type="text" name="data['.$time.'][denumire]" style="border:1px solid #000;border-right: 0px solid #000; width:129px; font-size:10px; text-align:center; " readonly="" value="DENUMIRE"></td>
       <td width="20" nowrap><input type="text" name="data['.$time.'][um]" style="border:1px solid #000;border-right: 0px solid #000; width:20px; font-size:10px;text-align:center; " readonly="" value="UM"></td>
@@ -235,7 +235,7 @@ else echo '<body id="body" onLoad="$(\'#data_factura\').datepicker()">';
       <td width="104" nowrap><input type="text" name="data['.$time.'][pret_vanzare]" style="border:1px solid #000;border-right: 0px solid #000; width:104px; font-size:10px;text-align:center; " readonly="" value="PRET VNZ"></td>
       <td width="90" nowrap><input type="text" name="data['.$time.'][val_total]" style="border:1px solid #000;border-right: 0px solid #000; width:90px; font-size:10px;text-align:center; " readonly="" value="VAL TOTAL"></td>
     </tr>
-  </table>	
+  </table>  
 <form action="" method="post" name="frmComponente" id="frmComponente" style="margin:0px 0px 0px 0px;">
 <div id="intrare_componente">
 </div>
@@ -262,12 +262,11 @@ else echo '<body id="body" onLoad="$(\'#data_factura\').datepicker()">';
 <div id="obiecte" class="flora" style="z-index:500 ">
 </div>
 </div>
-<?php 
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> div(); 
-	}
+<?php
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> div();
+}
 ?>
 <div id="windows">
 </div>

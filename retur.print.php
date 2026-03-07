@@ -9,10 +9,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 
 h2 {
@@ -86,41 +86,40 @@ $mysql = new MySQL();
 <?php
 
 $frmFiltre = $_POST;
-	$rows = $mysql -> getRows("
+    $rows = $mysql -> getRows("
 select produse.denumire, users.nume, cantitate, valoare, data, ora from retururi
 inner join produse using(produs_id)
 inner join users on users.user_id = retururi.utilizator_id
-where data between '". $frmFiltre['dataStart'] ."' and '".$frmFiltre['dataStop']."'
+where data between '" . $frmFiltre['dataStart'] . "' and '" . $frmFiltre['dataStop'] . "'
 	");
-	$nr_r = count($rows);
-	if($nr_r)
-		{
-					$gv = new GridView;
-					$gv -> tableOptions['tag'] = array("width" => "100%", "border" => 1, "cellspacing" => 0, "cellpadding"=>0, "align"=>"left");
-					$gv -> tableOptions['head'] = array("class"=> "rowhead");
-					$gv -> columns = array("Articol", "Cantitate", "Pret", "Data", "Ora", "User");
-					$gv -> tableOptions['ColWidth'] = array();
-					for($i=0; $i<$nr_r;$i++)
-						{
-						$obj = $rows[$i];
-						$gv -> dataTable[$i]['data'] = array($obj['denumire'], $obj['cantitate'], $obj['valoare'], $obj['data'], $obj['ora'], $obj['nume']);
-						
-						if($i%2==0) $class = "roweven";
-						else $class = "rowodd";
-			
-						$gv -> dataTable[$i]['tag'] = array("class"=>$class, 
-						"onMouseOver"=>"$(this).addClass('rowhover')", 
-						"onMouseOut"=>"$(this).removeClass('rowhover')",
-						);
-						}
-		$d = $gv -> getTable();
-		}
-	else
-		{
-		$d = "NU SUNT INREGISTRARI";
-		}	
+    $nr_r = count($rows);
+    if ($nr_r) {
+                    $gv = new GridView();
+                    $gv -> tableOptions['tag'] = array("width" => "100%", "border" => 1, "cellspacing" => 0, "cellpadding" => 0, "align" => "left");
+                    $gv -> tableOptions['head'] = array("class" => "rowhead");
+                    $gv -> columns = array("Articol", "Cantitate", "Pret", "Data", "Ora", "User");
+                    $gv -> tableOptions['ColWidth'] = array();
+        for ($i = 0; $i < $nr_r; $i++) {
+            $obj = $rows[$i];
+            $gv -> dataTable[$i]['data'] = array($obj['denumire'], $obj['cantitate'], $obj['valoare'], $obj['data'], $obj['ora'], $obj['nume']);
 
-echo $d;	
-?>
+            if ($i % 2 == 0) {
+                $class = "roweven";
+            } else {
+                $class = "rowodd";
+            }
+
+            $gv -> dataTable[$i]['tag'] = array("class" => $class,
+            "onMouseOver" => "$(this).addClass('rowhover')",
+            "onMouseOut" => "$(this).removeClass('rowhover')",
+            );
+        }
+        $d = $gv -> getTable();
+    } else {
+        $d = "NU SUNT INREGISTRARI";
+    }
+
+    echo $d;
+    ?>
 </body>
 </html>

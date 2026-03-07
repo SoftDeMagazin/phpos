@@ -12,10 +12,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 #loading {
 
@@ -43,16 +43,15 @@ $xajax->printJavascript('thirdparty/xajax/');
 ?>
 
 <?php
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> javaScript(); 
-	}
-$tn = new TastaturaNumerica;
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> javaScript();
+}
+$tn = new TastaturaNumerica();
 echo $tn -> printJavaScript();
-$kb = new KeyBoard;
+$kb = new KeyBoard();
 echo $kb -> printJavaScript();
-$tabView = new TabView;
+$tabView = new TabView();
 $tabView -> root = "";
 echo $tabView -> printCss();
 echo $tabView -> printJavaScript();
@@ -113,14 +112,14 @@ alert('True Xpos is: '+trueX+'nTrue Ypos is: '+trueY)
 </Script>
 <script type="text/javascript">
 function fn_loadProdus(denumire, pret_vanzare)
-	{
-	xajax.$('div_denumire').innerHTML = denumire;
-	xajax.$('div_pret').innerHTML = pret_vanzare;
-	}
+    {
+    xajax.$('div_denumire').innerHTML = denumire;
+    xajax.$('div_pret').innerHTML = pret_vanzare;
+    }
 function fn_focus(strId)
-	{
-	document.getElementById(strId).focus();
-	}	
+    {
+    document.getElementById(strId).focus();
+    }   
 </script>
 <script type="text/javascript">
 var OnKeyRequestBuffer = 
@@ -164,45 +163,46 @@ echo '<body id="body" onLoad="">';
     </tr>
     <tr>
       <td colspan="2">
-	  <div id="lista_modificari" style="height:500px; overflow:auto">
-	  <?php
-	  $mysql = new MySQL();
-	  $mp = new ModificariPret($mysql);
-	  $nr_r =  $mp -> find(array("where activat = 'NU'"));
-	if($nr_r)
-		{
-					$gv = new GridView;
-					$gv -> tableOptions['tag'] = array("width" => "100%", "border" => 0, "cellspacing" => 0, "cellpadding"=>0, "align"=>"left");
-					$gv -> tableOptions['head'] = array("class"=> "rowhead");
-					$gv -> columns = array("Data", "Articol", "Pret vechi", "Pret nou", "Diferenta", "Stoc", "Val Diferenta");
-					$gv -> tableOptions['ColWidth'] = array();
-					for($i=0; $i<$nr_r;$i++)
-						{
-						$obj = $mp -> objects[$i];
-						$prod = new ViewStocuriProduse($mysql, $obj -> produs_id);
-						$diferenta = $obj -> pret_nou - $obj -> pret_vechi;
-						if(!$prod -> obj -> stoc) $prod -> obj -> stoc = 0;
-						$prod -> obj -> stoc = number_format($prod -> obj -> stoc, 2,'.','');
-						$gv -> dataTable[$i]['data'] = array($obj -> data_modificare, $prod -> obj -> denumire, $obj -> pret_vechi, $obj -> pret_nou,number_format($diferenta, 2, '.','') , $prod -> obj -> stoc, number_format($prod -> obj -> stoc*$diferenta,2,'.',''));
-						if($i%2==0) $class = "roweven";
-						else $class = "rowodd";
-			
-						$gv -> dataTable[$i]['tag'] = array("class"=>$class, 
-						"onMouseOver"=>"$(this).addClass('rowhover')", 
-						"onMouseOut"=>"$(this).removeClass('rowhover')",
-						);
-						}
-		$d = $gv -> getTable();
-		}
-	else
-		{
-		$d = "NU SUNT PRETURI NEACTIVATE";
-		}	
-	  echo $d;
-	  ?>
-	  
-	  </div>
-	  </td>
+      <div id="lista_modificari" style="height:500px; overflow:auto">
+      <?php
+        $mysql = new MySQL();
+        $mp = new ModificariPret($mysql);
+        $nr_r =  $mp -> find(array("where activat = 'NU'"));
+        if ($nr_r) {
+                    $gv = new GridView();
+                    $gv -> tableOptions['tag'] = array("width" => "100%", "border" => 0, "cellspacing" => 0, "cellpadding" => 0, "align" => "left");
+                    $gv -> tableOptions['head'] = array("class" => "rowhead");
+                    $gv -> columns = array("Data", "Articol", "Pret vechi", "Pret nou", "Diferenta", "Stoc", "Val Diferenta");
+                    $gv -> tableOptions['ColWidth'] = array();
+            for ($i = 0; $i < $nr_r; $i++) {
+                $obj = $mp -> objects[$i];
+                $prod = new ViewStocuriProduse($mysql, $obj -> produs_id);
+                $diferenta = $obj -> pret_nou - $obj -> pret_vechi;
+                if (!$prod -> obj -> stoc) {
+                    $prod -> obj -> stoc = 0;
+                }
+                $prod -> obj -> stoc = number_format($prod -> obj -> stoc, 2, '.', '');
+                $gv -> dataTable[$i]['data'] = array($obj -> data_modificare, $prod -> obj -> denumire, $obj -> pret_vechi, $obj -> pret_nou,number_format($diferenta, 2, '.', '') , $prod -> obj -> stoc, number_format($prod -> obj -> stoc * $diferenta, 2, '.', ''));
+                if ($i % 2 == 0) {
+                    $class = "roweven";
+                } else {
+                    $class = "rowodd";
+                }
+
+                $gv -> dataTable[$i]['tag'] = array("class" => $class,
+                "onMouseOver" => "$(this).addClass('rowhover')",
+                "onMouseOut" => "$(this).removeClass('rowhover')",
+                );
+            }
+            $d = $gv -> getTable();
+        } else {
+            $d = "NU SUNT PRETURI NEACTIVATE";
+        }
+        echo $d;
+        ?>
+      
+      </div>
+      </td>
     </tr>
     <tr>
       <td width="50%"><div align="center">
@@ -220,12 +220,11 @@ echo '<body id="body" onLoad="">';
 <div id="obiecte" class="flora" style=" ">
 </div>
 </div>
-<?php 
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> div(); 
-	}
+<?php
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> div();
+}
 ?>
 <div id="windows">
 </div>

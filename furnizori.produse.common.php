@@ -2,7 +2,7 @@
 require_once("thirdparty/xajax/xajax_core/xajax.inc.php");
 
 $xajax = new xajax("furnizori.produse.server.php");
-$registerFunctions = TRUE;
+$registerFunctions = true;
 /*         HELPERS         */
 include("include/helpers/helper.class.php");
 include("include/helpers/forms.class.php");
@@ -36,4 +36,3 @@ include("include/models/clienti.class.php");
 include("include/models/registrucasa.class.php");
 include("config/config.php");
 $xajax -> registerFunction("raport");
-?>

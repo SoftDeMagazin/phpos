@@ -12,10 +12,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 select {
 width: 190px;
@@ -29,16 +29,15 @@ $xajax->printJavascript('thirdparty/xajax/');
 ?>
 
 <?php
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> javaScript(); 
-	}
-$tn = new TastaturaNumerica;
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> javaScript();
+}
+$tn = new TastaturaNumerica();
 echo $tn -> printJavaScript();
-$kb = new KeyBoard;
+$kb = new KeyBoard();
 echo $kb -> printJavaScript();
-$tabView = new TabView;
+$tabView = new TabView();
 $tabView -> root = "";
 echo $tabView -> printCss();
 echo $tabView -> printJavaScript();
@@ -66,62 +65,56 @@ $zi -> getLastDay();
       <input name="dateStop" type="text" id="dateStop" value="<?php echo $zi -> obj -> data; ?>" readonly="" onClick="xajax_calPopup('','', 'dateStop')">
     </div></td>
     <td width="200">
-	<div align="center">
-	<?php
-		$options = NULL;
-	$frm = new Forms();	
-				$ModuriPlata = new ModuriPlata($mysql);
-			$ModuriPlata -> find(array("ORDER BY nume_mod ASC"));
-			$options['0'] = "Filtru Moduri plata";
-			if(isset($ModuriPlata -> objects))
-				{
-				foreach($ModuriPlata -> objects as $objCasa)
-					{
-					$options[$objCasa -> mod_plata_id] = $objCasa -> nume_mod;
-					}
-				}
-			echo $frm -> input("mod_plata_id", array("options" => $options));	
+    <div align="center">
+    <?php
+        $options = null;
+    $frm = new Forms();
+                $ModuriPlata = new ModuriPlata($mysql);
+            $ModuriPlata -> find(array("ORDER BY nume_mod ASC"));
+            $options['0'] = "Filtru Moduri plata";
+    if (isset($ModuriPlata -> objects)) {
+        foreach ($ModuriPlata -> objects as $objCasa) {
+            $options[$objCasa -> mod_plata_id] = $objCasa -> nume_mod;
+        }
+    }
+            echo $frm -> input("mod_plata_id", array("options" => $options));
 
-	?></div></td>
+    ?></div></td>
     <td width="200"><div align="center">
       <?php
-	$options = NULL;
-			$case = new CaseFiscale($mysql);
-			$case -> find(array("ORDER BY nume_casa ASC"));
-			$options['0'] = "Filtru Case";
-			if(isset($case -> objects))
-				{
-				foreach($case -> objects as $objCasa)
-					{
-					$options[$objCasa -> casa_id] = $objCasa -> nume_casa;
-					}
-				}
-			echo $frm -> input("casa_id", array("options" => $options));	
-	?>
+        $options = null;
+            $case = new CaseFiscale($mysql);
+            $case -> find(array("ORDER BY nume_casa ASC"));
+            $options['0'] = "Filtru Case";
+        if (isset($case -> objects)) {
+            foreach ($case -> objects as $objCasa) {
+                $options[$objCasa -> casa_id] = $objCasa -> nume_casa;
+            }
+        }
+            echo $frm -> input("casa_id", array("options" => $options));
+        ?>
     </div></td>
   </tr>
   <tr>
     <td></td>
     <td>&nbsp;</td>
-    <td>	<div align="center"><?php
-			$user = new Users($mysql);
-			$user -> find(array("WHERE", "activ" => " = 'DA'", "ORDER BY", "nume", "ASC"));
-			$options = NULL;
-			$options['0'] = "Filtru Utilizatori";
-			if(isset($user -> objects))
-				{
-				foreach($user -> objects as $objUser)
-					{
-					$options[$objUser -> user_id] = $objUser -> nume;
-					}
-				}
-			echo $frm -> input("user_id", array("options" => $options));	
-	?></div>	</td>
+    <td>    <div align="center"><?php
+            $user = new Users($mysql);
+            $user -> find(array("WHERE", "activ" => " = 'DA'", "ORDER BY", "nume", "ASC"));
+            $options = null;
+            $options['0'] = "Filtru Utilizatori";
+    if (isset($user -> objects)) {
+        foreach ($user -> objects as $objUser) {
+            $options[$objUser -> user_id] = $objUser -> nume;
+        }
+    }
+            echo $frm -> input("user_id", array("options" => $options));
+    ?></div>    </td>
     <td>
-	<div align="center">
-	  <input name="btnGenereaza" type="button" id="btnGenereaza" value="Genereaza Raport" onClick="xajax_genereazaRaport(xajax.getFormValues('frmFiltre'));">	
-	  </div>
-	</td>
+    <div align="center">
+      <input name="btnGenereaza" type="button" id="btnGenereaza" value="Genereaza Raport" onClick="xajax_genereazaRaport(xajax.getFormValues('frmFiltre'));">   
+      </div>
+    </td>
   </tr>
 </table>
 </form>
@@ -129,13 +122,13 @@ $zi -> getLastDay();
 <table width="1000" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td height="550" width="420" valign="top">
-	<div id="preview" style="width:400px; height:500px;overflow:scroll; margin:20px auto;">
-	</div>
-	</td>
+    <div id="preview" style="width:400px; height:500px;overflow:scroll; margin:20px auto;">
+    </div>
+    </td>
     <td valign="top" width="580">
-	<div id="bon_continut" style="margin-top: 20px;overflow:auto;">
+    <div id="bon_continut" style="margin-top: 20px;overflow:auto;">
       
-	</div></td>
+    </div></td>
   </tr>
   <tr>
     <td width="420"><div align="center">
@@ -154,12 +147,11 @@ $zi -> getLastDay();
 </div>
 </div>
 </div>
-<?php 
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> div(); 
-	}
+<?php
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> div();
+}
 ?>
 <div id="windows"></div>
 </body>

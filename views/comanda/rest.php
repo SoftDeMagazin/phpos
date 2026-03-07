@@ -1,9 +1,9 @@
 <?php
-		$tn = new TastaturaNumerica();
-	$BonModuri = new ViewBonuriModuri($mysql);
-	$BonModuri -> findAllBy("bon_id", $Bon -> obj -> bon_id);
-	$innerHTML = "";
-	$info = '
+        $tn = new TastaturaNumerica();
+    $BonModuri = new ViewBonuriModuri($mysql);
+    $BonModuri -> findAllBy("bon_id", $Bon -> obj -> bon_id);
+    $innerHTML = "";
+    $info = '
 	<table width="90%" align="center" border="0" cellspacing="0" cellpadding="0">
         <tr class="rowhead">
           <td>Total</td>
@@ -17,7 +17,7 @@
         </tr>
       </table>
 	';
-	$moduri = '
+    $moduri = '
 	<table width="90%" align="center" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td colspan="2" class="rowhead">Achitat</td>
@@ -27,27 +27,28 @@
           <td>Suma</td>
         </tr>
 	';
-	$numerar = 0;
-	foreach($BonModuri -> objects as $objBon)
-		{
-		$html -> append($moduri, '<tr>
+    $numerar = 0;
+foreach ($BonModuri -> objects as $objBon) {
+    $html -> append($moduri, '<tr>
           <td>'. $objBon -> nume_mod .'</td>
           <td>'. number_format($objBon -> suma, 2, '.', '') .'</td>
         </tr>');
-		if($objBon -> cash == "DA") $numerar += $objBon -> suma;
-		}
-	$html -> append($moduri, '<tr>
+    if ($objBon -> cash == "DA") {
+        $numerar += $objBon -> suma;
+    }
+}
+    $html -> append($moduri, '<tr>
           <td>Total</td>
           <td>'. number_format($BonModuri -> objects[0] -> total, 2, '.', '') .'</td>
         </tr>');
-	$platitNumerar = '
+    $platitNumerar = '
 	<table width="90%" align="center" border="0" cellspacing="0" cellpadding="0">
         <tr class="rowhead">
           <td>Platit cash</td>
           <td>'. number_format($numerar, 2, '.', '') .'</td>
         </tr>
 	</table>';
-	$calculatorRest = '
+    $calculatorRest = '
 	<table width="90%" align="center" border="0" cellspacing="0" cellpadding="0">
 	<tr>
     <td><div style="text-align: center">
@@ -79,10 +80,9 @@
     </div></td>
   </tr>
 </table>
-	';		
-	$html -> append($moduri, '</table>');	
-	$html -> append($innerHTML, $info);
-	$html -> append($innerHTML, $moduri);
-	$html -> append($innerHTML, $platitNumerar);
-	$html -> append($innerHTML, $calculatorRest);
-?>
+	';
+    $html -> append($moduri, '</table>');
+    $html -> append($innerHTML, $info);
+    $html -> append($innerHTML, $moduri);
+    $html -> append($innerHTML, $platitNumerar);
+    $html -> append($innerHTML, $calculatorRest);

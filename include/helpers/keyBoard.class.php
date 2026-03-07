@@ -1,9 +1,9 @@
 <?php
 class KeyBoard
 {
-	function printJavaScript()
-		{
-		return '<script type="text/javascript" language="javascript">
+    function printJavaScript()
+    {
+        return '<script type="text/javascript" language="javascript">
 function kb_insert(value, idInput)
 {
 document.getElementById(idInput).value = document.getElementById(idInput).value + value;
@@ -20,11 +20,11 @@ document.getElementById(idInput).value = document.getElementById(idInput).value.
 		if(focus != \'\') document.getElementById(focus).focus();
 		}	
 </script>';
-		}
-	
-	function printCss()
-		{
-		return '
+    }
+    
+    function printCss()
+    {
+        return '
 		<style type="text/css">
 		/* keyboard */
 .kb_button_taste
@@ -71,24 +71,24 @@ height: 60px;
 background-color:#FF0000;
 }	</style>
 		';
-		}
-	
-	function printHtml($dest, $focus)
-		{
-		$txt = 'Value: <input name="kb_value" id="kb_value" size="30" type="text">';
-		$txt .= $this -> html('kb_value');
-		$txt .= '
+    }
+    
+    function printHtml($dest, $focus)
+    {
+        $txt = 'Value: <input name="kb_value" id="kb_value" size="30" type="text">';
+        $txt .= $this -> html('kb_value');
+        $txt .= '
 		<table width="100%">
 		<tr>
             <td align="center"><input name="kb_btnOk" type="button" id="kb_btnOk" value="Ok" onClick="kb_save(\''. $dest .'\', \''. $focus .'\');xajax_btnRenuntaDialog();"></td>
             <td align="center"><input name="kb_btnRenunta" type="button" id="kb_btnRenunta" value="Renunta" onClick="xajax_btnRenuntaDialog();"></td>
           </tr></table>';
-		return $txt;
-		}
-		
-	function html($dest)
-		{
-		return '
+        return $txt;
+    }
+        
+    function html($dest)
+    {
+        return '
 <table  align="center" cellpadding="0" cellspacing="0" class="table">
       <tr>
         <td colspan="10"><div align="right">
@@ -278,6 +278,5 @@ background-color:#FF0000;
             </div></td>
   </tr>
     </table>';
-		}	
+    }
 }
-?>

@@ -4,7 +4,7 @@
 
 class TabView extends Helper
 {
-	var $v1='
+    var $v1='
 <div id="tabView" style="width:<%tabViewWidth%>px;height:<%tabViewHeight%>px;">
   <div id="tabViewContent" style="width:<%tabViewContentWidth%>px; height:<%tabViewHeight%>px;overflow:hidden; float:left;">
   <%tabViewContent%>
@@ -14,8 +14,8 @@ class TabView extends Helper
   </div>
 </div>
 	';
-	
-	var $v2='
+    
+    var $v2='
 <div id="tabView" style="width:<%tabViewWidth%>px;height:<%tabViewHeight%>px;">
   <div id="tabViewNav" style="width:45px; float:left;">
     <input name="btnTabViewLeft" type="button" id="btnTabViewLeft" value=" " onClick="tabViewScroll(-<%tabViewScroll%>)" onDblClick="tabViewScroll(-<%tabViewScroll%>)">
@@ -28,10 +28,10 @@ class TabView extends Helper
   </div>
 </div>
 	';
-	var $root="../../";
-	function printJavaScript()
-		{
-		return '
+    var $root="../../";
+    function printJavaScript()
+    {
+        return '
 		<script type="text/javascript" language="javascript">
 			function tabViewScroll(amount) {
 				var objDiv = document.getElementById("tabViewContent");
@@ -39,11 +39,11 @@ class TabView extends Helper
 				}
 		</script>
 		';
-		}
-	
-	function printCss()
-		{
-		return '
+    }
+    
+    function printCss()
+    {
+        return '
 		<style type="text/css">
 			<!--
 			#tabViewContent button {
@@ -57,30 +57,31 @@ class TabView extends Helper
 			-->
 		</style>
 		';
-		}
-	
-	function printTabView($options = array(), $v = 1)
-		{
-		if($v == 1) $txt = $this -> v1;
-		else $txt = $this -> v2;
-		$this -> replace($txt, '<%tabViewWidth%>', $options['width']);
-		$this -> replace($txt, '<%tabViewHeight%>', $options['height']);
-		$this -> replace($txt, '<%tabViewContentWidth%>', $options['width']-100);
-		$this -> replace($txt, '<%tabViewScroll%>', $options['scroll']);
-		$this -> replace($txt, '<%tabViewContent%>', $this -> tabViewContent($options['content']));
-		return $txt;
-		}
-	
-	function tabViewContent($contents = array())
-		{
-		$html = new Html;
-		$txt = '<table width="100%"  border="0" cellspacing="0" cellpadding="0"><tr>';
-		foreach($contents as $content)
-			{
-			$this -> append($txt, '<td>'. $html -> buttonTag($content) .'</td>');
-			}
-		$this -> append($txt, '</tr></table>');
-		return $txt;	
-		}			
+    }
+    
+    function printTabView($options = array(), $v = 1)
+    {
+        if ($v == 1) {
+            $txt = $this -> v1;
+        } else {
+            $txt = $this -> v2;
+        }
+        $this -> replace($txt, '<%tabViewWidth%>', $options['width']);
+        $this -> replace($txt, '<%tabViewHeight%>', $options['height']);
+        $this -> replace($txt, '<%tabViewContentWidth%>', $options['width']-100);
+        $this -> replace($txt, '<%tabViewScroll%>', $options['scroll']);
+        $this -> replace($txt, '<%tabViewContent%>', $this -> tabViewContent($options['content']));
+        return $txt;
+    }
+    
+    function tabViewContent($contents = array())
+    {
+        $html = new Html;
+        $txt = '<table width="100%"  border="0" cellspacing="0" cellpadding="0"><tr>';
+        foreach ($contents as $content) {
+            $this -> append($txt, '<td>'. $html -> buttonTag($content) .'</td>');
+        }
+        $this -> append($txt, '</tr></table>');
+        return $txt;
+    }
 }
-?>

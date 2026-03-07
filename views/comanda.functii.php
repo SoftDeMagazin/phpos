@@ -1,4 +1,4 @@
-<?php 
+<?php
 $view = '
 <div id="comandafunctii">
 <div id="divwindowhead">Functii</div>
@@ -19,4 +19,3 @@ $view = '
     </tr>
   </table>
 </div>';
-?>

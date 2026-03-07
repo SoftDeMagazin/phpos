@@ -9,10 +9,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 
 h2 {
@@ -104,33 +104,33 @@ $Produse = new Produse($mysql);
   </table>
 </form>
 <?php
-if($_SERVER['REQUEST_METHOD'] == "POST")
-{
-$produse = new ViewStocuriProduse($mysql);
-$categorie_id = $_POST['categorie_id'];
-$produse -> find("where categorie_id = '$categorie_id' order by denumire asc");
-if(isset($produse -> objects))
-	{
-	echo '<table width="90%"  border="0" align="center" cellpadding="0" cellspacing="0" id="componente">
+if ($_SERVER['REQUEST_METHOD'] == "POST") {
+    $produse = new ViewStocuriProduse($mysql);
+    $categorie_id = $_POST['categorie_id'];
+    $produse -> find("where categorie_id = '$categorie_id' order by denumire asc");
+    if (isset($produse -> objects)) {
+        echo '<table width="90%"  border="0" align="center" cellpadding="0" cellspacing="0" id="componente">
   <tr>
     <td><strong>Denumire produs </strong></td>
     <td><strong>Pret</strong></td>
     <td><strong>Stoc scriptic </strong></td>
     <td><strong>Stoc Faptic </strong></td>
   </tr>';
-	foreach($produse -> objects as $obj)
-		{
-		if($obj -> stoc == NULL) $stoc = 0;
-		else $stoc = $obj -> stoc;
-		 echo '<tr>
-    	<td>'. $obj -> denumire .'</td>
-    	<td>'. $obj -> pret .'</td>
-    	<td>'. number_format($stoc,2) .'</td>
+        foreach ($produse -> objects as $obj) {
+            if ($obj -> stoc == null) {
+                $stoc = 0;
+            } else {
+                $stoc = $obj -> stoc;
+            }
+             echo '<tr>
+    	<td>' . $obj -> denumire . '</td>
+    	<td>' . $obj -> pret . '</td>
+    	<td>' . number_format($stoc, 2) . '</td>
     	<td>&nbsp;</td>
-  		</tr>';	
-		}
-	echo '</table>';	
-	}
+  		</tr>';
+        }
+        echo '</table>';
+    }
 }
 ?>
 

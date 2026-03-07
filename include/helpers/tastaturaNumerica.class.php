@@ -1,9 +1,9 @@
 <?php
 class TastaturaNumerica
-	{
-	function printJavaScript()
-		{
-		return '
+{
+    function printJavaScript()
+    {
+        return '
 		<script type="text/javascript" language="javascript">
 	function tnAddChar(chr)
 		{
@@ -78,13 +78,11 @@ function tn_result(dest)
 	}		
 		</script>
 		';
-	
-		
-		}
-	
-	function html($dest, $focus)
-		{
-		return '
+    }
+    
+    function html($dest, $focus)
+    {
+        return '
 		<table id="tn_table"  border="0" align="center" cellpadding="0" cellspacing="0">
           <tr>
             <td ><input name="btn6" type="button" class="tn_button" id="btn65" value="6" onClick="tnAddCharDest(\'6\',\''. $dest .'\', \''. $focus .'\')" onDblClick="tnAddCharDest(\'6\',\''. $dest .'\', \''. $focus .'\')"></td>
@@ -106,11 +104,11 @@ function tn_result(dest)
           </tr>
 		</table>	
 		';
-		}	
-		
-	function printHTML($dest, $focus)
-		{
-		return '
+    }
+        
+    function printHTML($dest, $focus)
+    {
+        return '
 		<div id="tn_div">
 <table id="tn_table"  border="0" align="center" cellpadding="0" cellspacing="0">
           <tr>
@@ -144,10 +142,10 @@ function tn_result(dest)
         </table>
 </div>
 		';
-		}
-	function printCalculator($dest)
-		{
-		return '
+    }
+    function printCalculator($dest)
+    {
+        return '
 		<table width="240"  border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>
     <td><input name="tn_operation" type="hidden" id="tn_operation"></td>
@@ -172,6 +170,5 @@ function tn_result(dest)
 </table>
 
 		';
-		}		
-	}
-?>
+    }
+}

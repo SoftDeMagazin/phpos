@@ -2,7 +2,7 @@
 require_once("thirdparty/xajax/xajax_core/xajax.inc.php");
 
 $xajax = new xajax("furnizori.server.php");
-$registerFunctions = TRUE;
+$registerFunctions = true;
 /*         HELPERS         */
 include("include/helpers/helper.class.php");
 include("include/helpers/forms.class.php");
@@ -43,4 +43,3 @@ $xajax -> registerFunction("afiseazaFacturi");
 $xajax -> registerFunction("afiseazaFactura");
 $xajax -> registerFunction("adaugaPlataFacturaFurnizor");
 $xajax -> registerFunction("salveazaPlataFacturaFurnizor");
-?>

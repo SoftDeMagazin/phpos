@@ -1,4 +1,4 @@
-	  <form action="" method="post" name="login">
+      <form action="" method="post" name="login">
       <table border="0" align="center" cellpadding="4" cellspacing="2">
         <tr>
           <td  style="vertical-align: top; font-weight: bold;" class="nume">Autentificare</td>
@@ -6,31 +6,27 @@
         <tr>
           <td  style="vertical-align: top" class="nume">
             <label for="name"><strong>User</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</label>
-			<?php
-			$user = new Users($mysql);
-			$user -> find(array("WHERE", "activ" => " = 'DA'", "ORDER BY", "nume", "ASC"));
-			if(isset($user -> objects))
-				{
-				foreach($user -> objects as $objUser)
-					{
-					$options[$objUser -> user_id] = $objUser -> nume;
-					}
-				}
-			$frm = new Forms();	
-			echo $frm -> input("user_id", array("options" => $options));	
-			$options = NULL;
-			$case = new CaseFiscale($mysql);
-			$case -> find(array("ORDER BY nume_casa ASC"));
-			if(isset($user -> objects))
-				{
-				foreach($case -> objects as $objCasa)
-					{
-					$options[$objCasa -> casa_id] = $objCasa -> nume_casa;
-					}
-				}
-			echo $frm -> input("casa_id", array("options" => $options));	
-			?>
-			</td>
+            <?php
+            $user = new Users($mysql);
+            $user -> find(array("WHERE", "activ" => " = 'DA'", "ORDER BY", "nume", "ASC"));
+            if (isset($user -> objects)) {
+                foreach ($user -> objects as $objUser) {
+                    $options[$objUser -> user_id] = $objUser -> nume;
+                }
+            }
+            $frm = new Forms();
+            echo $frm -> input("user_id", array("options" => $options));
+            $options = null;
+            $case = new CaseFiscale($mysql);
+            $case -> find(array("ORDER BY nume_casa ASC"));
+            if (isset($user -> objects)) {
+                foreach ($case -> objects as $objCasa) {
+                    $options[$objCasa -> casa_id] = $objCasa -> nume_casa;
+                }
+            }
+            echo $frm -> input("casa_id", array("options" => $options));
+            ?>
+            </td>
         </tr>
         <tr>
           <td  style="vertical-align: top" class="nume"><label for="subject"><strong>Parola</strong>&nbsp;&nbsp;&nbsp;&nbsp;</label>

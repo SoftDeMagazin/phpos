@@ -30,4 +30,4 @@ $nir = '<table width="100%"  border="0" cellspacing="2" cellpadding="2">
 	<td></td>
     <td></td>
   </tr>
-</table>'; ?>
+</table>';

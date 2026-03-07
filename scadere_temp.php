@@ -1,7 +1,7 @@
 <?php
 /*
 insert into intrari_continut (nir_id, nir_componenta_id, produs_id, cantitate, cantitate_ramasa, pret_intrare, data, activ, tip) (
-select -1, -1,produse.produs_id, 0, 0, 0, '1900-01-01' as data, 1 as activ, 'init' as tip from bonuri_continut 
+select -1, -1,produse.produs_id, 0, 0, 0, '1900-01-01' as data, 1 as activ, 'init' as tip from bonuri_continut
 inner join produse using(produs_id)
 where bon_continut_id not in (select bon_continut_id from iesiri where tip = 'vanzare') and produse.tip_produs = 'serviciu'
 )
@@ -49,14 +49,14 @@ inner join produse using(produs_id)
 where bon_continut_id not in (select bon_continut_id from iesiri where tip = 'vanzare') and produse.tip_produs = 'serviciu'");
 $Produs = new Produse($mysql);
 
-foreach($rows as $row) {
-	$bc = new BonuriContinut($mysql, $row['bon_continut_id']);
-	$objBonContinut = $bc -> obj;
+foreach ($rows as $row) {
+    $bc = new BonuriContinut($mysql, $row['bon_continut_id']);
+    $objBonContinut = $bc -> obj;
 
-				$Produs -> get($objBonContinut -> produs_id);
-				if($Produs -> obj -> tip_produs == "reteta")
-				$Produs -> scadereStoc($objBonContinut -> cantitate, $objBonContinut -> bon_continut_id, "vanzare_reteta");
-				else
-				$Produs -> scadereStoc($objBonContinut -> cantitate, $objBonContinut -> bon_continut_id, "vanzare");
+                $Produs -> get($objBonContinut -> produs_id);
+    if ($Produs -> obj -> tip_produs == "reteta") {
+        $Produs -> scadereStoc($objBonContinut -> cantitate, $objBonContinut -> bon_continut_id, "vanzare_reteta");
+    } else {
+        $Produs -> scadereStoc($objBonContinut -> cantitate, $objBonContinut -> bon_continut_id, "vanzare");
+    }
 }
-?>

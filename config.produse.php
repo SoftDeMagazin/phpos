@@ -12,10 +12,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 -->
 </style>
@@ -26,30 +26,29 @@ $xajax->printJavascript('thirdparty/xajax/');
 ?>
 
 <?php
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> javaScript(); 
-	}
-$tn = new TastaturaNumerica;
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> javaScript();
+}
+$tn = new TastaturaNumerica();
 echo $tn -> printJavaScript();
-$kb = new KeyBoard;
+$kb = new KeyBoard();
 echo $kb -> printJavaScript();
-$tabView = new TabView;
+$tabView = new TabView();
 $tabView -> root = "";
 echo $tabView -> printCss();
 echo $tabView -> printJavaScript();
 ?>
 <script type="text/javascript">
 function fn_loadProdus(denumire, pret_vanzare)
-	{
-	xajax.$('div_denumire').innerHTML = denumire;
-	xajax.$('div_pret').innerHTML = pret_vanzare;
-	}
+    {
+    xajax.$('div_denumire').innerHTML = denumire;
+    xajax.$('div_pret').innerHTML = pret_vanzare;
+    }
 function fn_focus(strId)
-	{
-	document.getElementById(strId).focus();
-	}	
+    {
+    document.getElementById(strId).focus();
+    }   
 </script>
 
 </head>
@@ -67,28 +66,26 @@ function fn_focus(strId)
 <div id="layout">
 <div id="categorii">
 <?php
-$html = new Html;
+$html = new Html();
 $mysql = new MySQL();
-	
-	$categorii = new Categorii($mysql);
-	$categorii -> find(array("ORDER BY", "denumire_categorie", "ASC"));
-	$i=0;
-	if(isset($categorii -> objects))
-		{
-		foreach($categorii -> objects as $objCategorie)
-			{
-			$content[$i] = array("name" => $objCategorie -> denumire_categorie, "value" => $objCategorie -> denumire_categorie, 
-			"class" => "btn_catalog",
-			"onClick" => "$('#tabViewContent button').css({border:'2px solid #FAFAFA'});$(this).css({border:'2px solid #000000'});document.getElementById('txtCodBare').value='';document.getElementById('txtDenumire').value='';xajax_catalogListaProduse(". $objCategorie -> categorie_id .", xajax.getFormValues('frmFiltre'));"
-			);
-			$i++;
-			}
-		}
 
-	
-	$options = array("width" => 900, "height" => 30, "scroll" => 800, "content" => $content);
-	$tabView = new TabView;
-	echo $tabView -> printTabView($options, 2);
+    $categorii = new Categorii($mysql);
+    $categorii -> find(array("ORDER BY", "denumire_categorie", "ASC"));
+    $i = 0;
+if (isset($categorii -> objects)) {
+    foreach ($categorii -> objects as $objCategorie) {
+        $content[$i] = array("name" => $objCategorie -> denumire_categorie, "value" => $objCategorie -> denumire_categorie,
+        "class" => "btn_catalog",
+        "onClick" => "$('#tabViewContent button').css({border:'2px solid #FAFAFA'});$(this).css({border:'2px solid #000000'});document.getElementById('txtCodBare').value='';document.getElementById('txtDenumire').value='';xajax_catalogListaProduse(" . $objCategorie -> categorie_id . ", xajax.getFormValues('frmFiltre'));"
+        );
+        $i++;
+    }
+}
+
+
+    $options = array("width" => 900, "height" => 30, "scroll" => 800, "content" => $content);
+    $tabView = new TabView();
+    echo $tabView -> printTabView($options, 2);
 ?>
 </div>
 
@@ -100,30 +97,30 @@ $mysql = new MySQL();
 <table width="100%"  border="0" cellspacing="2" cellpadding="0">
   <tr>
     <td width="350" valign="top">
-	<fieldset style="height:200px; "><legend>Sortare Produse</legend>
-	<div style="text-align: center ">
-	<select name="orderBy" id="orderBy" style="width:150px ">
-	  <option value="denumire" selected>Denumire</option>
-	  <option value="cod_bare">Cod bare</option>
-	  <option value="pret">Pret</option>
-	  <option value="stoc">Stoc</option>
-	 </select>
-	</div>
+    <fieldset style="height:200px; "><legend>Sortare Produse</legend>
+    <div style="text-align: center ">
+    <select name="orderBy" id="orderBy" style="width:150px ">
+      <option value="denumire" selected>Denumire</option>
+      <option value="cod_bare">Cod bare</option>
+      <option value="pret">Pret</option>
+      <option value="stoc">Stoc</option>
+     </select>
+    </div>
     <input name="ordMod" type="radio" value="ASC" checked> 
     Ascendent
     <input name="ordMod" type="radio" value="DESC" > 
     Descendent
     <br>
-	<div style="text-align: center ">
+    <div style="text-align: center ">
     <input name="btnSort" type="button" class="btn_search" id="btnSort" value=" " onClick="xajax_catalogListaProduse(document.getElementById('frm_categorie_id').value, xajax.getFormValues('frmFiltre'))">
-	</div>
-	</fieldset>	</td>
+    </div>
+    </fieldset> </td>
     <td width="350" valign="top"><fieldset style="height:200px;"><legend>Cautare Produse
     </legend>
-	<div style="text-align:center; "><label style="text-align:left; ">Cod Bare</label> 
-	<br>
-	<input type="text" name="txtCodBare" id="txtCodBare">
-    <input name="Button2" type="button" class="kb_buttonTastatura" value=" " onClick="xajax_kbPopup('txtCodBare');">	
+    <div style="text-align:center; "><label style="text-align:left; ">Cod Bare</label> 
+    <br>
+    <input type="text" name="txtCodBare" id="txtCodBare">
+    <input name="Button2" type="button" class="kb_buttonTastatura" value=" " onClick="xajax_kbPopup('txtCodBare');">    
     <input name="btnSearchCod" type="button" class="btn_search" id="btnSearchCod" value=" " onClick="xajax_catalogListaProduse(document.getElementById('frm_categorie_id').value, xajax.getFormValues('frmFiltre'))">
     <br>
     <input name="radMod" type="radio" value="AND"> 
@@ -131,28 +128,28 @@ $mysql = new MySQL();
     <input name="radMod" type="radio" value="OR" checked> 
     Sau 
     <br>
-	<label style="text-align:left; ">Denumire</label> <br>
-	<input type="text" name="txtDenumire" id="txtDenumire">
-	<input name="Button" type="button" class="kb_buttonTastatura" value=" " onClick="xajax_kbPopup('txtDenumire');">
+    <label style="text-align:left; ">Denumire</label> <br>
+    <input type="text" name="txtDenumire" id="txtDenumire">
+    <input name="Button" type="button" class="kb_buttonTastatura" value=" " onClick="xajax_kbPopup('txtDenumire');">
     <input name="btnSearchDenumire" type="button" class="btn_search" id="btnSearchDenumire" value=" " onClick="xajax_catalogListaProduse(document.getElementById('frm_categorie_id').value, xajax.getFormValues('frmFiltre'))">
     <div style="text-align:center; margin-top:20px; ">
-	<input name="btnResetSearch" type="button" class="btnTouch" id="btnResetSearch" onClick="document.getElementById('txtCodBare').value='';document.getElementById('txtDenumire').value='';xajax_catalogListaProduse(document.getElementById('frm_categorie_id').value, xajax.getFormValues('frmFiltre'))" value="Reset">
-	</div>
-	
-	</fieldset></td>
+    <input name="btnResetSearch" type="button" class="btnTouch" id="btnResetSearch" onClick="document.getElementById('txtCodBare').value='';document.getElementById('txtDenumire').value='';xajax_catalogListaProduse(document.getElementById('frm_categorie_id').value, xajax.getFormValues('frmFiltre'))" value="Reset">
+    </div>
+    
+    </fieldset></td>
     <td width="320" valign="top"><fieldset style="height:98px; padding-top:0px; "><legend style="margin:0px 0px 0px 0px; padding: 0px 0px 0px 0px; ">Produs</legend>
           <input type="hidden" name="frm_produs_id" id="frm_produs_id" value="0">
         <div id="produsDenumire" style="height: 30px; text-align:center; color:#FF0000; font-weight:bold; ">&nbsp;</div>
-	    <div align="center">
-	        <input name="addProdus" type="button" class="btnTouch" accesskey="a" onClick="xajax_frmProdus(0);" value="Adauga Produs" style="height:40px; ">  
-	        <input name="editProdus" type="button" class="btnTouch" accesskey="m" onClick="xajax_frmProdus(document.getElementById('frm_produs_id').value);" value="Modifica Produs" style="height:40px; ">
-	    </div>
+        <div align="center">
+            <input name="addProdus" type="button" class="btnTouch" accesskey="a" onClick="xajax_frmProdus(0);" value="Adauga Produs" style="height:40px; ">  
+            <input name="editProdus" type="button" class="btnTouch" accesskey="m" onClick="xajax_frmProdus(document.getElementById('frm_produs_id').value);" value="Modifica Produs" style="height:40px; ">
+        </div>
     </fieldset>
-	<fieldset style="height:100px; "><legend>Iesire</legend>
-	<div align="center">
-	  <input name="btnCautareAvansata" type="button" class="btnTouch" id="btnCautareAvansata" onClick="window.location.href = 'login.php'" value="IESIRE">
-	  </div>
-	</fieldset>	</td>
+    <fieldset style="height:100px; "><legend>Iesire</legend>
+    <div align="center">
+      <input name="btnCautareAvansata" type="button" class="btnTouch" id="btnCautareAvansata" onClick="window.location.href = 'login.php'" value="IESIRE">
+      </div>
+    </fieldset> </td>
   </tr>
 </table>
 
@@ -164,12 +161,11 @@ $mysql = new MySQL();
 </div>
 </div>
 </div>
-<?php 
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> div(); 
-	}
+<?php
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> div();
+}
 ?>
 <div id="windows">
 </div>

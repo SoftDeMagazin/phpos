@@ -1,22 +1,22 @@
 <?php
 class divScroll
 {
-	function printJavaScript()
-		{
-		return '
+    function printJavaScript()
+    {
+        return '
 		<script type="text/javascript">
 		function divScroll(div_id, amount)
 		{
 		document.getElementById(div_id).scrollTop += amount;
 		}
 		</script>';
-		}
+    }
 
-	function printHtml($id, $width, $height, $innerHTML = '')
-		{
-		$innerWidth = $width - 50;
-		$h = $height/2;
-		return '
+    function printHtml($id, $width, $height, $innerHTML = '')
+    {
+        $innerWidth = $width - 50;
+        $h = $height/2;
+        return '
 		<table width="'. $width .'" border="0" align="center" cellpadding="0" cellspacing="0">
   		<tr>
     		<td width="'.$innerWidth.'" height="'. $height .'" rowspan="2" scope="col">
@@ -31,7 +31,5 @@ class divScroll
   	</tr>
 	</table> 
 		';
-		}
+    }
 }
-
-?>

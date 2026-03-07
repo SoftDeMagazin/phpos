@@ -9,10 +9,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 
 h2 {
@@ -86,86 +86,86 @@ $mysql = new MySQL();
 <?php
 
 $frmFiltre = $_POST;
-	$trans = new Transformari($mysql);
-	$nr_r = $trans -> find(array(
-	"where",
-	"data_transformare" => $mysql -> between($frmFiltre['dataStart'], $frmFiltre['dataStop']),
-	"order by data_transformare asc"
-	)
-	);
-echo '<h3>Transformari</h3>';	
-	if($nr_r)
-		{
-					$gv = new GridView;
-					$gv -> tableOptions['tag'] = array("width" => "100%", "border" => 1, "cellspacing" => 0, "cellpadding"=>0, "align"=>"center");
-					$gv -> tableOptions['head'] = array("class"=> "rowhead");
-					$gv -> columns = array("Data", "Articol sursa", "Cantitate", "Articol Destinatie", "Cantitate");
-					$gv -> tableOptions['ColWidth'] = array();
-					for($i=0; $i<$nr_r;$i++)
-						{
-						$obj = $trans -> objects[$i];
-						$gv -> dataTable[$i]['data'] = array($obj -> data_transformare, $obj -> sursa_denumire, $obj -> sursa_cantitate, $obj -> destinatie_denumire, $obj -> destinatie_cantitate);
-						if($i%2==0) $class = "";
-						else $class = "";
-			
-						$gv -> dataTable[$i]['tag'] = array("class"=>$class);
-						}
-		$d = $gv -> getTable();
-		}
-	else
-		{
-		$d = "NU SUNT INREGISTRARI";
-		}	
-		
-echo $d;
-echo '<h3>Produse sursa</h3>';	
-$sursa = $mysql -> getRows("select produse.denumire, a.produs_id, sum(a.cantitate) as cantitate, round(sum(a.pret_intrare*a.cantitate),2) as valoare, round(sum((b.pret_vanzare*100/124 - a.pret_intrare)*a.cantitate),2) as adaos
+    $trans = new Transformari($mysql);
+    $nr_r = $trans -> find(array(
+    "where",
+    "data_transformare" => $mysql -> between($frmFiltre['dataStart'], $frmFiltre['dataStop']),
+    "order by data_transformare asc"
+    ));
+    echo '<h3>Transformari</h3>';
+    if ($nr_r) {
+                    $gv = new GridView();
+                    $gv -> tableOptions['tag'] = array("width" => "100%", "border" => 1, "cellspacing" => 0, "cellpadding" => 0, "align" => "center");
+                    $gv -> tableOptions['head'] = array("class" => "rowhead");
+                    $gv -> columns = array("Data", "Articol sursa", "Cantitate", "Articol Destinatie", "Cantitate");
+                    $gv -> tableOptions['ColWidth'] = array();
+        for ($i = 0; $i < $nr_r; $i++) {
+            $obj = $trans -> objects[$i];
+            $gv -> dataTable[$i]['data'] = array($obj -> data_transformare, $obj -> sursa_denumire, $obj -> sursa_cantitate, $obj -> destinatie_denumire, $obj -> destinatie_cantitate);
+            if ($i % 2 == 0) {
+                $class = "";
+            } else {
+                $class = "";
+            }
+
+            $gv -> dataTable[$i]['tag'] = array("class" => $class);
+        }
+        $d = $gv -> getTable();
+    } else {
+        $d = "NU SUNT INREGISTRARI";
+    }
+
+    echo $d;
+    echo '<h3>Produse sursa</h3>';
+    $sursa = $mysql -> getRows("select produse.denumire, a.produs_id, sum(a.cantitate) as cantitate, round(sum(a.pret_intrare*a.cantitate),2) as valoare, round(sum((b.pret_vanzare*100/124 - a.pret_intrare)*a.cantitate),2) as adaos
 from intrari_continut as a
 inner join produse using(produs_id)
 inner join intrari_continut as b on b.intrare_continut_id = a.nir_componenta_id
-where a.tip = 'ajustare_transformare' and a.data between '". $frmFiltre['dataStart'] ."' and '". $frmFiltre['dataStop'] ."'
+where a.tip = 'ajustare_transformare' and a.data between '" . $frmFiltre['dataStart'] . "' and '" . $frmFiltre['dataStop'] . "'
 group by produse.denumire, a.produs_id;");
-					$gv = new GridView;
-					$gv -> tableOptions['tag'] = array("width" => "100%", "border" => 1, "cellspacing" => 0, "cellpadding"=>0, "align"=>"center");
-					$gv -> tableOptions['head'] = array("class"=> "rowhead");
-					$gv -> columns = array("Articol", "Cantitate", "Valoare", "Adaos");
-					$gv -> tableOptions['ColWidth'] = array();
-					for($i=0; $i<count($sursa);$i++)
-						{
-						
-						$gv -> dataTable[$i]['data'] = array($sursa[$i]['denumire'], $sursa[$i]['cantitate']*(-1), $sursa[$i]['valoare']*(-1), $sursa[$i]['adaos']*(-1));
-						if($i%2==0) $class = "";
-						else $class = "";
-						$totalVal +=  $sursa[$i]['valoare']*(-1);
-						$totalAdaos += $sursa[$i]['adaos']*(-1);
-						$gv -> dataTable[$i]['tag'] = array("class"=>$class);
-						}
-						$gv -> dataTable[count($sursa)]['data'] = array('Total', '&nbsp;', $totalVal, $totalAdaos);
-echo $gv -> getTable();	
+                    $gv = new GridView();
+                    $gv -> tableOptions['tag'] = array("width" => "100%", "border" => 1, "cellspacing" => 0, "cellpadding" => 0, "align" => "center");
+                    $gv -> tableOptions['head'] = array("class" => "rowhead");
+                    $gv -> columns = array("Articol", "Cantitate", "Valoare", "Adaos");
+                    $gv -> tableOptions['ColWidth'] = array();
+    for ($i = 0; $i < count($sursa); $i++) {
+        $gv -> dataTable[$i]['data'] = array($sursa[$i]['denumire'], $sursa[$i]['cantitate'] * (-1), $sursa[$i]['valoare'] * (-1), $sursa[$i]['adaos'] * (-1));
+        if ($i % 2 == 0) {
+            $class = "";
+        } else {
+            $class = "";
+        }
+        $totalVal +=  $sursa[$i]['valoare'] * (-1);
+        $totalAdaos += $sursa[$i]['adaos'] * (-1);
+        $gv -> dataTable[$i]['tag'] = array("class" => $class);
+    }
+                        $gv -> dataTable[count($sursa)]['data'] = array('Total', '&nbsp;', $totalVal, $totalAdaos);
+    echo $gv -> getTable();
 
-echo '<h3>Produse destinatie</h3>';
-$destinatie = $mysql -> getRows("
+    echo '<h3>Produse destinatie</h3>';
+    $destinatie = $mysql -> getRows("
 select produse.denumire, produse.produs_id, sum(intrari_continut.cantitate) as cantitate, round(sum(intrari_continut.pret_intrare*intrari_continut.cantitate),2) as valoare from intrari_continut 
 inner join produse using(produs_id)
-where tip = 'transformare_destinatie' and intrari_continut.data between '". $frmFiltre['dataStart'] ."' and '". $frmFiltre['dataStop'] ."'
+where tip = 'transformare_destinatie' and intrari_continut.data between '" . $frmFiltre['dataStart'] . "' and '" . $frmFiltre['dataStop'] . "'
 group by produse.denumire, produse.produs_id, intrari_continut.pret_intrare; 
 ");
-					$gv = new GridView;
-					$gv -> tableOptions['tag'] = array("width" => "100%", "border" => 1, "cellspacing" => 0, "cellpadding"=>0, "align"=>"center");
-					$gv -> tableOptions['head'] = array("class"=> "rowhead");
-					$gv -> columns = array("Articol", "Cantitate", "Valoare");
-					$gv -> tableOptions['ColWidth'] = array();
-					for($i=0; $i<count($destinatie);$i++)
-						{
-						
-						$gv -> dataTable[$i]['data'] = array($destinatie[$i]['denumire'], $destinatie[$i]['cantitate'], $destinatie[$i]['valoare']);
-						if($i%2==0) $class = "";
-						else $class = "";
-						$totalMp += $destinatie[$i]['valoare'];
-						$gv -> dataTable[$i]['tag'] = array("class"=>$class);
-						}
-					$gv -> dataTable[count($destinatie)]['data'] = array('Total','&nbsp;', $totalMp);
-echo $gv -> getTable();	
-?>
+                    $gv = new GridView();
+                    $gv -> tableOptions['tag'] = array("width" => "100%", "border" => 1, "cellspacing" => 0, "cellpadding" => 0, "align" => "center");
+                    $gv -> tableOptions['head'] = array("class" => "rowhead");
+                    $gv -> columns = array("Articol", "Cantitate", "Valoare");
+                    $gv -> tableOptions['ColWidth'] = array();
+    for ($i = 0; $i < count($destinatie); $i++) {
+        $gv -> dataTable[$i]['data'] = array($destinatie[$i]['denumire'], $destinatie[$i]['cantitate'], $destinatie[$i]['valoare']);
+        if ($i % 2 == 0) {
+            $class = "";
+        } else {
+            $class = "";
+        }
+        $totalMp += $destinatie[$i]['valoare'];
+        $gv -> dataTable[$i]['tag'] = array("class" => $class);
+    }
+                    $gv -> dataTable[count($destinatie)]['data'] = array('Total','&nbsp;', $totalMp);
+    echo $gv -> getTable();
+    ?>
 </body>
 </html>

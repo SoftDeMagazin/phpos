@@ -1,0 +1,5 @@
+<ruleset name="MyStandard">
+    <rule ref="PSR2">
+        <exclude name="Generic.Files.LineLength"/>
+    </rule>
+</ruleset>

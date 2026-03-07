@@ -1,17 +1,13 @@
 <?php
 function f()
 {
-echo "f";
+    echo "f";
 }
 function g()
 {
-echo "g";
+    echo "g";
 }
 $c = 2;
 $b = 2;
 
 ($b == $c) ? f() : g();
-
-
-?>
-

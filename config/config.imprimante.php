@@ -1,6 +1,5 @@
 <?php
 $cfgImprimante = array(
-	"imprimanta_rapoarte" => "EPSON",
-	"lungime_pagina" => 50
-	);
-?>
+    "imprimanta_rapoarte" => "EPSON",
+    "lungime_pagina" => 50
+    );

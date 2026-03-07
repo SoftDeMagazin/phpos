@@ -8,4 +8,3 @@ require("config.stocuri.php");
 require("config.imprimante.php");
 require("config.gui.php");
 require("config.marcaj.php");
-?>

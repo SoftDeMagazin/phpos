@@ -12,10 +12,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 #loading {
 
@@ -43,16 +43,15 @@ $xajax->printJavascript('thirdparty/xajax/');
 ?>
 
 <?php
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> javaScript(); 
-	}
-$tn = new TastaturaNumerica;
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> javaScript();
+}
+$tn = new TastaturaNumerica();
 echo $tn -> printJavaScript();
-$kb = new KeyBoard;
+$kb = new KeyBoard();
 echo $kb -> printJavaScript();
-$tabView = new TabView;
+$tabView = new TabView();
 $tabView -> root = "";
 echo $tabView -> printCss();
 echo $tabView -> printJavaScript();
@@ -123,30 +122,32 @@ alert('True Xpos is: '+trueX+'nTrue Ypos is: '+trueY)
   </tr>
   <tr>
     <th scope="col"><div id="preview" style="height: 550px; overflow:auto; ">
-	<?php
-		$continut = new Etichete($mysql);
-		$nr_r = $continut -> findAll();
-					$gv = new GridView;
-					$gv -> tableOptions['tag'] = array("width" => "100%", "border" => 0, "cellspacing" => 0, "cellpadding"=>0, "align"=>"left");
-					$gv -> tableOptions['head'] = array("class"=> "rowhead");
-					$gv -> columns = array("Cod", "Data");
-					$gv -> tableOptions['ColWidth'] = array("50%", "50%");
-					for($i=0; $i<$nr_r;$i++)
-						{
-						$obj = $continut -> objects[$i];
-						$gv -> dataTable[$i]['data'] = array($obj -> eticheta_id, $obj -> data);
-						if($i%2==0) $class = "roweven";
-						else $class = "rowodd";
-			
-						$gv -> dataTable[$i]['tag'] = array("class"=>$class, 
-						"onMouseOver"=>"$(this).addClass('rowhover')", 
-						"onMouseOut"=>"$(this).removeClass('rowhover')",
-						"onClick"=>"window.location.href = 'etichete.php?eticheta_id=". $obj -> eticheta_id ."'",
-						);
-						}
-					echo $gv -> getTable();
-	?>
-	</div></th>
+    <?php
+        $continut = new Etichete($mysql);
+        $nr_r = $continut -> findAll();
+                    $gv = new GridView();
+                    $gv -> tableOptions['tag'] = array("width" => "100%", "border" => 0, "cellspacing" => 0, "cellpadding" => 0, "align" => "left");
+                    $gv -> tableOptions['head'] = array("class" => "rowhead");
+                    $gv -> columns = array("Cod", "Data");
+                    $gv -> tableOptions['ColWidth'] = array("50%", "50%");
+    for ($i = 0; $i < $nr_r; $i++) {
+        $obj = $continut -> objects[$i];
+        $gv -> dataTable[$i]['data'] = array($obj -> eticheta_id, $obj -> data);
+        if ($i % 2 == 0) {
+            $class = "roweven";
+        } else {
+            $class = "rowodd";
+        }
+
+        $gv -> dataTable[$i]['tag'] = array("class" => $class,
+        "onMouseOver" => "$(this).addClass('rowhover')",
+        "onMouseOut" => "$(this).removeClass('rowhover')",
+        "onClick" => "window.location.href = 'etichete.php?eticheta_id=" . $obj -> eticheta_id . "'",
+        );
+    }
+                    echo $gv -> getTable();
+    ?>
+    </div></th>
   </tr>
   <tr>
     <td></td>
@@ -175,13 +176,12 @@ alert('True Xpos is: '+trueX+'nTrue Ypos is: '+trueY)
 </div>
 </div>
 
-<?php 
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> div(); 
-	}
+<?php
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> div();
+}
 ?>
-<div id="windows">	</div>
+<div id="windows">  </div>
 </body>
 </html>

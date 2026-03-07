@@ -17,9 +17,8 @@ $rows = $mysql -> getRows("SELECT denumire from produse");
 ?>
 <select name="select" size="20" multiple style="width:300px;" onChange=""  accesskey="a">
 <?php
-foreach($rows as $row)
-{
-echo '<option value="'. $row['denumire'] .'">'. $row['denumire'] .'</option>';
+foreach ($rows as $row) {
+    echo '<option value="' . $row['denumire'] . '">' . $row['denumire'] . '</option>';
 }
 ?>
 </select>
@@ -28,9 +27,8 @@ $rows = $mysql -> getRows("SELECT denumire from produse");
 ?>
 <select name="furnizori" size="1" multiple style="width:300px;" onChange=""  accesskey="b">
 <?php
-foreach($rows as $row)
-{
-echo '<option value="'. $row['denumire'] .'">'. $row['denumire'] .'</option>';
+foreach ($rows as $row) {
+    echo '<option value="' . $row['denumire'] . '">' . $row['denumire'] . '</option>';
 }
 ?>
 </select>

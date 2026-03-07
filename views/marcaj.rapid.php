@@ -21,5 +21,3 @@ $view = '
   </tr>
 </table>
 </form>';
-
-?>

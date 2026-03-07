@@ -9,10 +9,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 
 h2 {
@@ -89,86 +89,67 @@ $mysql = new MySQL();
 
 
 <?php
-	$mod = $_GET['raport'];
-	$dateStart = $_GET['dateStart'];
-	$dateStop = $_GET['dateStop'];
-	$chkGrafic = $_GET['chkGrafic'];
-	switch($mod)
-		{
-		case "rptModuriPlata":
-			{
-			$rpt = new rptModuriPlata($mysql);
-			echo $rpt -> preview($dateStart, $dateStop);
-			if($chkGrafic == "DA")
-			{
-			if($file = $rpt -> pie($dateStart, $dateStop))		
-				{
-				echo '<img src="temp/'.$file.'.png">';
-				}
-			}
-			else
-			{
-		
-			}	
-			}break;
-		case "rptVanzari":
-			{
-			$rpt = new rptVanzari($mysql);
-			echo $rpt -> preview($dateStart, $dateStop);
-			if($chkGrafic == "DA")
-			{
-			if($file = $rpt -> pie($dateStart, $dateStop))		
-				{
-				echo '<img src="temp/'.$file.'.png">';
-				}
-			}
-			else
-			{
-			
-			}	
-			}break;
-	case "rptVanzariTigari":
-			{
-			$rpt = new rptVanzariTigari($mysql);
-			echo $rpt -> preview($dateStart, $dateStop);
-			if($chkGrafic == "DA")
-			{
-			if($file = $rpt -> pie($dateStart, $dateStop))		
-				{
-				echo '<img src="temp/'.$file.'.png">';
-				}
-			}
-			else
-			{
-			
-			}	
-			}break;
-		case "rptUtilizatoriModuri":
-			{
-			$rpt = new rptUtilizatoriModuri($mysql);
-			echo $rpt -> preview($dateStart, $dateStop);
-			if($chkGrafic== "DA")
-			{
-			if($file = $rpt -> pie($frmValues['dateStart'], $frmValues['dateStop']))		
-				{
-				echo '<img src="temp/'.$file.'.png">';
-				}
-			}
-			}break;
-		case "rptCaseModuri":
-			{
-			echo $rpt = new rptCaseModuri($mysql);
-			$rpt -> preview($dateStart, $dateStop);
+    $mod = $_GET['raport'];
+    $dateStart = $_GET['dateStart'];
+    $dateStop = $_GET['dateStop'];
+    $chkGrafic = $_GET['chkGrafic'];
+switch ($mod) {
+    case "rptModuriPlata":
+        {
+        $rpt = new rptModuriPlata($mysql);
+        echo $rpt -> preview($dateStart, $dateStop);
+        if ($chkGrafic == "DA") {
+            if ($file = $rpt -> pie($dateStart, $dateStop)) {
+                echo '<img src="temp/' . $file . '.png">';
+            }
+        } else {
+        }
+    }break;
+    case "rptVanzari":
+        {
+        $rpt = new rptVanzari($mysql);
+        echo $rpt -> preview($dateStart, $dateStop);
+        if ($chkGrafic == "DA") {
+            if ($file = $rpt -> pie($dateStart, $dateStop)) {
+                echo '<img src="temp/' . $file . '.png">';
+            }
+        } else {
+        }
+    }break;
+    case "rptVanzariTigari":
+            {
+            $rpt = new rptVanzariTigari($mysql);
+            echo $rpt -> preview($dateStart, $dateStop);
+        if ($chkGrafic == "DA") {
+            if ($file = $rpt -> pie($dateStart, $dateStop)) {
+                echo '<img src="temp/' . $file . '.png">';
+            }
+        } else {
+        }
+    }break;
+    case "rptUtilizatoriModuri":
+        {
+        $rpt = new rptUtilizatoriModuri($mysql);
+        echo $rpt -> preview($dateStart, $dateStop);
+        if ($chkGrafic == "DA") {
+            if ($file = $rpt -> pie($frmValues['dateStart'], $frmValues['dateStop'])) {
+                echo '<img src="temp/' . $file . '.png">';
+            }
+        }
+    }break;
+    case "rptCaseModuri":
+        {
+        echo $rpt = new rptCaseModuri($mysql);
+        $rpt -> preview($dateStart, $dateStop);
 
-			}break;
-	
-		case "rptBonuriEmise":
-			{
-			echo $rpt = new rptBonuriEmise($mysql);
-			$rpt -> preview($dateStart, $dateStop);
-			}break;		
-			
-		}
+    }break;
+
+    case "rptBonuriEmise":
+        {
+        echo $rpt = new rptBonuriEmise($mysql);
+        $rpt -> preview($dateStart, $dateStop);
+    }break;
+}
 ?>
 </body>
 </html>

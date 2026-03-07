@@ -2,7 +2,7 @@
 require_once("thirdparty/xajax/xajax_core/xajax.inc.php");
 
 $xajax = new xajax("config.produse.server.php");
-$registerFunctions = TRUE;
+$registerFunctions = true;
 /*         HELPERS         */
 include("include/helpers/helper.class.php");
 include("include/helpers/forms.class.php");
@@ -42,5 +42,3 @@ $xajax -> registerFunction("retetarComponenta");
 $xajax -> registerFunction("salveazaComponenta");
 $xajax -> registerFunction("stergeComponenta");
 $xajax -> registerFunction("stergeProdus");
-
-?>

@@ -1,5 +1,4 @@
 <?php
 $cfgGui = array(
-	"loading" => false
-	);
-?>
+    "loading" => false
+    );

@@ -12,10 +12,10 @@ require("test.login.php");
 <style type="text/css">
 <!--
 body {
-	margin-left: 0px;
-	margin-top: 0px;
-	margin-right: 0px;
-	margin-bottom: 0px;
+    margin-left: 0px;
+    margin-top: 0px;
+    margin-right: 0px;
+    margin-bottom: 0px;
 }
 #loading {
 
@@ -43,32 +43,31 @@ $xajax->printJavascript('thirdparty/xajax/');
 ?>
 
 <?php
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> javaScript(); 
-	}
-$tn = new TastaturaNumerica;
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> javaScript();
+}
+$tn = new TastaturaNumerica();
 echo $tn -> printJavaScript();
-$kb = new KeyBoard;
+$kb = new KeyBoard();
 echo $kb -> printJavaScript();
-$tabView = new TabView;
+$tabView = new TabView();
 $tabView -> root = "";
 echo $tabView -> printCss();
 echo $tabView -> printJavaScript();
-$ds = new divScroll;
+$ds = new divScroll();
 echo $ds -> printJavaScript();
 ?>
 <script type="text/javascript">
 function fn_loadProdus(denumire, pret_vanzare)
-	{
-	xajax.$('div_denumire').innerHTML = denumire;
-	xajax.$('div_pret').innerHTML = pret_vanzare;
-	}
+    {
+    xajax.$('div_denumire').innerHTML = denumire;
+    xajax.$('div_pret').innerHTML = pret_vanzare;
+    }
 function fn_focus(strId)
-	{
-	document.getElementById(strId).focus();
-	}	
+    {
+    document.getElementById(strId).focus();
+    }   
 </script>
 
 </head>
@@ -156,11 +155,11 @@ alert('True Xpos is: '+trueX+'nTrue Ypos is: '+trueY)
                 <input name="btnGenereaza" type="button" id="btnGenereaza2" value="Genereaza Raport" onClick="xajax_genereazaLista(xajax.getFormValues('frmFiltre'));">
                 </label>
             </div></td><td><div align="center"></div></td>
-    <td width="200">	<div align="center">
-    </div>	</td>
+    <td width="200">    <div align="center">
+    </div>  </td>
     <td width="200">
-	<div align="center">	  </div>
-	</td>
+    <div align="center">      </div>
+    </td>
   </tr>
 </table>
 </form></td>
@@ -188,13 +187,12 @@ alert('True Xpos is: '+trueX+'nTrue Ypos is: '+trueY)
 </div>
 </div>
 
-<?php 
-if($cfgGui['loading'])
-	{
-	$load = new Loading;
-	echo $load -> div(); 
-	}
+<?php
+if ($cfgGui['loading']) {
+    $load = new Loading();
+    echo $load -> div();
+}
 ?>
-<div id="windows">	</div>
+<div id="windows">  </div>
 </body>
 </html>
