@@ -1,2 +1,4 @@
 config/config.db.php
 vendor/
+electron-kiosk/dist
+node_modules
