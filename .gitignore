@@ -3,3 +3,4 @@ vendor/
 electron-kiosk/dist
 node_modules
 bonuri/*.*
+!bonuri/.gitkeep
