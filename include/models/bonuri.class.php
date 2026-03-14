@@ -92,10 +92,11 @@ class Bonuri extends AbstractDB
     
     function emiteBonFiscal()
     {
-        global $cfgFiscal;
-        $fiscal = new $cfgFiscal['CasaFiscala']($this -> mysql);
+        $Casa = new CaseFiscale($this -> mysql, $this -> obj -> casa_id);
+        $tipCasa = $Casa -> obj -> tip_casa;
+        $fiscal = new $tipCasa($this -> mysql);
         $fiscal -> bon_id = $this -> obj -> bon_id;
-        $fiscal -> FilePath = $cfgFiscal['FilePath'];
+        $fiscal -> FilePath = $Casa -> obj -> cale_fisiere;
         $fiscal -> genereazaBon();
         $fiscal -> executBon();
     }

@@ -42,7 +42,7 @@ class FiscalDatecs extends Fiscal
 
     function genereazaBon()
     {
-        global $cfgFiscal;
+
         $Bon = new Bonuri($this -> mysql, $this -> bon_id);
         $Casa = new CaseFiscale($this -> mysql, $Bon -> obj -> casa_id);
         $BonContinut = new BonuriContinut($this -> mysql);
@@ -194,7 +194,7 @@ class FiscalNet extends Fiscal
 
     function genereazaBon()
     {
-        global $cfgFiscal;
+
         $Bon = new Bonuri($this -> mysql, $this -> bon_id);
         $Casa = new CaseFiscale($this -> mysql, $Bon -> obj -> casa_id);
         $BonContinut = new BonuriContinut($this -> mysql);
@@ -326,7 +326,7 @@ class FiscalZeka extends Fiscal
 
     function genereazaBon()
     {
-        global $cfgFiscal;
+
         $Bon = new Bonuri($this -> mysql, $this -> bon_id);
         $txt = "KARAT\r\n";
         $BonContinut = new BonuriContinut($this -> mysql);
@@ -375,7 +375,7 @@ class FiscalElka extends Fiscal
 
     function genereazaBon()
     {
-        global $cfgFiscal;
+
         $Bon = new Bonuri($this -> mysql, $this -> bon_id);
         $txt = "";
         $BonContinut = new BonuriContinut($this -> mysql);
@@ -438,7 +438,7 @@ class FiscalSapel extends Fiscal
 
     function genereazaBon()
     {
-        global $cfgFiscal;
+
         $Bon = new Bonuri($this -> mysql, $this -> bon_id);
         $txt = "";
         $BonContinut = new BonuriContinut($this -> mysql);
