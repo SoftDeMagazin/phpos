@@ -95,7 +95,22 @@ try {
     exit 1
 }
 
-# --- 4. Run database setup scripts ---
+# --- 4. Copy database config ---
+
+Write-Step "Setting up database config"
+
+$configSrc = "C:\xampp\htdocs\config\config.db.sample.php"
+$configDst = "C:\xampp\htdocs\config\config.db.php"
+
+if (Test-Path $configSrc) {
+    Copy-Item -Path $configSrc -Destination $configDst -Force
+    Write-Ok "Copied config.db.sample.php to config.db.php"
+} else {
+    Write-Fail "config.db.sample.php not found at $configSrc"
+    exit 1
+}
+
+# --- 5. Run database setup scripts ---
 
 Write-Step "Setting up database"
 
