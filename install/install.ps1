@@ -170,6 +170,26 @@ if ($LASTEXITCODE -ne 0) {
 Write-Ok "Electron app built successfully"
 Pop-Location
 
+# --- 7. Create desktop shortcut ---
+
+Write-Step "Creating desktop shortcut"
+
+$exePath = Get-ChildItem -Path "$electronDir\dist" -Filter "Kiosk*.exe" | Select-Object -First 1 -ExpandProperty FullName
+if ($exePath) {
+    $desktopPath = [Environment]::GetFolderPath("Desktop")
+    $shortcutPath = Join-Path $desktopPath "Kiosk.lnk"
+    $shell = New-Object -ComObject WScript.Shell
+    $shortcut = $shell.CreateShortcut($shortcutPath)
+    $shortcut.TargetPath = $exePath
+    $shortcut.WorkingDirectory = $electronDir
+    $shortcut.Description = "Kiosk Application"
+    $shortcut.Save()
+    Write-Ok "Desktop shortcut created at $shortcutPath"
+} else {
+    Write-Fail "Could not find built Kiosk exe in $electronDir\dist"
+    exit 1
+}
+
 # --- Done ---
 
 Write-Host "`n"
