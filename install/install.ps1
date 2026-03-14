@@ -66,11 +66,11 @@ try {
 
 Write-Step "Preparing C:\xampp\htdocs"
 
-# Remove existing content
+# Remove existing htdocs directory entirely
 if (Test-Path "C:\xampp\htdocs") {
-    Write-Host "  Removing existing htdocs content..."
-    Remove-Item -Path "C:\xampp\htdocs\*" -Recurse -Force
-    Write-Ok "htdocs cleared"
+    Write-Host "  Removing existing htdocs directory..."
+    Remove-Item -Path "C:\xampp\htdocs" -Recurse -Force
+    Write-Ok "htdocs removed"
 }
 
 Write-Host "  Cloning repository..."
@@ -128,7 +128,7 @@ foreach ($script in $scripts) {
 
 Write-Step "Setting up Electron kiosk app"
 
-$electronDir = "C:\xampp\electron-kiosk"
+$electronDir = "C:\xampp\htdocs\electron-kiosk"
 
 if (-not (Test-Path "$electronDir\package.json")) {
     Write-Fail "Electron app not found at $electronDir"
